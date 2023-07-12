@@ -1,0 +1,185 @@
+{
+	"Create SQL PROGRAMING": {
+		"prefix": "csp",
+		"body": [
+			"SET CLIENT_ENCODING TO 'SJIS';\n",
+			"\n/*\n\t[サブ機能  ] EX.基本マスタ\n\t[機能ＩＤ  ] EX02\n\t[機能名称  ] 分類マスタ\n\t[リビジョン] 1\n\t[関数名    ] p_Example\n\t[作 成 日  ] 2021/08/17\n\t[作 成 者  ] UNICCS/y-mano\n\t[更新履歴  ] \n*/\n\n",
+			"CREATE OR REPLACE FUNCTION PXC_Example_001.p_Example (\n\ti_Example\tIN\tVARCHAR\n) RETURNS REFCURSOR AS $$",
+			"\n/*",
+			"\n$START\n",
+			"$FUNCTION\\1\n\t分類マスタ（第２分類）を検索します。\n$PAR\\1\n\t第２分類コード\n$RETURN\\1\n\t結果セット\n$END\n*/\n",
+			"DECLARE\n\tls_SqlErrMsg\tUMF_RESOURCEDEF.RESOURCEVAL%TYPE := '';\n\tls_SqlState\t\tVARCHAR(5);\n\nBEGIN\n\n\nEXCEPTION\n\tWHEN OTHERS THEN\n\t\tSELECT  SQLSTATE\tINTO ls_SqlState;\n\t\tSELECT  SQLERRM\t\tINTO ls_SqlErrMsg;\n\t\tPERFORM PXS_STANDARD.p_NoticeError(\n\t\t\t'PXC_Example_001.p_Example.SYSTEMERROR',\n\t\t\tls_SqlState,\n\t\t\tls_SqlErrMsg\n\t\t);\nEND;\n$$ LANGUAGE 'plpgsql';\n\nRESET CLIENT_ENCODING;"
+		],
+		"description": "Create SQL PROGRAMING"
+	},
+
+	"Get User Info": {
+		"prefix": "gui",
+		"body": [
+			"\tlrec_UserInfo\t\t\tRECORD;",
+			"\tlrec_UserInfo\t:= PXS_USER.p_GetUserInfo();"
+		],
+		"description": "Get User Info"
+	},
+
+	"Convert DateTime To Character": {
+		"prefix": "cdtc",
+		"body": [
+			"TO_CHAR(lrec_CheckDataNow.UPDDATETIME, 'YYYY/MM/DD HH24:MI:SS')"
+		],
+		"description": "Convert DateTime To Character"
+	},
+
+	"Convert Date To Character": {
+		"prefix": "cdc",
+		"body": [
+			"TO_CHAR(lrec_CheckDataNow.DATE 'YYYY/MM/DD')"
+		],
+		"description": "Convert Date To Character"
+	},
+
+	"Convert String To Date": {
+		"prefix": "csd",
+		"body": [
+			"fx_ConvertStringToDate(i_Reflectdate, 'YYYY/MM/DD');"
+		],
+		"description": "Convert String To Date"
+	},
+
+	"EXCEPTION SQL PROGRAMING": {
+		"prefix": "exc",
+		"body": [
+			"EXCEPTION\n\tWHEN RAISE_EXCEPTION THEN\n\t\tSELECT\tSQLERRM\tINTO ls_SqlErrMsg;\n\t\tPERFORM PXS_STANDARD.p_NoticeErrorExpansion(\n\t\t\t'ERROR',\n\t\t\t'',\n\t\t\tls_SqlErrMsg\n\t\t);\n\tWHEN OTHERS THEN\n\t\tSELECT\tSQLSTATE\tINTO ls_SqlState;\n\t\tSELECT\tSQLERRM\t\tINTO ls_SqlErrMsg;\n\t\tPERFORM PXS_STANDARD.p_NoticeError(\n\t\t\t'PXC_EXAMPLE_001.p_Example.SYSTEMERROR',\n\t\t\tls_SqlState,\n\t\t\tls_SqlErrMsg\n\t\t);"
+		],
+		"description": "EXCEPTION SQL PROGRAMING"
+	},
+
+	"Exception Message": {
+		"prefix": "excm",
+		"body": [
+			"\t\t\tls_ExceptionMessage := PXS_STANDARD.f_GetResourceVal(\n\t\t\t\t'PXC_EXAMPLE_001.p_EXAMPLE.NAME_RESOURCE',\n\t\t\t\ti_Params1,\n\t\t\t\ti_Params2\n\t\t\t);\n\t\t\tRAISE '%', ls_ExceptionMessage USING ERRCODE = 'raise_exception';"
+		],
+		"description": "Exception Message"
+	},
+
+	"Get Resource Value": {
+		"prefix": "grv",
+		"body": [
+			"PXS_STANDARD.f_GetResourceVal('PXC_EXAMPLE_001.p_Example.NAME_RESOURCE', i_Params1, i_Params2);"
+		],
+		"description": "Get Resource Value"
+	},
+
+	"Create Cursor": {
+		"prefix": "cursor",
+		"body": [
+			"\tlrec_Example\t\t\tTABLE_EXAMPLE%ROWTYPE;",
+			"\tlcur_Example CURSOR FOR\n\t\tSELECT\t*\n\t\tFROM\tTABLE_EXAMPLE\n\t\tWHERE\\CONDITION_1\t= CONDITION_OTHER\n\t\tAND\t\\CONDITION_2\t\t\t= CONDITION_OTHER\n\t\tFOR UPDATE;",
+			"\t\tOPEN lcur_Example;\n\t\tFETCH lcur_Example INTO lrec_Example;\n\t\t\t-- TO DO\n\t\t\t\n\t\tCLOSE lcur_Example;"
+		],
+		"description": "Create Cursor"
+	},
+
+	"For Loop From Cursor": {
+		"prefix": "For...Loop",
+		"body": [
+			"\tlrec_Example\t\t\tRECORD;",
+			"\tlcur_Example CURSOR FOR\n\t\tSELECT\tCOLUMN_EXAMPLE\n\t\tFROM\tTABLE_NAME\n\t\tWHERE\tCONDITION_1\t\t= CONDITION_OTHER;\n",
+			"\tFOR lrec_Example IN lcur_Example LOOP\n\t\t-- TO DO LIST\n\tEND LOOP;"
+		],
+		"description": "LOOP DATA"
+	},
+
+	"For Loop Direction": {
+		"prefix": "For",
+		"body": [
+			"\tlrec_Example\t\t\t\t\t\t\tRECORD;",
+			"\tFOR lrec_ReservePartner IN (\n\t\tSELECT\t*\n\t\tFROM\tTABLE_NAME\n\t\tWHERE\tCONDITION_1\t= CONDITION_1\n\t\tAND\t\tCONDITION_2\t= CONDITION_2\n\t\tORDER BY COLUM_NAME\n\t) LOOP",
+			"\tEND LOOP;"
+		],
+		"description": "LOOP DATA"
+	},
+
+	"Create Reference Cursor": {
+		"prefix": "refcursor",
+		"body": [
+			"\treturnCursor\tREFCURSOR;",
+			"\tOPEN returnCursor FOR\n\t\tSELECT\tCOLUMN1_EXAMPLE\n\t\tFROM\tUMF_CLASS4 CLASS\n\t\tWHERE\tCONDITION_1\t= CONDITION_OTHER\n\t\tAND\t\tCONDITION_1\t= CONDITION_OTHER;\n\n\tRETURN returnCursor;"
+		],
+		"description": "Create Reference Cursor"
+	},
+
+	"IF": {
+		"prefix": "if",
+		"body": [
+			"\n",
+			"IF ($1) THEN\n",
+			"END IF;",
+			"\n"
+		],
+		"description": "IF"
+	},
+
+	"IF... ELSE": {
+		"prefix": "if...else",
+		"body": [
+			"\n",
+			"IF ($1) THEN\n",
+			"ELSE\n",
+			"END IF;",
+			"\n"
+		],
+		"description": "IF... ELSE"
+	},
+
+	"IF... ELSEIF...ELSE": {
+		"prefix": "if...elseif...else",
+		"body": [
+			"\n",
+			"IF ($1) THEN\n",
+			"ELSIF\n",
+			"ELSE\n",
+			"END IF;",
+			"\n"
+		],
+		"description": "IF... ELSEIF...ELSE"
+	},
+
+	"Switch...Case...multi": {
+		"prefix": "case...when...multi",
+		"body": [
+			"\t\t\tCASE (lrec_CSVUploadColumnData.COLUMN7)\n",
+			"\t\t\t\tWHEN ('1') THEN\n\t\t\t\t\tls_DenpKind\t:= '10';\n\t\t\t\t\tls_DenpType\t:= lrec_OrderHeader.DENPTYPE;\n\n",
+			"\t\t\t\tWHEN ('2') THEN\n\t\t\t\t\tls_DenpKind\t:= '12';\n\t\t\t\t\tls_DenpType\t:= lrec_ReturnHeader.DENPTYPE;\n\n",
+			"\t\t\t\tELSE\n\t\t\t\t\tls_DenpKind\t:= '10';\n\t\t\t\t\tls_DenpType\t:= lrec_OrderHeader.DENPTYPE;\n",
+			"\t\t\tEND;\n"
+		],
+		"description": "Switch...Case...multi"
+	},
+
+	"Switch...Case...single": {
+		"prefix": "case...when...single",
+		"body": [
+			"CASE WHEN COLUMNDATA.EXAMPLE = '0' THEN COLUMNDATA.EXAMPLE ELSE COLUMNDATA.EXAMPLE2 END"
+		],
+		"description": "Switch...Case...single"
+	},
+
+	"Delete Query Format": {
+		"prefix": "delete",
+		"body": [
+			"DELETE\tFROM TABLE_NAME PPN\n",
+			"\nWHERE\tEXISTS (\tSELECT\t1\n\t\t\t\t\tFROM\tTMP_TABLE_NAME COLUMNDATA\n\t\t\t\t\tWHERE\tCOLUMNDATA.COLUMN1\t\t\t= PPN.COLUMN_1\n\t\t\t\t\tAND\t\tCOLUMNDATA.VALIDFLAG\t\t= '0'\n\t\t);"
+		],
+		"description": "Switch...Case...single"
+	},
+
+	"Delete Query Format": {
+		"prefix": "update",
+		"body": [
+			"DELETE\tFROM TABLE_NAME PPN\n",
+			"\nWHERE\tEXISTS (\tSELECT\t1\n\t\t\t\t\tFROM\tTMP_TABLE_NAME COLUMNDATA\n\t\t\t\t\tWHERE\tCOLUMNDATA.COLUMN1\t\t\t= PPN.COLUMN_1\n\t\t\t\t\tAND\t\tCOLUMNDATA.VALIDFLAG\t\t= '0'\n\t\t);"
+		],
+		"description": "Switch...Case...single"
+	},
+}
