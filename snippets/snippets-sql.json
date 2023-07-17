@@ -664,6 +664,18 @@
 		"description": "Check Session Array Store"
 	},
 
+	"Check Session Array Update Operator": {
+		"prefix": "checksessionstore",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayUpdOperator\t\tBOOLEAN\t\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\t\tlb_ExistsArrayUpdOperator\t\t:= PXS_UTILITY.f_ExistsArrayUpdOperator();",
+			"\n"
+		],
+		"description": "Check Session Array Update Operator"
+	},
+
 	"Check Session Array Floor": {
 		"prefix": "checksessionfloor",
 		"body": [
@@ -923,6 +935,28 @@
 		"description": "Check Session Array CombiGroupCode"
 	},
 
+	"Check Session Array Order Operator": {
+		"prefix": "checksessionorderoperator",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayOrderOperator\tBOOLEAN\t:= PXS_UTILITY.PXS_UTILITY.f_ExistsArrayOrderOperator();",
+			"\n"
+		],
+		"description": "Check Session Array Order Operator"
+	},
+
+	"Check Session Array Maker": {
+		"prefix": "checksesionmaker",
+		"body": [
+			"\n",
+			"\tlb_ExistsMaker\t\t\tBOOLEAN;",
+			"",
+			"\tlb_ExistsMaker\t\t\t:= PXS_UTILITY.f_ExistsArrayMaker();",
+			"\n"
+		],
+		"description": "Check Session Array Maker"
+	},
+
 	"Check Session Array Auth Store": {
 		"prefix": "checksessionstoregroup",
 		"body": [
@@ -936,8 +970,92 @@
 		"description": "Check Session Array Auth Store"
 	},
 
+	"Check Session Array In Company": {
+		"prefix": "checksessionincompany",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayInCompany\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\tlb_ExistsArrayInCompany\t\t:= PXS_UTILITY.f_ExistsArrayInCompany();",
+			"\n"
+		],
+		"description": "Check Session Array In Company"
+	},
+
+	"Check Session Array Out Company": {
+		"prefix": "checksessionoutcompany",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayOutCompany\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\tlb_ExistsArrayOutCompany\t:= PXS_UTILITY.f_ExistsArrayOutCompany();",
+			"\n"
+		],
+		"description": "Check Session Array Out Company"
+	},
+
+	"Check Session Array In Store": {
+		"prefix": "checksessioninstore",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayInStore\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= false;",
+			"",
+			"\tlb_ExistsArrayInStore\t\t:= PXS_UTILITY.f_ExistsArrayInStore();",
+			"\n"
+		],
+		"description": "Check Session Array In Store"
+	},
+
+	"Check Session Array Out Store": {
+		"prefix": "checksessionoutstore",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayOutStore\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\tlb_ExistsArrayOutStore\t\t:= PXS_UTILITY.f_ExistsArrayOutStore();",
+			"\n"
+		],
+		"description": "Check Session Array Out Store"
+	},
+
+	"Check Session Array In Store Floor": {
+		"prefix": "checksessioninstorefloor",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayInStoreFloor\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\tlb_ExistsArrayInStoreFloor\t:= PXS_UTILITY.f_ExistsArrayInStoreFloor();",
+			"\n"
+		],
+		"description": "Check Session Array In Store Floor"
+	},
+
+	"Check Session Array Out Store Floor": {
+		"prefix": "checksessionoutstorefloor",
+		"body": [
+			"\n",
+			"\tlb_ExistsArrayOutStoreFloor\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
+			"",
+			"\tlb_ExistsArrayOutStoreFloor\t:= PXS_UTILITY.f_ExistsArrayOutStoreFloor();",
+			"\n"
+		],
+		"description": "Check Session Array Out Store Floor"
+	},
+
+	"Check Session Array Tenant Name": {
+		"prefix": "checksessiontenantname",
+		"body": [
+			"\n",
+			"\tlb_ExistArrayTenantName\t\tBOOLEAN DEFAULT FALSE;",
+			"",
+			"\tlb_ExistArrayTenantName\t\t:= PXS_UTILITY.f_ExistsArrayTenantName();",
+			"\n"
+		],
+		"description": "Check Session Array Out Store Floor"
+	},
+
 	"Set Select Store List": {
-		"prefix": "checksessionlogistics",
+		"prefix": "setselectstorelist",
 		"body": [
 			"\n",
 			"\t-- 店舗検索条件で指定されたコードより、店舗一覧を作成",
@@ -961,6 +1079,30 @@
 			"\n"
 		],
 		"description": "Get Money Hontai"
+	},
+
+	"Get Make Sku Code": {
+		"prefix": "getmakeskucode",
+		"body": [
+			"\n",
+			"\tlrec_GetMakeSkuCd\tRECORD;",
+			"",
+			"\t\tlrec_GetMakeSkuCd\t\t:= PXS_UTILITY.f_GetMakeSkuCd(i_Sku_Cd);",
+			"\n"
+		],
+		"description": "Get Make Sku Code"
+	},
+
+	"Get Sku Code CM": {
+		"prefix": "getskucodeCM",
+		"body": [
+			"\n",
+			"\tlrec_GetSkuCdRec\tRECORD;",
+			"",
+			"\t\tlrec_GetSkuCdRec\t:= PXS_UTILITY.f_GetSkuCdCM(ls_Sku_Cd, i_UPCE_Flag);",
+			"\n"
+		],
+		"description": "Get Sku Code CM"
 	},
 
 	"Get Money Sougaku": {
@@ -987,6 +1129,21 @@
 			"\n"
 		],
 		"description": "Check Item Exist In UMF_PLANITEMSTORE"
+	},
+
+	"Check String Irregular Chars": {
+		"prefix": "checkstrirregularchars",
+		"body": [
+			"\n",
+			"\t-- 摘要の入力チェック",
+			"\tOPEN returnCursor FOR",
+			"\t\tSelect CASE PXS_UTILITY.f_CheckStrIrregularChars(i_CommentValue) WHEN TRUE THEN 'TRUE'",
+			"\t\t       ELSE 'FALSE' END AS RESULT;",
+			"",
+			"\tRETURN returnCursor;",
+			"\n"
+		],
+		"description": "Check String Irregular Chars"
 	},
 
 	"Check reverse Item For Plan": {
@@ -1017,6 +1174,22 @@
 		"description": "Check Caset Bitnk"
 	},
 
+
+	"Get Operator Data": {
+		"prefix": "getoperatordata",
+		"body": [
+			"\n",
+			"\tPERFORM PXS_UTILITY.p_GetOperatorData(i_Operator_Cd, i_Company_Cd);",
+			"",
+			"\tOPEN returnCursor FOR",
+			"\t\tSELECT\t*",
+			"\t\tFROM\tTMP_CALENDARDATELIST;",
+			"\tRETURN returnCursor;",
+			"\n"
+		],
+		"description": "Get Operator Data"
+	},
+
 	"Get Adopt Price": {
 		"prefix": "getadoptprice",
 		"body": [
@@ -1034,6 +1207,165 @@
 			"\n"
 		],
 		"description": "Get Adopt Price"
+	},
+
+	"Get Gnk Column List": {
+		"prefix": "getgnkcolumnlist",
+		"body": [
+			"\n",
+			"\treturnCursor\tREFCURSOR;",
+			"",
+			"\tPERFORM PXS_UTILITY.f_GetGnkColumnList(i_ProfitType);",
+			"",
+			"\tOPEN returnCursor FOR",
+			"\t\tSELECT\t*",
+			"\t\tFROM\tTMP_GNKCOLUMN;",
+			"",
+			"\tRETURN returnCursor;",
+			"\n"
+		],
+		"description": "Get Gnk Column List"
+	},
+
+	"Get Last Year Date": {
+		"prefix": "getlastyeardate",
+		"body": [
+			"\n",
+			"PXS_UTILITY.F_GETLASTYEARDATE(TMP_IB04_STOREINFO.SALESDATE)",
+			"\n"
+		],
+		"description": "Get Last Year Date"
+	},
+
+	"Get Dispensing Floor Code": {
+		"prefix": "getdispensingfloorcd",
+		"body": [
+			"\n",
+			"\tls_Floor_Cd_Check\t\t\t\t\tVARCHAR\t\t\t\t\t\t\t\t\t\t:= '';",
+			"\tls_SysConfigDispensingClass\t\t\tUMF_SYSTEMMODECONFIG.VALUE%TYPE;",
+			"",
+			"\tlrec_UserInfo\t\t\t\t:= PXS_USER.p_GetUserInfo();",
+			"\tla_ConfigList\t\t\t\t:= ARRAY[C_CONFIG_IB004];",
+			"",
+			"\tPERFORM PXS_UTILITY.f_SetSystemConfig(NULL, la_ConfigList);",
+			"",
+			"\tls_SysConfigDispensingClass\t:= PXS_UTILITY.F_GETSYSTEMCONFIG(lrec_UserInfo.SYSTEMMODE_CD, C_CONFIG_IB004);",
+			"\tls_Floor_Cd_Check\t\t\t:= PXS_UTILITY.F_GETDISPENSINGFLOORCD(i_Store_Cd, i_Floor_Cd, i_Class_Cd, ls_SysConfigDispensingClass);",
+			"",
+			"\tOPEN returnCursor FOR",
+			"\t\tSELECT\tls_Floor_Cd_Check\t\tAS RESULT_CHECK_FLOOR_CD;",
+			"\tRETURN returnCursor;",
+			"\n"
+		],
+		"description": "Get Dispensing Floor Code"
+	},
+
+	"Get Item Store History": {
+		"prefix": "getitemstorehistory",
+		"body": [
+			"\n",
+			"\tln_ItemMasterGntnk\t\t\t\t\tUMF_ITEMSTORE.ORDERGNTNK1%TYPE;",
+			"\tln_ItemPOSGntnk\t\t\t\t\t\tUMF_ITEMSTORE.POSGNTNK1%TYPE;",
+			"\tln_ItemWholeSaleGntnk\t\t\t\tUMF_ITEMSTORE.WHOLESALEGNTNK1%TYPE;",
+			"\tln_ItemNet1Gntnk\t\t\t\t\tUMF_ITEMSTORE.NET1GNTNK1%TYPE;",
+			"\tln_ItemNet2Gntnk\t\t\t\t\tUMF_ITEMSTORE.NET2GNTNK1%TYPE;",
+			"\tln_ItemBitnk\t\t\t\t\t\tUMF_ITEMSTORE.BITNK1%TYPE;",
+			"\tls_ItemStore_Partner_Cd\t\t\t\tUMF_ITEMSTORE.PARTNER_CD%TYPE;",
+			"",
+			"\t\tSELECT\tCASE WHEN ls_TaxType = '1' THEN ORDERGNTNK1\t\tWHEN ls_TaxType IN ('2', '3') THEN ORDERGNTNK2\t\tEND,",
+			"\t\t\t\tCASE WHEN ls_TaxType = '1' THEN POSGNTNK1\t\tWHEN ls_TaxType IN ('2', '3') THEN POSGNTNK2\t\tEND,",
+			"\t\t\t\tCASE WHEN ls_TaxType = '1' THEN WHOLESALEGNTNK1\tWHEN ls_TaxType IN ('2', '3') THEN WHOLESALEGNTNK2\tEND,",
+			"\t\t\t\tCASE WHEN ls_TaxType = '1' THEN NET1GNTNK1\t\tWHEN ls_TaxType IN ('2', '3') THEN NET1GNTNK2\t\tEND,",
+			"\t\t\t\tCASE WHEN ls_TaxType = '1' THEN NET2GNTNK1\t\tWHEN ls_TaxType IN ('2', '3') THEN NET2GNTNK2\t\tEND,",
+			"\t\t\t\tCASE WHEN ls_TaxType = '1' THEN BITNK1\t\t\tWHEN ls_TaxType IN ('2', '3') THEN BITNK2\t\t\tEND,",
+			"\t\t\t\tPARTNER_CD",
+			"\t\tINTO\tln_ItemMasterGntnk,",
+			"\t\t\t\tln_ItemPOSGntnk,",
+			"\t\t\t\tln_ItemWholeSaleGntnk,",
+			"\t\t\t\tln_ItemNet1Gntnk,",
+			"\t\t\t\tln_ItemNet2Gntnk,",
+			"\t\t\t\tln_ItemBitnk,",
+			"\t\t\t\tls_ItemStore_Partner_Cd",
+			"\t\tFROM\tPXS_UTILITY.f_GetItemStoreHistory(",
+			"\t\t\t\t\tNULL,",
+			"\t\t\t\t\ti_Store_Cd,",
+			"\t\t\t\t\ti_Sku_Cd,",
+			"\t\t\t\t\ti_DenpInspectDate",
+			"\t\t\t\t);",
+			"\n"
+		],
+		"description": "Get Item Store History"
+	},
+
+	"Get Tenant PayDate": {
+		"prefix": "gettenantpaydate",
+		"body": [
+			"\n",
+			"\tld_PayDate\t\t\tDATE;",
+			"",
+			"\tld_PayDate\t:= PXS_UTILITY.f_GetTenantPayDate(NULL, i_Store_Cd, ls_Class5_Cd, '2', CAST(i_DelimitDate AS DATE));",
+			"\n"
+		],
+		"description": "Get Tenant PayDate"
+	},
+
+	"Get Order Stock Qty": {
+		"prefix": "getorderstockqty",
+		"body": [
+			"\n",
+			"\tln_StockQty\t\t\tBIGINT := NULL;\t\t\t\t\t\t\t\t\t-- 発注用理論在庫数",
+			"",
+			"\t\t\tln_StockQty := CAST(PXS_UTILITY.f_GetOrderStockQty(i_Store_Cd, ls_Sku_Cd) AS BIGINT);",
+			"\n"
+		],
+		"description": "Get Order S"
+	},
+
+	"Get Item Store History Profit Gntnk": {
+		"prefix": "getitemstorehistoryprofitgntnk",
+		"body": [
+			"\n",
+			"\tln_PosGntnk_His\t\t\tUMF_ITEMSTORE.POSGNTNK1%TYPE;",
+			"\tln_OrderGntnk_His\t\tUMF_ITEMSTORE.ORDERGNTNK1%TYPE;",
+			"\tln_WholeSaleGntnk1_His\tUMF_ITEMSTORE.WHOLESALEGNTNK1%TYPE;",
+			"\tln_Net1Gntnk1_His\t\tUMF_ITEMSTORE.NET1GNTNK1%TYPE;",
+			"\tln_Net2Gntnk1_His\t\tUMF_ITEMSTORE.NET2GNTNK1%TYPE;",
+			"\tln_ProfitGntnk_His\t\tUMF_ITEMSTORE.ORDERGNTNK1%TYPE;",
+			"",
+			"\tSELECT\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN ORDERGNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN ORDERGNTNK2",
+			"\t\t\tEND,",
+			"\t\t\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN POSGNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN POSGNTNK2",
+			"\t\t\tEND,",
+			"\t\t\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN WHOLESALEGNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN WHOLESALEGNTNK2",
+			"\t\t\tEND,",
+			"\t\t\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN NET1GNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN NET1GNTNK2",
+			"\t\t\tEND,",
+			"\t\t\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN NET2GNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN NET2GNTNK2",
+			"\t\t\tEND,",
+			"\t\t\tCASE",
+			"\t\t\t\tWHEN i_TaxType = '1' THEN PROFITGNTNK1",
+			"\t\t\t\tWHEN i_TaxType IN ('2', '3') THEN PROFITGNTNK2",
+			"\t\t\tEND",
+			"\tINTO\tln_OrderGntnk_His,",
+			"\t\t\tln_PosGntnk_His,",
+			"\t\t\tln_WholeSaleGntnk1_His,",
+			"\t\t\tln_Net1Gntnk1_His,",
+			"\t\t\tln_Net2Gntnk1_His,",
+			"\t\t\tln_ProfitGntnk_His",
+			"\tFROM\tPXS_UTILITY.f_GetItemStoreHistoryProfitGntnk(NULL, i_Store_Cd, i_Sku_Cd, i_InDate);",
+			"\n"
+		],
+		"description": "Get Item Store History Profit Gntnk"
 	},
 
 	"Get Order Gntnk": {
@@ -1090,17 +1422,30 @@
 		"description": "Get Reserve Item Gntnk Pattern"
 	},
 
-	"Get Reserve Item Store": {
-		"prefix": "getreserveitemstore",
+	"Check is Whole Sale": {
+		"prefix": "checkiswholesale",
 		"body": [
 			"\n",
-			"\tlrec_GetReserveItemStore\t\tRECORD;",
+			"\tlb_IsWholeSale\t\t\t\tBOOLEAN := FALSE;",
 			"",
-			"\t\t\t-- 予約店舗商品情報取得",
-			"\t\t\tlrec_GetReserveItemStore\t:= PXS_UTILITY.f_GetReserveItemStore(lrec_TmpItemStoreData.SKU_CD, lrec_TmpItemStoreData.STORE_CD, i_ReflectDate);",
+			"\tlb_IsWholeSale := PXS_UTILITY.f_IsWholeSale (",
+			"\t\t\t\t\t\ti_Store_Cd,",
+			"\t\t\t\t\t\ti_Partner_Cd,",
+			"\t\t\t\t\t\tTO_DATE(i_InspectDate, 'YYYY/MM/DD')",
+			"\t\t\t\t\t);",
 			"\n"
 		],
-		"description": "Get Reserve Item Store"
+		"description": "Check is Whole Sale"
+	},
+
+	"Check Double Number": {
+		"prefix": "checkdoublenumber",
+		"body": [
+			"\n",
+			"PXS_UTILITY.f_checkDoubleNumber(i_Qty)",
+			"\n"
+		],
+		"description": "Check Double Number"
 	},
 
 	"Get Reserve Item Bitnk Pattern": {
@@ -1152,7 +1497,7 @@
 			"\tlrec_GetReserveItemPop\t\t:= PXS_UTILITY.f_GetReserveItemPop(i_Sku_Cd, i_ReflectDate);",
 			"\n"
 		],
-		"description": "Get Reserve Item Store"
+		"description": "Get Reserve Item Pop"
 	},
 
 	"Get Operator Whole Sale Type": {
@@ -1268,6 +1613,97 @@
 		"description": "Get Check Digit"
 	},
 
+	"Get Delivery Store Code": {
+		"prefix": "getdeliverystorecd",
+		"body": [
+			"\n",
+			"\tlrec_DeliveryStore\t\t\t\t\t\tRECORD;",
+			"",
+			"\t\tlrec_DeliveryStore := PXS_UTILITY.f_GetDeliveryStoreCd (",
+			"\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2, -- FINALDESTINATION_CD ",
+			"\t\t\t\t\t\t\t\t\tCASE",
+			"\t\t\t\t\t\t\t\t\t\tWHEN lrec_CSVUploadColumnData.COLUMN7 = '2' THEN NULL",
+			"\t\t\t\t\t\t\t\t\t\tELSE COALESCE(lrec_CSVUploadColumnData.COLUMN15, lrec_CSVUploadColumnData.COLUMN1, ls_CurrentDate)",
+			"\t\t\t\t\t\t\t\t\tEND, -- ORDERDATE",
+			"\t\t\t\t\t\t\t\t\tCASE",
+			"\t\t\t\t\t\t\t\t\t\tWHEN lrec_CSVUploadColumnData.COLUMN7 = '2' THEN COALESCE(lrec_CSVUploadColumnData.COLUMN15, lrec_CSVUploadColumnData.COLUMN1, ls_CurrentDate)",
+			"\t\t\t\t\t\t\t\t\t\tELSE NULL",
+			"\t\t\t\t\t\t\t\t\tEND -- RETURNDATE",
+			"\t\t\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Get Delivery Store Code"
+	},
+
+	"Get Zeigaku": {
+		"prefix": "getzeigaku",
+		"body": [
+			"\n",
+			"\t----------",
+			"\t-- 税額 --",
+			"\t----------",
+			"\to_PurchaseGnkBik.GNKTAXKNGK := PXS_UTILITY.f_GetZeigaku(",
+			"\t\to_PurchaseGnkBik.GNKKNGK,\t-- i_Kngk",
+			"\t\ti_TaxType,\t\t\t\t\t-- i_TaxType",
+			"\t\ti_TaxRate,\t\t\t\t\t-- i_TaxRate",
+			"\t\ti_CostRoundType\t\t\t\t-- i_HsuType",
+			"\t);",
+			"\n"
+		],
+		"description": "Get Zeigaku"
+	},
+
+	"Get Item Class": {
+		"prefix": "getitemclass",
+		"body": [
+			"\n",
+			"PXS_UTILITY.f_GetItemClass(",
+			"\t\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\t\tls_ItemAttributeType,",
+			"\t\t\t\t\t\t\t\tlrec_DeliveryDetail.SKU_CD,",
+			"\t\t\t\t\t\t\t\tla_OutRec.INSPECTDATE",
+			"\t\t\t\t\t\t\t)",
+			"\n"
+		],
+		"description": "Get Item Class"
+	},
+
+	"Get Nsw DenpType Purchase": {
+		"prefix": "getnswdenptypepurchase",
+		"body": [
+			"\n",
+			"\t\t\t\tPXS_UTILITY.f_GetNswDenpTypePurchase(",
+			"\t\t\t\t\tC_OHD.STORE_CD,",
+			"\t\t\t\t\tC_OHD.PARTNER_CD,",
+			"\t\t\t\t\tC_OHD.LOGISTICSCENTER_CD,",
+			"\t\t\t\t\tLGC.CENTERKIND,",
+			"\t\t\t\t\tC_OHD.TAXTYPE,",
+			"\t\t\t\t\tC_OHD.TAXRATE,",
+			"\t\t\t\t\tC_OHD.INSPECTDATE,",
+			"\t\t\t\t\tC_OHD.DENPKIND",
+			"\t\t\t\t)",
+			"\n"
+		],
+		"description": "Get Nsw DenpType Purchase"
+	},
+
+	"Get Nsw DenpType Move": {
+		"prefix": "getnswdenptypemove",
+		"body": [
+			"\n",
+			"\t\t\tPXS_UTILITY.f_GetNswDenpTypeMove(",
+			"\t\t\t\tHD.INSTORE_CD,",
+			"\t\t\t\tHD.OUTSTORE_CD,",
+			"\t\t\t\t'1',\t-- 入出庫区分(0:入庫、1:出庫)",
+			"\t\t\t\tDT.TAXTYPE,",
+			"\t\t\t\tDT.TAXRATE,",
+			"\t\t\t\tHD.INSPECTDATE",
+			"\t\t\t),",
+			"\n"
+		],
+		"description": "Get Nsw DenpType Move"
+	},
+
 	"Get ShelLifeCycle": {
 		"prefix": "getshelLifecycle",
 		"body": [
@@ -1279,6 +1715,63 @@
 			"\n"
 		],
 		"description": "Get ShelLifeCycle"
+	},
+
+	"Get store history": {
+		"prefix": "getstorehistory",
+		"body": [
+			"\n",
+			"\tls_Company_Cd\t\t\t\tUTR_PURCHASEDENPHEADER.COMPANY_CD%TYPE;",
+			"\tls_Store\t\t\t\t\tUTR_RETURN.STORE_CD%TYPE;",
+			"\tld_ReturnDate\t\t\t\tUTR_RETURN.RETURNDATE%TYPE;",
+			"",
+			"",
+			"\t\t\t\t\t-- 会社コード",
+			"\t\t\t\t\tSELECT\tCOMPANY_CD",
+			"\t\t\t\t\tINTO\tls_Company_Cd",
+			"\t\t\t\t\tFROM\tPXS_UTILITY.f_GetStoreHistory(ls_Store, ld_ReturnDate);",
+			"\n"
+		],
+		"description": "Get store history"
+	},
+
+	"Get Delimit Date": {
+		"prefix": "getdelimitdate",
+		"body": [
+			"\n",
+			"PXS_UTILITY.f_GetDelimitDate(NULL, PSD.PAYPARTNER_CD, ld_ApclosingDate, ld_ApclosingDate)",
+			"\n"
+		],
+		"description": "Get Delimit Date"
+	},
+
+	"Get Class History": {
+		"prefix": "getclasshistory",
+		"body": [
+			"\n",
+			"\tSELECT\tPARENTCLASS_CD",
+			"\tFROM\tPXS_UTILITY.f_GetClassHistory(NULL, CLS3.ItemAttributeType, CLS3.ClassType, CLS3.Class_Cd, SSch.InventoryDate)",
+			"\n"
+		],
+		"description": "Get Class History"
+	},
+
+	"Update System Config": {
+		"prefix": "getclasshistory",
+		"body": [
+			"\n",
+			"\tlb_UpdSystemConfig\t\tBOOLEAN;",
+			"",
+			"\t\tlb_UpdSystemConfig\t:= PXS_UTILITY.f_UpdSystemConfig(lrec_UserInfo.User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t lrec_UserInfo.SystemMode_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t 'HG002',",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t ls_MaxAccountsMonth,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t lrec_UserInfo.Operator_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t CAST(CURRENT_TIMESTAMP AS TIMESTAMP WITHOUT TIME ZONE),",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t lrec_UserInfo.Proc_Cd);",
+			"\n"
+		],
+		"description": "Get Class History"
 	},
 
 
