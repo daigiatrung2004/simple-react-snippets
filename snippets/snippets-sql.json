@@ -14,7 +14,7 @@
 	},
 
 	"Get User Info": {
-		"prefix": "gui",
+		"prefix": "getuserinfo",
 		"body": [
 			"\tlrec_UserInfo\t\t\tRECORD;",
 			"\tlrec_UserInfo\t:= PXS_USER.p_GetUserInfo();"
@@ -370,7 +370,7 @@
 	},
 
 	"Get System Config Format": {
-		"prefix": "gsc",
+		"prefix": "getsystemconfig",
 		"body": [
 			"\n",
 			"\tla_ConfigList\t\t\t\tTEXT[];",
@@ -399,7 +399,7 @@
 	},
 
 	"Create temporary table by defined column": {
-		"prefix": "ctt1",
+		"prefix": "createtemptable1",
 		"body": [
 			"\n",
 			"\tCREATE TEMPORARY TABLE IF NOT EXISTS TMP_TABLE_NAME (",
@@ -431,7 +431,7 @@
 	},
 
 	"Create temporary table from table other": {
-		"prefix": "ctt2",
+		"prefix": "createtemptable2",
 		"body": [
 			"\n",
 			"\t-- 更新用テンポラリテーブル（拡張)",
@@ -497,7 +497,7 @@
 	},
 
 	"Get Inspect Date": {
-		"prefix": "gid",
+		"prefix": "getinspectdate",
 		"body": [
 			"\n",
 			"\tld_InspectDateCheck\t\t\t\t\t\tDATE;",
@@ -548,7 +548,7 @@
 	},
 
 	"Accept CSV Update Error Data": {
-		"prefix": "err",
+		"prefix": "acceptcsvupdateerrordate",
 		"body": [
 			"\n",
 			"\t\t\t\t\tPERFORM PXS_FILEUPLOAD.p_AcceptCSVUpdateErrorData (",
@@ -569,7 +569,7 @@
 	},
 
 	"Get Master Item": {
-		"prefix": "gmi",
+		"prefix": "getmasteritem",
 		"body": [
 			"\n",
 			"\tls_CLASS1_CD\t\t\t\t\t\t\tUMF_CLASS.CLASS_CD%TYPE;",
@@ -609,7 +609,7 @@
 	},
 
 	"Get Purchase GnkBik": {
-		"prefix": "gpg",
+		"prefix": "getpurchasegnkbik",
 		"body": [
 			"\n",
 			"\to_PurchaseGnkBik\t\t\t\t\t\tTYPE_PURCHASEGNKBIK;",
@@ -636,7 +636,7 @@
 	},
 
 	"Get Attribute Class By Item Store": {
-		"prefix": "gsc",
+		"prefix": "getattributeclassbyitemstore",
 		"body": [
 			"\n",
 			"\tls_ItemAttributeType\t\t\t\t\tUTR_PURCHASEDENPDETAIL.ITEMATTRIBUTETYPE%TYPE;",
@@ -695,7 +695,7 @@
 	},
 
 	"Get Tax Rate": {
-		"prefix": "gtr",
+		"prefix": "gettaxrate",
 		"body": [
 			"\n",
 			"\t\t\t\t\t\t\t\t\tPXS_UTILITY.f_GetTaxRate (",
