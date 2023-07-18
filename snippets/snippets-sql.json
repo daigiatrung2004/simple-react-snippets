@@ -71,13 +71,156 @@
 	},
 
 	"Create Cursor": {
-		"prefix": "cursor",
+		"prefix": "fetch",
 		"body": [
 			"\tlrec_Example\t\t\tTABLE_EXAMPLE%ROWTYPE;",
 			"\tlcur_Example CURSOR FOR\n\t\tSELECT\t*\n\t\tFROM\tTABLE_EXAMPLE\n\t\tWHERE\\CONDITION_1\t= CONDITION_OTHER\n\t\tAND\t\\CONDITION_2\t\t\t= CONDITION_OTHER\n\t\tFOR UPDATE;",
 			"\t\tOPEN lcur_Example;\n\t\tFETCH lcur_Example INTO lrec_Example;\n\t\t\t-- TO DO\n\t\t\t\n\t\tCLOSE lcur_Example;"
 		],
 		"description": "Create Cursor"
+	},
+
+	"Create pxs builder sql": {
+		"prefix": "createbuilder",
+		"body": [
+			"",
+			"\treturnCursor\tREFCURSOR;",
+			"",
+			"PERFORM PXS_PLSBUILDER.Initialize();",
+			"",
+			"",
+			"PERFORM PXS_PLSBUILDER.Append('\tSELECT\t*');",
+			"",
+			"",
+			"",
+			"\tOPEN returnCursor FOR EXECUTE PXS_PLSBUILDER.Get();",
+			"",
+			"\tPERFORM PXS_PLSBUILDER.Drop();",
+			"",
+			"\tRETURN returnCursor;",
+			""
+		],
+		"description": "Create pxs builder sql"
+	},
+
+	"Create pxs builder append sql": {
+		"prefix": "createbuilder.append",
+		"body": [
+			"PERFORM PXS_PLSBUILDER.Append('\tSELECT\t*');"
+		],
+		"description": "Create pxs builder append sql"
+	},
+
+	"Add params sp": {
+		"prefix": "i_",
+		"body": [
+			"i_$1\t\tIN\tVARCHAR,"
+		],
+		"description": "Add params sp"
+	},
+
+	"declare string sp": {
+		"prefix": "ls_",
+		"body": [
+			"ls_$1\t\tVARCHAR;"
+		],
+		"description": "declare string sp"
+	},
+
+	"declare record sp": {
+		"prefix": "lrec_",
+		"body": [
+			"lrec_$1\t\tRECORD;"
+		],
+		"description": "declare record sp"
+	},
+
+	"declare boolean sp": {
+		"prefix": "lb_",
+		"body": [
+			"lb_$1\t\tBOOLEAN := FALSE;"
+		],
+		"description": "declare boolean sp"
+	},
+
+	"declare string config sp": {
+		"prefix": "lsconfig",
+		"body": [
+			"ls_Config_$1\t\t\t\t\t\t\t\tUMF_SYSTEMMODECONFIG.VALUE%TYPE;"
+		],
+		"description": "declare string config sp"
+	},
+
+	"declare number sp": {
+		"prefix": "ln_",
+		"body": [
+			"ln_$1\t\t\t\t\t\t\t\tNUMERIC\t\t\t\t\t\t\t\t\t\t\t:= 1;"
+		],
+		"description": "declare number sp"
+	},
+
+	"declare date sp": {
+		"prefix": "ld_",
+		"body": [
+			"ld_$1\t\t\t\t\t\tDATE;"
+		],
+		"description": "declare number sp"
+	},
+
+	"declare date time sp": {
+		"prefix": "ldt_",
+		"body": [
+			"ldt_$1\t\t\t\t\t\\TIMESTAMP;"
+		],
+		"description": "declare date time sp"
+	},
+
+	"declare refcursor sp": {
+		"prefix": "lcur_",
+		"body": [
+			"\tlcur_$1\t\t\t\t\tREFCURSOR;"
+		],
+		"description": "declare refcursor sp"
+	},
+
+	"declare type sp": {
+		"prefix": "o_",
+		"body": [
+			"o_PurchaseGnkBik\t\t\t\t\t\tTYPE_PURCHASEGNKBIK;"
+		],
+		"description": "declare type sp"
+	},
+
+	"declare contant sp": {
+		"prefix": "constant",
+		"body": [
+			"C_ARRAY_DELIMITER\t\t\t\t\t\tCONSTANT VARCHAR\t\t\t\t\t\t\t\t:= ',';"
+		],
+		"description": "declare contant sp"
+	},
+
+	"declare string code sp": {
+		"prefix": "lscode",
+		"body": [
+			"ls_$1_Cd\t\t\t\t\t\t\t\tUTR_PURCHASEDENPHEADER.STORE_CD%TYPE\t\t\t:= '';"
+		],
+		"description": "declare string code sp"
+	},
+
+	"declare array sp": {
+		"prefix": "la_",
+		"body": [
+			"\tla_$1\t\t\t\tVARCHAR[];"
+		],
+		"description": "declare array sp"
+	},
+
+	"declare function sp": {
+		"prefix": "lf_",
+		"body": [
+			"\tlf_FuncAuthSetting\tTYPE_FUNCAUTHSETTING;"
+		],
+		"description": "declare array sp"
 	},
 
 	"For Loop From Cursor": {
@@ -542,7 +685,7 @@
 	},
 
 	"To Date Format": {
-		"prefix": "tdf",
+		"prefix": "to_date",
 		"body": [
 			"\n",
 			"TO_DATE(ls_ImportCondition1, 'YYYY/MM/DD')",
@@ -1052,6 +1195,30 @@
 			"\n"
 		],
 		"description": "Check Session Array Out Store Floor"
+	},
+
+	"Check Error Code import csv": {
+		"prefix": "checkerrorcode",
+		"body": [
+			"\n",
+			"\tls_ErrorCheck\t\t\t\t\t\t\tVARCHAR;",
+			"",
+			"ls_ErrorCheck\t\t:= PXS_FILEUPLOAD.f_GetCheckErrorCode(i_CSVFile_Cd, i_CheckType);",
+			"\n"
+		],
+		"description": "Check Error Code import csv"
+	},
+
+	"Check csv file type import csv": {
+		"prefix": "checkiscsvfiletype",
+		"body": [
+			"\n",
+			"\tlb_IsCSVFileType\t\t\t\t\t\tBOOLEAN DEFAULT FALSE;",
+			"",
+			"\tlb_IsCSVFileType\t:= PXS_FILEUPLOAD.f_CheckIsCSVFileType(i_Server_Cd, i_ImportBatchKey);",
+			"\n"
+		],
+		"description": "Check Error Code import csv"
 	},
 
 	"Set Select Store List": {
@@ -1774,11 +1941,602 @@
 		"description": "Get Class History"
 	},
 
+	"Lpad format": {
+		"prefix": "lpad",
+		"body": [
+			"LPAD('PostgreSQL', 15, '*')"
+		],
+		"description": "Lpad format"
+	},
+
+	"Rpad format": {
+		"prefix": "rpad",
+		"body": [
+			"RPAD('w3r', 10, '*')"
+		],
+		"description": "Rpad format"
+	},
+
+	"Coalesce format": {
+		"prefix": "rpad",
+		"body": [
+			"COALESCE(COLUMN5, '')"
+		],
+		"description": "Coalesce format: nếu tham số thứ nhất là NULL thì sẽ sử dụng tham số thứ 2"
+	},
+
+	"NULLIF format": {
+		"prefix": "nullif",
+		"body": [
+			"NULLIF(i_ImportBatchKey, '')"
+		],
+		"description": "NULLIF format: nếu tham số thứ nhất bằng tham số thứ 2 thì trả về NULL"
+	},
+
+	"GREATEST format": {
+		"prefix": "greatest",
+		"body": [
+			"GREATEST(25, 6, 7, 10, 20, 54);  --  returns 54"
+		],
+		"description": "GREATEST format: trả về giá trị lớn nhất trong các giá trị truyền vào"
+	},
+
+	"LEAST format": {
+		"prefix": "least",
+		"body": [
+			"LEAST(20, 30, 60, 10); -- 10"
+		],
+		"description": "LEAST format: trả về giá trị nhỏ nhất trong các giá trị truyền vào"
+	},
+
+	"Unnest format": {
+		"prefix": "unnest",
+		"body": [
+			"unnest(ARRAY[1,2])",
+			"",
+			"--  unnest",
+			"-- --------",
+			"--       1",
+			"--       2",
+			"-- (2 rows)"
+		],
+		"description": "Unnest format: convert array to set of rows"
+	},
+
+	"distinct on format": {
+		"prefix": "distinct...on",
+		"body": [
+			"\n",
+			"SELECT\tDISTINCT ON(UPDDATA.SKU_CD)",
+			"\t\tUPDDATA.SKU_CD,",
+			"\t\tUPDDATA.APPLY_DATE,",
+			"\t\tUPDDATA.TAXTYPE,",
+			"\t\tUPDDATA.TAX_CD",
+			"FROM\tTMP_BA32_PROCESSDATA UPDDATA",
+			"WHERE\tUPDDATA.EDIT_TYPE\t\t= '2'",
+			"AND\t\tUPDDATA.APPLY_DATE\t\t= CURRENT_DATE",
+			"AND\t\tUPDDATA.TAX_CD_FLAG\t\t= '0';",
+			"\n"
+		],
+		"description": "distinct on format: distinct theo cột"
+	},
+
+	"RANK format": {
+		"prefix": "rank",
+		"body": [
+			"RANK() OVER(ORDER BY SUM_AMOUNT DESC)"
+		],
+		"description": "RANK format : RANK sắp xếp thứ hạng, đồng hạng thì hạng kế tiếp sẽ bị mất, có thể dùng với OVER()"
+	},
+
+	"DENSE_RANK format": {
+		"prefix": "dense_rank",
+		"body": [
+			"DENSE_RANK() OVER(PARTITION BY SKU_CD ORDER BY GNTNK_STORECOUNT\t\t DESC, GNTNK)"
+		],
+		"description": "DENSE_RANK format : xếp hạng, đồng hạng thì hạng kế tiếp vẫn được hiển thị, có thể dùng với OVER()."
+	},
+
+	"GENERATE_SERIES format": {
+		"prefix": "generate_series",
+		"body": [
+			"GENERATE_SERIES(1, 5)"
+		],
+		"description": "GENERATE_SERIES format: trả về to - from + 1 dòng có giá trị từ from đến to và bước nhảy là step (tạo số liên tiếp từ -> đến.), có thể dùng với OVER()"
+	},
+
+	"repeat format": {
+		"prefix": "repeat",
+		"body": [
+			"REPEAT('i', 5)"
+		],
+		"description": "repeat format: lặp lại, có thể dùng với OVER()"
+	},
+
+	"trim format": {
+		"prefix": "trim",
+		"body": [
+			"TRIM('  PostgreSQL TRIM  ')"
+		],
+		"description": "trim format: xóa all space đầu và cuối string {TRIM(LEADING FROM string)}"
+	},
+
+	"ltrim format": {
+		"prefix": "ltrim",
+		"body": [
+			"LTRIM('enterprise', 'e') -- nterprise"
+		],
+		"description": "ltrim format: xóa ký tự bên trái {LTRIM(string, [character]);}"
+	},
+
+	"rtrim format": {
+		"prefix": "rtrim",
+		"body": [
+			"RTRIM('enterprise', 'e') -- enterpris"
+		],
+		"description": "rtrim forma: xóa ký tự bên phải {RTRIM(string, [character]);}"
+	},
+
+	"btrim format": {
+		"prefix": "btrim",
+		"body": [
+			"BTRIM('enterprise', 'e') -- nterpris"
+		],
+		"description": "btrim format: xóa ký tự bên trái và phải {RTRIM(string, [character]);}"
+	},
+
+	"concat format": {
+		"prefix": "concat",
+		"body": [
+			"CONCAT(IT.SNAME, '　', IT.STANDARDNAME)"
+		],
+		"description": "concat format: nối chuỗi nếu chuỗi bằng rỗng thì vẫn hiện những char khác rỗng {CONCAT(str_1, str_2, ...)}"
+	},
+
+	"concentratate format": {
+		"prefix": "||",
+		"body": [
+			"'Concatenation' || ' ' || 'Operator'"
+		],
+		"description": "concentratate format: nối chuỗi nếu chuỗi bằng rỗng thì chuỗi trả về là rỗng(NULL) {CONCAT(str_1, str_2, ...)}"
+	},
+
+	"insert log": {
+		"prefix": "vulog",
+		"body": [
+			"INSERT INTO VU_LOG VALUES(CONCAT('TEST:', TEST));"
+		],
+		"description": "insert log"
+	},
+
+	"create vu log": {
+		"prefix": "createvulog",
+		"body": [
+			"CREATE TABLE VU_LOG (TEST\tVARCHAR);"
+		],
+		"description": "create vu log"
+	},
+
+	"vu log select": {
+		"prefix": "vulogselect",
+		"body": [
+			"SELECT * FROM VU_LOG;"
+		],
+		"description": "query vu log"
+	},
+
+	"regexp_split_to_table": {
+		"prefix": "regexp_split_to_table",
+		"body": [
+			"REGEXP_SPLIT_TO_TABLE(i_SystemMode_Cd, ',')"
+		],
+		"description": "regexp_split_to_table ( string text, pattern text [, flags text ] ) → text[] is a system function for splitting a string into a table using a POSIX regular expression as the delimiter."
+	},
+
+	"regexp_split_to_array": {
+		"prefix": "regexp_split_to_array",
+		"body": [
+			"REGEXP_SPLIT_TO_ARRAY(COLUMN3, '-')"
+		],
+		"description": "regexp_split_to_array ( string text, pattern text [, flags text ] ) → text[] is a system function for splitting a string into an array using a POSIX regular expression as the delimiter."
+	},
+
+	"regexp_matches": {
+		"prefix": "regexp_matches",
+		"body": [
+			"REGEXP_MATCHES(NOTES, '\\$[0-9A-Z_:]+', 'g')"
+		],
+		"description": "REGEXP_MATCHES(source_string, pattern [, flags]) function matches a regular expression against a string and returns matched substrings."
+	},
+
+	"regexp_replace": {
+		"prefix": "regexp_replace",
+		"body": [
+			"REGEXP_REPLACE(i_BoxInput, '[^0-9,]', '', 'g'), ',')"
+		],
+		"description": "REGEXP_REPLACE(source, pattern, replacement_string,[, flags]) function replaces substrings that match a POSIX regular expression by a new substring."
+	},
+
+	"ROUND format": {
+		"prefix": "round",
+		"body": [
+			"ROUND(FEE.EOSFEERATE, 2)"
+		],
+		"description": "ROUND format: làm tròn số bao nhiêu số sau 0 { ROUND (source [ , n ] ) }"
+	},
+
+	"Average format": {
+		"prefix": "avg",
+		"body": [
+			"AVG(POINTAWARDRATE)"
+		],
+		"description": "Average format: tính trung bình theo cột có thể dùng với OVER()"
+	},
+
+	"Sum format": {
+		"prefix": "SUM",
+		"body": [
+			"SUM(AMOUNT)"
+		],
+		"description": "Sum format: tính tổng theo cột có thể dùng với OVER()"
+	},
+
+	"ROW_NUMBER format": {
+		"prefix": "row_number",
+		"body": [
+			"ROW_NUMBER() OVER(PARTITION BY STORE_CD ORDER BY STORE_CD, SALESDATE, CLASS_CD)"
+		],
+		"description": "ROW_NUMBER format: đánh số thứ tự, có thể dùng với OVER()"
+	},
+
+	"count format": {
+		"prefix": "count",
+		"body": [
+			"COUNT(*)"
+		],
+		"description": "count format: đếm phần tử trong table count(1) thì null vẫn tính, còn count(column) thì null không tính, có thể dùng với OVER()"
+	},
+
+	"min format": {
+		"prefix": "min",
+		"body": [
+			"MIN(AMOUNT) OVER(PARTITION BY SALESDATE, STORE_CD)"
+		],
+		"description": "min format: lấy giá trị nhỏ nhất theo cột, có thể dùng với OVER()"
+	},
+
+	"max format": {
+		"prefix": "max",
+		"body": [
+			"MAX(CLASS_CD) OVER(PARTITION BY SALESDATE, STORE_CD) AS CLASS_CD"
+		],
+		"description": "max format: lấy giá trị lớn nhất theo cột, có thể dùng với OVER()"
+	},
+
+	"FIRST_VALUE format": {
+		"prefix": "first_value",
+		"body": [
+			"FIRST_VALUE(CLASS_CD) OVER(PARTITION BY SALESDATE, STORE_CD)"
+		],
+		"description": "FIRST_VALUE format: lấy giá trị đầu tiên theo group partition by theo cột, có thể dùng với OVER()"
+	},
+
+	"ARRAY_AGG format": {
+		"prefix": "array_agg",
+		"body": [
+			"ARRAY_AGG(BYTELENGTH ORDER BY ROWNUMBER)"
+		],
+		"description": "ARRAY_AGG format: nối các phần tử lại thành 1 mảng{ ARRAY_AGG(expression [ORDER BY [sort_expression {ASC | DESC}], [...]) }"
+	},
+
+	"STRING_AGG format": {
+		"prefix": "string_agg",
+		"body": [
+			"STRING_AGG(TMP.COL2, '<br>')"
+		],
+		"description": "STRING_AGG format: nối column thành 1 chuỗi cách nhau theo ký hiệu phía sau.{ STRING_AGG ( expression, separator [order_by_clause] ) }"
+	},
+
+	"ARRAY_TO_STRING format": {
+		"prefix": "array_to_string",
+		"body": [
+			"ARRAY_TO_STRING(ARRAY_AGG(BYTELENGTH ORDER BY ROWNUMBER), ',')"
+		],
+		"description": "ARRAY_TO_STRING format: convert array to string {array_to_string(anyarray, text [, text])}"
+	},
+
+	"sum from previous row to current row format": {
+		"prefix": "unbounded...preceding",
+		"body": [
+			"SUM(AMOUNT) OVER(ORDER BY STORE_CD, SALESDATE, AMOUNT ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
+		],
+		"description": "sum from previous row to current row format : tính tổng từ dòng trước đó đến dòng hiện tại"
+	},
+
+	"Over format": {
+		"prefix": "over",
+		"body": [
+			"OVER($1)"
+		],
+		"description": "Over format : OVER([PARTITION BY tên_cột] [ORDER BY tên_cột] [ROWS/RANGE BETWEEN from AND to) \n from/to có thể là UNBOUNDED PRECEDING hoặc N PRECEDING hoặc CURRENT ROW hoặc UNBOUNDED FOLLOWING hoặc N FOLLOWING"
+	},
+
+	"Set Authority Store": {
+		"prefix": "auth.initilize_store",
+		"body": [
+			"",
+			"\t-- 店舗権限のテンポラリテーブルをセット",
+			"\tPERFORM PXS_AUTH.p_Initilize_Store();",
+			""
+		],
+		"description": "Set Authority Store"
+	},
+
+	"Set Authority Class": {
+		"prefix": "auth.initilize_class",
+		"body": [
+			"",
+			"\t-- 分類権限のテンポラリテーブルをセット",
+			"\tPERFORM PXS_AUTH.p_Initilize_Class();",
+			""
+		],
+		"description": "Set Authority Class"
+	},
+
+	"Set Authority Partner": {
+		"prefix": "auth.initilize_partner",
+		"body": [
+			"",
+			"\t-- パートナー権限のテンポラリテーブルをセット（全パートナーの場合は作成しない）",
+			"\tIF (lrec_UserInfo.ParentPartner_Cd <> '000000') THEN",
+			"\t\tPERFORM PXS_AUTH.p_Initilize_Partner();",
+			"\tEND IF;",
+			""
+		],
+		"description": "Set Authority Class"
+	},
+
+	"Set Authority Function Auth setting": {
+		"prefix": "auth.funcauthsetting",
+		"body": [
+			"",
+			"\tlf_FuncAuthSetting\tTYPE_FUNCAUTHSETTING;",
+			"",
+			"\tlf_FuncAuthSetting\t:= PXS_AUTH.P_GETFUNCAUTHSETTING (NULL, lrec_UserInfo.OPERATOR_CD, 'BB01');",
+			""
+		],
+		"description": "Set Authority Function Auth setting"
+	},
+
+	"Set Authority Company": {
+		"prefix": "auth.initilize_company",
+		"body": [
+			"",
+			"\tlb_ExistsCompanyAuth\t\t\tBOOLEAN;",
+			"",
+			"\t-- 会社権限取得",
+			"\tlb_ExistsCompanyAuth\t:=  PXS_AUTH.p_Initilize_Company();",
+			""
+		],
+		"description": "Set Authority Company"
+	},
+
+	"Set Authority Company contract": {
+		"prefix": "auth.initilize_contractcompany",
+		"body": [
+			"",
+			"\tlb_ExistsContractAuth\t\tBOOLEAN;",
+			"",
+			"\tlb_ExistsContractAuth\t\t:= PXS_AUTH.p_Initilize_ContractCompany(NULL, '2');",
+			""
+		],
+		"description": "Set Authority Company contract"
+	},
 
 
+	"Pattern check error 00010": {
+		"prefix": "checkerror_00010_pattern",
+		"body": [
+			"",
+			"\tln_ExistsCount\t\t\t\tNUMERIC\t\t\t\t\t\t\t\t\t:= 0;",
+			"\tla_ColumnName\t\t\t\tVARCHAR[];",
+			"",
+			"\t\tln_ExistsCount\t\t\t\t:= 0;",
+			"",
+			"",
+			"",
+			"\t\t-- キー項目で更新マスタ存在チェック",
+			"\t\tSELECT\tCOUNT(*)",
+			"\t\tINTO\tln_ExistsCount",
+			"\t\tFROM\tUMF_STOREBRAND",
+			"\t\tWHERE\tSTORE_CD\t= lrec_CSVUploadColumnData.COLUMN1",
+			"\t\tAND\t\tBRAND_CD\t= lrec_CSVUploadColumnData.COLUMN2",
+			"\t\tAND\t\tSERIES_CD\t= lrec_CSVUploadColumnData.COLUMN3",
+			"\t\tAND\t\tVALIDFLAG\t= '1';",
+			"",
+			"\t\tIF (INSTR(ls_ErrorCheck, '00010') > 0) THEN",
+			"\t\t\t----------------------------------------------------------------------",
+			"\t\t\t-- 更新マスタに存在しない場合、ＣＳＶ取込タイプが【2:総入替】の場合  -",
+			"\t\t\t-- 項目必須チェック（使用するカラムをすべて記載する）                -",
+			"\t\t\t-- カラムフラグ詳細---------------------------------------------------",
+			"\t\t\t-- 0：ＣＳＶ取込データがセットされている                             -",
+			"\t\t\t-- 1：デフォルト値がセットされている                                 -",
+			"\t\t\t-- 8：NULLがセットされている                                         -",
+			"\t\t\t-- 9：必須項目にNULLがセットされている                               -",
+			"\t\t\t----------------------------------------------------------------------",
+			"\t\t\tIF (ln_ExistsCount = 0 OR i_UploadType = '2') THEN",
+			"\t\t\t\t-- 必須項目のNULLチェック",
+			"\t\t\t\tIF (   lrec_CSVUploadColumnData.COLUMN1_FLAG = '9'\t\t\t-- ★使用するカラムをすべて記載する。",
+			"\t\t\t\t\tOR lrec_CSVUploadColumnData.COLUMN2_FLAG = '9'",
+			"\t\t\t\t\tOR lrec_CSVUploadColumnData.COLUMN3_FLAG = '9'",
+			"\t\t\t\t) THEN",
+			"\t\t\t\t\tIF (lb_IsCSVFileType = TRUE) THEN",
+			"\t\t\t\t\t\tls_ColumnName\t:=\tCASE",
+			"\t\t\t\t\t\t\t\t\t\t\t\tWHEN lrec_CSVUploadColumnData.COLUMN1_FLAG = '9'\tTHEN 'COLUMN1'",
+			"\t\t\t\t\t\t\t\t\t\t\t\tWHEN lrec_CSVUploadColumnData.COLUMN2_FLAG = '9'\tTHEN 'COLUMN2'",
+			"\t\t\t\t\t\t\t\t\t\t\t\tWHEN lrec_CSVUploadColumnData.COLUMN3_FLAG = '9'\tTHEN 'COLUMN3'",
+			"\t\t\t\t\t\t\t\t\t\t\t\tELSE ''",
+			"\t\t\t\t\t\t\t\t\t\t\tEND;",
+			"",
+			"\t\t\t\t\tELSE",
+			"\t\t\t\t\t\tls_ColumnName\t:=\tCASE WHEN lrec_CSVUploadColumnData.COLUMN1_FLAG = '9'\t\tTHEN 'COLUMN1'\t\t|| C_ARRAY_DELIMITER ELSE '' END ||",
+			"\t\t\t\t\t\t\t\t\t\t\tCASE WHEN lrec_CSVUploadColumnData.COLUMN2_FLAG = '9'\t\tTHEN 'COLUMN2'\t\t|| C_ARRAY_DELIMITER ELSE '' END ||",
+			"\t\t\t\t\t\t\t\t\t\t\tCASE WHEN lrec_CSVUploadColumnData.COLUMN3_FLAG = '9'\t\tTHEN 'COLUMN3'\t\t|| C_ARRAY_DELIMITER ELSE '' END;",
+			"\t\t\t\t\tEND IF;",
+			"",
+			"\t\t\t\t\tla_ColumnName\t:= STRING_TO_ARRAY(TRIM(ls_ColumnName, C_ARRAY_DELIMITER), C_ARRAY_DELIMITER);",
+			"",
+			"\t\t\t\t\t-- エラーテーブルへINSERT",
+			"\t\t\t\t\tPERFORM PXS_FILEUPLOAD.P_ACCEPTCSVUPDATEERRORDATA(",
+			"\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t'00010',",
+			"\t\t\t\t\t\t\t\tPXS_FILEUPLOAD.p_GetCSVFileErrorType(i_User_Cd, i_CSVFile_Cd, '00010'),",
+			"\t\t\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\t\t\tla_ColumnName",
+			"\t\t\t\t\t\t\t);",
+			"",
+			"\t\t\t\t\tln_LineNo\t\t:= ln_LineNo + ARRAY_LENGTH(la_ColumnName, 1);",
+			"\t\t\t\t\tln_ErrorCount\t:= ln_ErrorCount + ARRAY_LENGTH(la_ColumnName, 1);",
+			"\t\t\t\tEND IF;",
+			"",
+			"\t\t\t\t-- 新規登録件数のカウントアップ",
+			"\t\t\t\tln_InsCount\t\t\t:= ln_InsCount + 1;",
+			"\t\t\t\tlb_RegistFlag\t\t:= TRUE;",
+			"\t\t\tELSE",
+			"\t\t\t\t-- 更新登録件数のカウントアップ",
+			"\t\t\t\tln_UpdCount\t\t\t:= ln_UpdCount + 1;",
+			"\t\t\t\tlb_RegistFlag\t\t:= FALSE;",
+			"\t\t\tEND IF;",
+			"\t\tEND IF;",
+			""
+		],
+		"description": "Pattern check error 00010"
+	},
 
-
-	
+	"Pattern check error 00011": {
+		"prefix": "checkerror_00011_pattern",
+		"body": [
+			"",
+			"\tIF (INSTR(ls_ErrorCheck, '00011') > 0) THEN",
+			"\t\tIF (lb_IsCSVFileType = TRUE) THEN",
+			"\t\t\t-- エラーテーブルへINSERT",
+			"\t\t\tINSERT INTO UWK_CSVUPDATEERRORDATA (",
+			"\t\t\t\t\t\tSERVER_CD,",
+			"\t\t\t\t\t\tIMPORTBATCHKEY,",
+			"\t\t\t\t\t\tCSVLINENO,",
+			"\t\t\t\t\t\tCHECKTYPE,",
+			"\t\t\t\t\t\tLINENO,",
+			"\t\t\t\t\t\tERROR_CD,",
+			"\t\t\t\t\t\tERRORTYPE,",
+			"\t\t\t\t\t\tERROR_NOTES,",
+			"\t\t\t\t\t\tUSER_CD",
+			"\t\t\t)",
+			"\t\t\t\tSELECT\tSERVER_CD,",
+			"\t\t\t\t\t\tIMPORTBATCHKEY,",
+			"\t\t\t\t\t\tCSVLINENO,",
+			"\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t'00011',",
+			"\t\t\t\t\t\tPXS_FILEUPLOAD.p_GetCSVFileErrorType(i_User_Cd, i_CSVFile_Cd, '00011'),",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\tUSER_CD",
+			"\t\t\t\tFROM\tUWK_CSVUPLOADCOLUMNDATA COLUMNDATA",
+			"\t\t\t\tWHERE\tSERVER_CD\t\t= i_Server_Cd",
+			"\t\t\t\tAND\t\tIMPORTBATCHKEY\t= i_ImportBatchKey",
+			"\t\t\t\tAND\t\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUWK_CSVUPDATEERRORDATA ERRORDATA",
+			"\t\t\t\t\t\t\tWHERE\tERRORDATA.SERVER_CD\t\t\t= COLUMNDATA.SERVER_CD",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.IMPORTBATCHKEY\t= COLUMNDATA.IMPORTBATCHKEY",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CSVLINENO\t\t\t= COLUMNDATA.CSVLINENO",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CHECKTYPE\t\t\t= i_CheckType",
+			"\t\t\t\t\t\t)",
+			"\t\t\t\tEXCEPT",
+			"\t\t\t\tSELECT\tMAX(SERVER_CD)\t\tAS SERVER_CD,",
+			"\t\t\t\t\t\tMAX(IMPORTBATCHKEY)\tAS IMPORTBATCHKEY,",
+			"\t\t\t\t\t\tMAX(CSVLINENO)\t\tAS CSVLINENO,",
+			"\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t'00011',",
+			"\t\t\t\t\t\tPXS_FILEUPLOAD.p_GetCSVFileErrorType(i_User_Cd, i_CSVFile_Cd, '00011'),",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\tMAX(USER_CD)\t\tAS USER_CD",
+			"\t\t\t\tFROM\tUWK_CSVUPLOADCOLUMNDATA COLUMNDATA",
+			"\t\t\t\tWHERE\tSERVER_CD\t\t= i_Server_Cd",
+			"\t\t\t\tAND\t\tIMPORTBATCHKEY\t= i_ImportBatchKey",
+			"\t\t\t\tAND\t\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUWK_CSVUPDATEERRORDATA ERRORDATA",
+			"\t\t\t\t\t\t\tWHERE\tERRORDATA.SERVER_CD\t\t\t= COLUMNDATA.SERVER_CD",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.IMPORTBATCHKEY\t= COLUMNDATA.IMPORTBATCHKEY",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CSVLINENO\t\t\t= COLUMNDATA.CSVLINENO",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CHECKTYPE\t\t\t= i_CheckType",
+			"\t\t\t\t\t\t)",
+			"\t\t\t\tGROUP BY COLUMN1,COLUMN2,COLUMN3;",
+			"",
+			"\t\tELSE",
+			"\t\t\tINSERT INTO UWK_EXCELUPDATEERRORDATA",
+			"\t\t\t\tSELECT\tSERVER_CD,",
+			"\t\t\t\t\t\tIMPORTBATCHKEY,",
+			"\t\t\t\t\t\tEXCELTAGINDEX,",
+			"\t\t\t\t\t\tCSVLINENO,",
+			"\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t'00011',",
+			"\t\t\t\t\t\tPXS_FILEUPLOAD.p_GetCSVFileErrorType(null, i_CSVFile_Cd, '00011'),",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\t'COLUMN1,COLUMN2,COLUMN3',",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\t'1',",
+			"\t\t\t\t\t\tnull",
+			"\t\t\t\tFROM\tUWK_CSVUPLOADCOLUMNDATA COLUMNDATA",
+			"\t\t\t\tWHERE\tSERVER_CD\t\t= i_Server_Cd",
+			"\t\t\t\tAND\t\tIMPORTBATCHKEY\t= i_ImportBatchKey",
+			"\t\t\t\tAND\t\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUWK_EXCELUPDATEERRORDATA ERRORDATA",
+			"\t\t\t\t\t\t\tWHERE\tERRORDATA.SERVER_CD\t\t\t= COLUMNDATA.SERVER_CD",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.IMPORTBATCHKEY\t= COLUMNDATA.IMPORTBATCHKEY",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CSVLINENO\t\t\t= COLUMNDATA.CSVLINENO",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CHECKTYPE\t\t\t= i_CheckType",
+			"\t\t\t\t\t\t)",
+			"\t\t\t\tEXCEPT",
+			"\t\t\t\tSELECT\tMAX(SERVER_CD)\t\tAS SERVER_CD,",
+			"\t\t\t\t\t\tMAX(IMPORTBATCHKEY)\tAS IMPORTBATCHKEY,",
+			"\t\t\t\t\t\tMAX(EXCELTAGINDEX)\tAS EXCELTAGINDEX,",
+			"\t\t\t\t\t\tMAX(CSVLINENO)\t\tAS CSVLINENO,",
+			"\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t'00011',",
+			"\t\t\t\t\t\tPXS_FILEUPLOAD.p_GetCSVFileErrorType(null, i_CSVFile_Cd, '00011'),",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\t'COLUMN1,COLUMN2,COLUMN3',",
+			"\t\t\t\t\t\t'',",
+			"\t\t\t\t\t\t'1',",
+			"\t\t\t\t\t\tnull",
+			"\t\t\t\tFROM\tUWK_CSVUPLOADCOLUMNDATA COLUMNDATA",
+			"\t\t\t\tWHERE\tSERVER_CD\t\t= i_Server_Cd",
+			"\t\t\t\tAND\t\tIMPORTBATCHKEY\t= i_ImportBatchKey",
+			"\t\t\t\tAND\t\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUWK_EXCELUPDATEERRORDATA ERRORDATA",
+			"\t\t\t\t\t\t\tWHERE\tERRORDATA.SERVER_CD\t\t\t= COLUMNDATA.SERVER_CD",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.IMPORTBATCHKEY\t= COLUMNDATA.IMPORTBATCHKEY",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CSVLINENO\t\t\t= COLUMNDATA.CSVLINENO",
+			"\t\t\t\t\t\t\tAND\t\tERRORDATA.CHECKTYPE\t\t\t= i_CheckType",
+			"\t\t\t\t\t\t)",
+			"\t\t\t\tGROUP BY COLUMN1,COLUMN2,COLUMN3;",
+			"\t\tEND IF;",
+			"\tEND IF;",
+			""
+		],
+		"description": "Pattern check error 00011"
+	},
 
 	"CSV Import Check Pattern": {
 		"prefix": "importcheckpattern",
@@ -5571,13 +6329,1018 @@
 		"description": "CSV Import Check Pattern"
 	},
 
+
+
+
+
+
 	"CSV Entry Pattern": {
 		"prefix": "csventrypattern",
 		"body": [
 			"\n",
-			"TO_DATE(ls_ImportCondition1, 'YYYY/MM/DD')",
+			"SET CLIENT_ENCODING TO 'SJIS';",
+			"",
+			"/*",
+			"\t[サブ機能  ] EA.仕入",
+			"\t[機能ＩＤ  ] EA25",
+			"\t[機能名称  ] 仕入伝票取込",
+			"\t[リビジョン] 1",
+			"\t[関数名    ] p_CSVEntry",
+			"\t[作 成 日  ] 2022/08/30",
+			"\t[作 成 者  ] UNICCS/d-vu",
+			"\t[更新履歴  ] 2023/06/12 UNICCS/d-vu",
+			"\t\t\t\t\tインボイス対応：返品の登録・更新時、基取引年月日を登録・更新するように変更",
+			"\t\t\t\t\t返品の税率は基取引年月日時点の税率を取得するように変更",
+			"\t\t\t\t\t基取引年月日は、PXS_UTILITY.f_GetPurchaseGnkBik内で算出した値をPURCHASEINFO1として戻される",
+			"\t\t\t\t\t※基取引年月日の算出式：伝票日付－発注先マスタ.返品税変更経過月数",
+			"*/",
+			"",
+			"CREATE OR REPLACE FUNCTION PXC_EA25_001.p_CSVEntry (",
+			"\ti_Server_Cd\t\t\tIN\tUWK_CSVUPLOADCOLUMNDATA.SERVER_CD%TYPE,",
+			"\ti_ImportBatchKey\tIN\tUWK_CSVUPLOADCOLUMNDATA.IMPORTBATCHKEY%TYPE,",
+			"\ti_CSVUploadType\t\tIN\tUTR_CSVUPLOADOBSERVER.CSVUPLOADTYPE%TYPE,",
+			"\ti_StartCSVLineNo\tIN\tUWK_CSVUPLOADCOLUMNDATA.CSVLINENO%TYPE,",
+			"\ti_CommitRowCount\tIN\tNUMERIC,",
+			"\ti_SyoriFlag\t\t\tIN\tVARCHAR\t\t-- 1:登録処理 2:削除処理",
+			") RETURNS VOID AS $$",
+			"/*",
+			"$START",
+			"$FUNCTION\\1",
+			"\t仕入伝票取込の更新処理",
+			"$PAR\\1",
+			"\tサーバーコード",
+			"$PAR\\2",
+			"\tＣＳＶ取込バッチキー",
+			"$PAR\\3",
+			"\tＣＳＶ取込タイプ（1：追加／上書き、2：総入替、3：削除）",
+			"$PAR\\4",
+			"\t開始ＣＳＶ取込行番号",
+			"$PAR\\5",
+			"\tコミット行数",
+			"$PAR\\6",
+			"\t処理フラグ（1:登録処理、2:削除処理）",
+			"$RETURN\\1",
+			"\tVOID",
+			"$END",
+			"*/",
+			"DECLARE",
+			"\t-- レコードとカーソル定義",
+			"\tlrec_UserInfo\t\tRECORD;",
+			"BEGIN",
+			"\t-- コミット件数未対応のため、2回目以降の実行では何もしない。",
+			"\tIF (i_StartCSVLineNo <> 1) THEN",
+			"\t\tRETURN;",
+			"\tEND IF;",
+			"",
+			"\tlrec_UserInfo\t\t:= PXS_USER.p_GetUserInfo();",
+			"",
+			"\tIF (i_SyoriFlag = '1') THEN",
+			"\t\t-- ■登録処理",
+			"\t\tCASE (i_CSVUploadType)",
+			"\t\t\t-- 追加/上書き",
+			"\t\t\tWHEN ('1') THEN",
+			"\t\t\t\t-- 仕入",
+			"\t\t\t\t-- ヘッダ",
+			"\t\t\t\t-- 更新用テンポラリテーブル（基本）",
+			"\t\t\t\tINSERT INTO UTR_PURCHASEDENPHEADER (",
+			"\t\t\t\t\t\tSYSDENPNO,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tDENPINSPECTDATE,",
+			"\t\t\t\t\t\tSYSTEMMODE_CD,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tCOMPANY_CD,",
+			"\t\t\t\t\t\tSTORE_CD,",
+			"\t\t\t\t\t\tFLOOR_CD,",
+			"\t\t\t\t\t\tREDECORATION_CD,",
+			"\t\t\t\t\t\tPARTNER_CD,",
+			"\t\t\t\t\t\tPAYPARTNER_CD,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tPARENTCLASS_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS_CD,",
+			"\t\t\t\t\t\tCLASSTYPE,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tORGSYSDENPNO,",
+			"\t\t\t\t\t\tPAYSCHDATE,",
+			"\t\t\t\t\t\tPAYDELAYDATE,",
+			"\t\t\t\t\t\tTRADETYPE,",
+			"\t\t\t\t\t\tAPCLOSINGDATE,",
+			"\t\t\t\t\t\tLOGISTICSCENTER_CD,",
+			"\t\t\t\t\t\tTOTALQTY,",
+			"\t\t\t\t\t\tTOTALGNKKNGK,",
+			"\t\t\t\t\t\tTOTALEXCLUDETAXGNK,",
+			"\t\t\t\t\t\tTOTALGNKTAXKNGK,",
+			"\t\t\t\t\t\tTOTALPARTNERGNKKNGK,",
+			"\t\t\t\t\t\tTOTALGNKDISCOUNTKNGK,",
+			"\t\t\t\t\t\tTOTALPROFITGNKKNGK,",
+			"\t\t\t\t\t\tTOTALBIKKNGK,",
+			"\t\t\t\t\t\tCONTRACTTYPE,",
+			"\t\t\t\t\t\tORDERDATE,",
+			"\t\t\t\t\t\tDELIVERYDATE,",
+			"\t\t\t\t\t\tORDERMETHOD,",
+			"\t\t\t\t\t\tORDERDENPNO,",
+			"\t\t\t\t\t\tDELIVERYNO,",
+			"\t\t\t\t\t\tORDERLOTQTY,",
+			"\t\t\t\t\t\tORDERQTY,",
+			"\t\t\t\t\t\tTOTALORDERGNKKNGK,",
+			"\t\t\t\t\t\tTOTALORDERBIKKNGK,",
+			"\t\t\t\t\t\tDISTRIBUTIONTYPE,",
+			"\t\t\t\t\t\tDISCOUNTALLOCDATETIME,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tADDOPERATOR_CD,",
+			"\t\t\t\t\t\tADDDATETIME,",
+			"\t\t\t\t\t\tADDPROC_CD,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME,",
+			"\t\t\t\t\t\tUPDPROC_CD",
+			"\t\t\t\t)",
+			"\t\t\t\tSELECT\tSYSDENPNO,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tDENPINSPECTDATE,",
+			"\t\t\t\t\t\tSYSTEMMODE_CD,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tCOMPANY_CD,",
+			"\t\t\t\t\t\tSTORE_CD,",
+			"\t\t\t\t\t\tFLOOR_CD,",
+			"\t\t\t\t\t\tREDECORATION_CD,",
+			"\t\t\t\t\t\tPARTNER_CD,",
+			"\t\t\t\t\t\tPAYPARTNER_CD,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tPARENTCLASS_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS_CD,",
+			"\t\t\t\t\t\tCLASSTYPE,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tORGSYSDENPNO,",
+			"\t\t\t\t\t\tPAYSCHDATE,",
+			"\t\t\t\t\t\tPAYDELAYDATE,",
+			"\t\t\t\t\t\tTRADETYPE,",
+			"\t\t\t\t\t\tAPCLOSINGDATE,",
+			"\t\t\t\t\t\tLOGISTICSCENTER_CD,",
+			"\t\t\t\t\t\tTOTALQTY,",
+			"\t\t\t\t\t\tTOTALGNKKNGK,",
+			"\t\t\t\t\t\tTOTALEXCLUDETAXGNK,",
+			"\t\t\t\t\t\tTOTALGNKTAXKNGK,",
+			"\t\t\t\t\t\tTOTALPARTNERGNKKNGK,",
+			"\t\t\t\t\t\tTOTALGNKDISCOUNTKNGK,",
+			"\t\t\t\t\t\tTOTALPROFITGNKKNGK,",
+			"\t\t\t\t\t\tTOTALBIKKNGK,",
+			"\t\t\t\t\t\tCONTRACTTYPE,",
+			"\t\t\t\t\t\tORDERDATE,",
+			"\t\t\t\t\t\tDELIVERYDATE,",
+			"\t\t\t\t\t\tORDERMETHOD,",
+			"\t\t\t\t\t\tORDERDENPNO,",
+			"\t\t\t\t\t\tDELIVERYNO,",
+			"\t\t\t\t\t\tORDERLOTQTY,",
+			"\t\t\t\t\t\tORDERQTY,",
+			"\t\t\t\t\t\tTOTALORDERGNKKNGK,",
+			"\t\t\t\t\t\tTOTALORDERBIKKNGK,",
+			"\t\t\t\t\t\tDISTRIBUTIONTYPE,",
+			"\t\t\t\t\t\tDISCOUNTALLOCDATETIME,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_DENPHEADER HEADER",
+			"\t\t\t\tWHERE\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUTR_PURCHASEDENPHEADER TMP",
+			"\t\t\t\t\t\t\tWHERE\tTMP.SYSDENPNO = HEADER.SYSDENPNO",
+			"\t\t\t\t\t\t);",
+			"",
+			"\t\t\t\tINSERT INTO UTR_PURCHASEDENPDETAIL (",
+			"\t\t\t\t\t\tSYSDENPNO,",
+			"\t\t\t\t\t\tLINENO,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tDENPINSPECTDATE,",
+			"\t\t\t\t\t\tSYSTEMMODE_CD,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tSTORE_CD,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tSKU_CD,",
+			"\t\t\t\t\t\tSKUSNAME,",
+			"\t\t\t\t\t\tSTANDARDNAME,",
+			"\t\t\t\t\t\tQTY,",
+			"\t\t\t\t\t\tGNTNK,",
+			"\t\t\t\t\t\tGNKKNGK,",
+			"\t\t\t\t\t\tEXCLUDETAXGNK,",
+			"\t\t\t\t\t\tGNKTAXKNGK,",
+			"\t\t\t\t\t\tPARTNERGNTNK,",
+			"\t\t\t\t\t\tPARTNERGNKKNGK,",
+			"\t\t\t\t\t\tGNKDISCOUNTTNK,",
+			"\t\t\t\t\t\tGNKDISCOUNTKNGK,",
+			"\t\t\t\t\t\tPROFITGNTNK,",
+			"\t\t\t\t\t\tPROFITGNKKNGK,",
+			"\t\t\t\t\t\tPROFITGNKTYPE,",
+			"\t\t\t\t\t\tNET1GNTNK,",
+			"\t\t\t\t\t\tNET2GNTNK,",
+			"\t\t\t\t\t\tWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tPOSGNTNK,",
+			"\t\t\t\t\t\tPLANWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tPLANNET1GNTNK,",
+			"\t\t\t\t\t\tPLANNET2GNTNK,",
+			"\t\t\t\t\t\tPLANMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tPLANPOSGNTNK,",
+			"\t\t\t\t\t\tMAKERNETGNTNK,",
+			"\t\t\t\t\t\tQUOTEGNTNK,",
+			"\t\t\t\t\t\tBITNK,",
+			"\t\t\t\t\t\tBIKKNGK,",
+			"\t\t\t\t\t\tPRICECHGKNGK,",
+			"\t\t\t\t\t\tORDERLOTQTY,",
+			"\t\t\t\t\t\tORDERQTY,",
+			"\t\t\t\t\t\tLOTSIZE,",
+			"\t\t\t\t\t\tORDERGNTNK,",
+			"\t\t\t\t\t\tORDERBITNK,",
+			"\t\t\t\t\t\tORDEROPERATOR_CD,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tREASON_CD,",
+			"\t\t\t\t\t\tIDNUMBER,",
+			"\t\t\t\t\t\tGROSSDENPNO,",
+			"\t\t\t\t\t\tGROSSLINENO,",
+			"\t\t\t\t\t\tPURCHASEINFO1,",
+			"\t\t\t\t\t\tADDOPERATOR_CD,",
+			"\t\t\t\t\t\tADDDATETIME,",
+			"\t\t\t\t\t\tADDPROC_CD,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME,",
+			"\t\t\t\t\t\tUPDPROC_CD",
+			"\t\t\t\t)",
+			"\t\t\t\tSELECT\tSYSDENPNO,",
+			"\t\t\t\t\t\tLINENO,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tDENPINSPECTDATE,",
+			"\t\t\t\t\t\tSYSTEMMODE_CD,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tSTORE_CD,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tSKU_CD,",
+			"\t\t\t\t\t\tSKUSNAME,",
+			"\t\t\t\t\t\tSTANDARDNAME,",
+			"\t\t\t\t\t\tQTY,",
+			"\t\t\t\t\t\tGNTNK,",
+			"\t\t\t\t\t\tGNKKNGK,",
+			"\t\t\t\t\t\tEXCLUDETAXGNK,",
+			"\t\t\t\t\t\tGNKTAXKNGK,",
+			"\t\t\t\t\t\tPARTNERGNTNK,",
+			"\t\t\t\t\t\tPARTNERGNKKNGK,",
+			"\t\t\t\t\t\tGNKDISCOUNTTNK,",
+			"\t\t\t\t\t\tGNKDISCOUNTKNGK,",
+			"\t\t\t\t\t\tPROFITGNTNK,",
+			"\t\t\t\t\t\tPROFITGNKKNGK,",
+			"\t\t\t\t\t\tPROFITGNKTYPE,",
+			"\t\t\t\t\t\tNET1GNTNK,",
+			"\t\t\t\t\t\tNET2GNTNK,",
+			"\t\t\t\t\t\tWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tPOSGNTNK,",
+			"\t\t\t\t\t\tPLANWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tPLANNET1GNTNK,",
+			"\t\t\t\t\t\tPLANNET2GNTNK,",
+			"\t\t\t\t\t\tPLANMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tPLANPOSGNTNK,",
+			"\t\t\t\t\t\tMAKERNETGNTNK,",
+			"\t\t\t\t\t\tQUOTEGNTNK,",
+			"\t\t\t\t\t\tBITNK,",
+			"\t\t\t\t\t\tBIKKNGK,",
+			"\t\t\t\t\t\tPRICECHGKNGK,",
+			"\t\t\t\t\t\tORDERLOTQTY,",
+			"\t\t\t\t\t\tORDERQTY,",
+			"\t\t\t\t\t\tLOTSIZE,",
+			"\t\t\t\t\t\tORDERGNTNK,",
+			"\t\t\t\t\t\tORDERBITNK,",
+			"\t\t\t\t\t\tORDEROPERATOR_CD,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tREASON_CD,",
+			"\t\t\t\t\t\tIDNUMBER,",
+			"\t\t\t\t\t\tGROSSDENPNO,",
+			"\t\t\t\t\t\tGROSSLINENO,",
+			"\t\t\t\t\t\tPURCHASEINFO1,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_DENPDETAIL DETAIL",
+			"\t\t\t\tWHERE\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUTR_PURCHASEDENPDETAIL TMP",
+			"\t\t\t\t\t\t\tWHERE\tTMP.SYSDENPNO\t= DETAIL.SYSDENPNO",
+			"\t\t\t\t\t\t\tAND\t\tTMP.LINENO\t\t= DETAIL.LINENO",
+			"\t\t\t\t\t\t);",
+			"",
+			"\t\t\t\tINSERT INTO UTR_MOVEDENPHEADER (",
+			"\t\t\t\t\t\tSYSDENPNO,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tEFFECTTYPE,",
+			"\t\t\t\t\t\tMOVESTATUS,",
+			"\t\t\t\t\t\tORGSYSDENPNO,",
+			"\t\t\t\t\t\tMOVEINPUTTYPE,",
+			"\t\t\t\t\t\tREGISTERDATE,",
+			"\t\t\t\t\t\tOUTCOMPANY_CD,",
+			"\t\t\t\t\t\tOUTSTORE_CD,",
+			"\t\t\t\t\t\tOUTFLOOR_CD,",
+			"\t\t\t\t\t\tINCOMPANY_CD,",
+			"\t\t\t\t\t\tINSTORE_CD,",
+			"\t\t\t\t\t\tINFLOOR_CD,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tOUTDATE,",
+			"\t\t\t\t\t\tINPLANDATE,",
+			"\t\t\t\t\t\tINDATE,",
+			"\t\t\t\t\t\tOUTOPERATOR_CD,",
+			"\t\t\t\t\t\tOUTACCEPTOPERATOR_CD,",
+			"\t\t\t\t\t\tOUTACCEPTSTATUS,",
+			"\t\t\t\t\t\tOUTACCEPTSEQNO,",
+			"\t\t\t\t\t\tINOPERATOR_CD,",
+			"\t\t\t\t\t\tINACCEPTOPERATOR_CD,",
+			"\t\t\t\t\t\tINACCEPTSTATUS,",
+			"\t\t\t\t\t\tINACCEPTSEQNO,",
+			"\t\t\t\t\t\tINACCEPTTYPE,",
+			"\t\t\t\t\t\tHTINSTOREDATAFLAG,",
+			"\t\t\t\t\t\tPURCHASEDENPNO,",
+			"\t\t\t\t\t\tPURCHASEDENPKIND,",
+			"\t\t\t\t\t\tPURCHASEUSERDENPKIND,",
+			"\t\t\t\t\t\tPURCHASEDENPTYPE,",
+			"\t\t\t\t\t\tPURCHASEUSERDENPTYPE,",
+			"\t\t\t\t\t\tORDERDENPNO,",
+			"\t\t\t\t\t\tREVERSETYPE,",
+			"\t\t\t\t\t\tBOXESSEQNO,",
+			"\t\t\t\t\t\tBOXESQTY,",
+			"\t\t\t\t\t\tBOXESNO,",
+			"\t\t\t\t\t\tPARTNER_CD,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tADDOPERATOR_CD,",
+			"\t\t\t\t\t\tADDDATETIME,",
+			"\t\t\t\t\t\tADDPROC_CD,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME,",
+			"\t\t\t\t\t\tUPDPROC_CD",
+			"\t\t\t\t)",
+			"\t\t\t\tSELECT\tSYSDENPNO,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tEFFECTTYPE,",
+			"\t\t\t\t\t\tMOVESTATUS,",
+			"\t\t\t\t\t\tORGSYSDENPNO,",
+			"\t\t\t\t\t\tMOVEINPUTTYPE,",
+			"\t\t\t\t\t\tREGISTERDATE,",
+			"\t\t\t\t\t\tOUTCOMPANY_CD,",
+			"\t\t\t\t\t\tOUTSTORE_CD,",
+			"\t\t\t\t\t\tOUTFLOOR_CD,",
+			"\t\t\t\t\t\tINCOMPANY_CD,",
+			"\t\t\t\t\t\tINSTORE_CD,",
+			"\t\t\t\t\t\tINFLOOR_CD,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tOUTDATE,",
+			"\t\t\t\t\t\tINPLANDATE,",
+			"\t\t\t\t\t\tINDATE,",
+			"\t\t\t\t\t\tOUTOPERATOR_CD,",
+			"\t\t\t\t\t\tOUTACCEPTOPERATOR_CD,",
+			"\t\t\t\t\t\tOUTACCEPTSTATUS,",
+			"\t\t\t\t\t\tOUTACCEPTSEQNO,",
+			"\t\t\t\t\t\tINOPERATOR_CD,",
+			"\t\t\t\t\t\tINACCEPTOPERATOR_CD,",
+			"\t\t\t\t\t\tINACCEPTSTATUS,",
+			"\t\t\t\t\t\tINACCEPTSEQNO,",
+			"\t\t\t\t\t\tINACCEPTTYPE,",
+			"\t\t\t\t\t\tHTINSTOREDATAFLAG,",
+			"\t\t\t\t\t\tPURCHASEDENPNO,",
+			"\t\t\t\t\t\tPURCHASEDENPKIND,",
+			"\t\t\t\t\t\tPURCHASEUSERDENPKIND,",
+			"\t\t\t\t\t\tPURCHASEDENPTYPE,",
+			"\t\t\t\t\t\tPURCHASEUSERDENPTYPE,",
+			"\t\t\t\t\t\tORDERDENPNO,",
+			"\t\t\t\t\t\tREVERSETYPE,",
+			"\t\t\t\t\t\tBOXESSEQNO,",
+			"\t\t\t\t\t\tBOXESQTY,",
+			"\t\t\t\t\t\tBOXESNO,",
+			"\t\t\t\t\t\tPARTNER_CD,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_MOVEDENPHEADER HEADER",
+			"\t\t\t\tWHERE\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUTR_MOVEDENPHEADER TMP",
+			"\t\t\t\t\t\t\tWHERE\tTMP.SYSDENPNO = HEADER.SYSDENPNO",
+			"\t\t\t\t\t\t);",
+			"",
+			"\t\t\t\tINSERT INTO UTR_MOVEDENPDETAIL (",
+			"\t\t\t\t\t\tSYSDENPNO,",
+			"\t\t\t\t\t\tLINENO,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tEFFECTTYPE,",
+			"\t\t\t\t\t\tMOVESTATUS,",
+			"\t\t\t\t\t\tOUTSTORE_CD,",
+			"\t\t\t\t\t\tINSTORE_CD,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tOUTDATE,",
+			"\t\t\t\t\t\tINDATE,",
+			"\t\t\t\t\t\tSKU_CD,",
+			"\t\t\t\t\t\tSKUSNAME,",
+			"\t\t\t\t\t\tSTANDARDNAME,",
+			"\t\t\t\t\t\tOUTITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tOUTPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tINITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tINPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tOUTQTY,",
+			"\t\t\t\t\t\tOUTPOSGNTNK,",
+			"\t\t\t\t\t\tOUTGNTNK,",
+			"\t\t\t\t\t\tOUTGNKKNGK,",
+			"\t\t\t\t\t\tOUTWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tOUTNET1GNTNK,",
+			"\t\t\t\t\t\tOUTNET2GNTNK,",
+			"\t\t\t\t\t\tOUTMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tOUTBITNK,",
+			"\t\t\t\t\t\tOUTBIKKNGK,",
+			"\t\t\t\t\t\tOUTLOSSQTY,",
+			"\t\t\t\t\t\tINQTY,",
+			"\t\t\t\t\t\tINPOSGNTNK,",
+			"\t\t\t\t\t\tINGNTNK,",
+			"\t\t\t\t\t\tINGNKKNGK,",
+			"\t\t\t\t\t\tINWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tINNET1GNTNK,",
+			"\t\t\t\t\t\tINNET2GNTNK,",
+			"\t\t\t\t\t\tINMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tINBITNK,",
+			"\t\t\t\t\t\tINBIKKNGK,",
+			"\t\t\t\t\t\tINLOSSQTY,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tHTINSTOREDATAFLAG,",
+			"\t\t\t\t\t\tQTYDIFFCHECKFLAG,",
+			"\t\t\t\t\t\tQTYDIFFCHECKDATE,",
+			"\t\t\t\t\t\tINSTOREITEMCOPYFLAG,",
+			"\t\t\t\t\t\tRSVCHAR1,",
+			"\t\t\t\t\t\tADDOPERATOR_CD,",
+			"\t\t\t\t\t\tADDDATETIME,",
+			"\t\t\t\t\t\tADDPROC_CD,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME,",
+			"\t\t\t\t\t\tUPDPROC_CD",
+			"\t\t\t\t)",
+			"\t\t\t\tSELECT\tSYSDENPNO,",
+			"\t\t\t\t\t\tLINENO,",
+			"\t\t\t\t\t\tDENPNO,",
+			"\t\t\t\t\t\tDENPKIND,",
+			"\t\t\t\t\t\tUSERDENPKIND,",
+			"\t\t\t\t\t\tDENPTYPE,",
+			"\t\t\t\t\t\tUSERDENPTYPE,",
+			"\t\t\t\t\t\tRBFLAG,",
+			"\t\t\t\t\t\tEFFECTTYPE,",
+			"\t\t\t\t\t\tMOVESTATUS,",
+			"\t\t\t\t\t\tOUTSTORE_CD,",
+			"\t\t\t\t\t\tINSTORE_CD,",
+			"\t\t\t\t\t\tINSPECTDATE,",
+			"\t\t\t\t\t\tOUTDATE,",
+			"\t\t\t\t\t\tINDATE,",
+			"\t\t\t\t\t\tSKU_CD,",
+			"\t\t\t\t\t\tSKUSNAME,",
+			"\t\t\t\t\t\tSTANDARDNAME,",
+			"\t\t\t\t\t\tOUTITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tOUTPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tOUTPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tOUTATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tINITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tINPARENTCLASS1_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS1_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS2_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS2_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS3_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS3_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS4_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS4_CD,",
+			"\t\t\t\t\t\tINPARENTCLASS5_CD,",
+			"\t\t\t\t\t\tINATTRIBUTECLASS5_CD,",
+			"\t\t\t\t\t\tOUTQTY,",
+			"\t\t\t\t\t\tOUTPOSGNTNK,",
+			"\t\t\t\t\t\tOUTGNTNK,",
+			"\t\t\t\t\t\tOUTGNKKNGK,",
+			"\t\t\t\t\t\tOUTWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tOUTNET1GNTNK,",
+			"\t\t\t\t\t\tOUTNET2GNTNK,",
+			"\t\t\t\t\t\tOUTMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tOUTBITNK,",
+			"\t\t\t\t\t\tOUTBIKKNGK,",
+			"\t\t\t\t\t\tOUTLOSSQTY,",
+			"\t\t\t\t\t\tINQTY,",
+			"\t\t\t\t\t\tINPOSGNTNK,",
+			"\t\t\t\t\t\tINGNTNK,",
+			"\t\t\t\t\t\tINGNKKNGK,",
+			"\t\t\t\t\t\tINWHOLESALEGNTNK,",
+			"\t\t\t\t\t\tINNET1GNTNK,",
+			"\t\t\t\t\t\tINNET2GNTNK,",
+			"\t\t\t\t\t\tINMASTERORDERGNTNK,",
+			"\t\t\t\t\t\tINBITNK,",
+			"\t\t\t\t\t\tINBIKKNGK,",
+			"\t\t\t\t\t\tINLOSSQTY,",
+			"\t\t\t\t\t\tTAXTYPE,",
+			"\t\t\t\t\t\tTAXRATE,",
+			"\t\t\t\t\t\tNOTES,",
+			"\t\t\t\t\t\tHTINSTOREDATAFLAG,",
+			"\t\t\t\t\t\tQTYDIFFCHECKFLAG,",
+			"\t\t\t\t\t\tQTYDIFFCHECKDATE,",
+			"\t\t\t\t\t\tINSTOREITEMCOPYFLAG,",
+			"\t\t\t\t\t\tRSVCHAR1,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tlrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tlrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_MOVEDENPDETAIL DETAIL",
+			"\t\t\t\tWHERE\tNOT EXISTS (",
+			"\t\t\t\t\t\t\tSELECT\t1",
+			"\t\t\t\t\t\t\tFROM\tUTR_MOVEDENPDETAIL TMP",
+			"\t\t\t\t\t\t\tWHERE\tTMP.SYSDENPNO\t= DETAIL.SYSDENPNO",
+			"\t\t\t\t\t\t\tAND\t\tTMP.LINENO\t\t= DETAIL.LINENO",
+			"\t\t\t\t\t\t);",
+			"",
+			"\t\t\t\tUPDATE\tUTR_ORDERHEADER HEADER",
+			"\t\t\t\tSET\t\tDELIVERYDECISIONFLAG\t= TMP.DELIVERYDECISIONFLAG,",
+			"\t\t\t\t\t\tINSPECTDATE\t\t\t\t= TMP.INSPECTDATE,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD\t\t\t= lrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME\t\t\t\t= lrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tUPDPROC_CD\t\t\t\t= lrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_ORDERHEADER TMP",
+			"\t\t\t\tWHERE\tTMP.SYSDENPNO = HEADER.SYSDENPNO;",
+			"",
+			"\t\t\t\tUPDATE\tUTR_RETURNHEADER HEADER",
+			"\t\t\t\tSET\t\tDELIVERYDECISIONFLAG\t= TMP.DELIVERYDECISIONFLAG,",
+			"\t\t\t\t\t\tINSPECTDATE\t\t\t\t= TMP.INSPECTDATE,",
+			"\t\t\t\t\t\tRSVDATE1\t\t\t\t= TMP.RSVDATE1,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD\t\t\t= lrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME\t\t\t\t= lrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tUPDPROC_CD\t\t\t\t= lrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_RETURNHEADER TMP",
+			"\t\t\t\tWHERE\tTMP.SYSDENPNO\t= HEADER.SYSDENPNO;",
+			"",
+			"\t\t\t\tUPDATE\tUTR_ORDERDETAIL DETAIL",
+			"\t\t\t\tSET\t\tDELIVERYQTY\t\t\t\t= TMP.DELIVERYQTY,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD\t\t\t= lrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME\t\t\t\t= lrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tUPDPROC_CD\t\t\t\t= lrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_ORDERDETAIL TMP",
+			"\t\t\t\tWHERE\tTMP.SYSDENPNO\t= DETAIL.SYSDENPNO",
+			"\t\t\t\tAND\t\tTMP.LINENO\t\t= DETAIL.LINENO;",
+			"",
+			"\t\t\t\tUPDATE\tUTR_RETURNDETAIL DETAIL",
+			"\t\t\t\tSET\t\tDELIVERYQTY\t\t\t\t= TMP.DELIVERYQTY,",
+			"\t\t\t\t\t\tUPDOPERATOR_CD\t\t\t= lrec_UserInfo.OPERATOR_CD,",
+			"\t\t\t\t\t\tUPDDATETIME\t\t\t\t= lrec_UserInfo.EXECTIME,",
+			"\t\t\t\t\t\tUPDPROC_CD\t\t\t\t= lrec_UserInfo.PROC_CD",
+			"\t\t\t\tFROM\tTMP_EA25_RETURNDETAIL TMP",
+			"\t\t\t\tWHERE\tTMP.SYSDENPNO\t= DETAIL.SYSDENPNO",
+			"\t\t\t\tAND\t\tTMP.LINENO\t\t= DETAIL.LINENO;",
+			"",
+			"\t\t\t-- 総入替",
+			"\t\t\tWHEN ('2') THEN",
+			"\t\t\t\t-- 何もしない。",
+			"\t\t\t\tNULL;",
+			"",
+			"\t\t\tELSE",
+			"\t\t\t\tNULL;",
+			"\t\tEND CASE;",
+			"",
+			"\tELSIF (i_SyoriFlag = '2') THEN",
+			"\t\t-- ■削除処理",
+			"\t\tCASE (i_CSVUploadType)",
+			"\t\t\t-- 総入替用の削除",
+			"\t\t\tWHEN ('2') THEN",
+			"\t\t\t\t-- 何もしない。",
+			"\t\t\t\tNULL;",
+			"",
+			"\t\t\t-- 削除",
+			"\t\t\tWHEN ('3') THEN",
+			"\t\t\t\t-- 何もしない。",
+			"\t\t\t\tNULL;",
+			"",
+			"\t\t\tELSE",
+			"\t\t\t\tNULL;",
+			"\t\tEND CASE;",
+			"\tEND IF;",
+			"",
+			"END;",
+			"$$ LANGUAGE 'plpgsql';",
+			"",
+			"RESET CLIENT_ENCODING;",
 			"\n"
 		],
 		"description": "CSV Entry Pattern"
+	},
+
+
+
+
+
+
+	"Defined create table pattern": {
+		"prefix": "createtablepattern",
+		"body": [
+			"\n",
+			"CREATE TABLE utr_returnheader (",
+			"    sysdenpno\t\t\t\t\t\tnumeric(14,0) NOT NULL,",
+			"    denpno\t\t\t\t\t\t\tnumeric(9,0) NOT NULL,",
+			"    denpkind\t\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    userdenpkind\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    denptype\t\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    userdenptype\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    store_cd\t\t\t\t\t\tcharacter varying(10) NOT NULL,",
+			"    floor_cd\t\t\t\t\t\tcharacter varying(5),",
+			"    returndate\t\t\t\t\t\tdate NOT NULL,",
+			"    deliverydate\t\t\t\t\tdate NOT NULL,",
+			"    partner_cd\t\t\t\t\t\tcharacter varying(6) NOT NULL,",
+			"    itemattributetype\t\t\t\tcharacter varying(3) NOT NULL,",
+			"    classtype\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    parentclass_cd\t\t\t\t\tcharacter varying(5) NOT NULL,",
+			"    attributeclass_cd\t\t\t\tcharacter varying(5) NOT NULL,",
+			"    taxtype\t\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    tax_cd\t\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    logisticscentertype\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    logisticscenter_cd\t\t\t\tcharacter varying(6),",
+			"    partnerdistributionmaster_cd\tcharacter varying(6),",
+			"    partnerlayouttype\t\t\t\tcharacter varying(2),",
+			"    directtransfer\t\t\t\t\tcharacter varying(6),",
+			"    temporarytransfer\t\t\t\tcharacter varying(6),",
+			"    logisticsdistributionmaster_cd\tcharacter varying(6),",
+			"    logisticslayouttype\t\t\t\tcharacter varying(2),",
+			"    businessname\t\t\t\t\tcharacter varying(2),",
+			"    eosmaketype\t\t\t\t\t\tcharacter varying(2),",
+			"    instore_cd\t\t\t\t\t\tcharacter varying(10),",
+			"    inclass_cd\t\t\t\t\t\tcharacter varying(5),",
+			"    grosstype\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    distributionstatus\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    distributiondatetime\t\t\ttimestamp(6) without time zone,",
+			"    deliveryplanflag\t\t\t\tcharacter varying(1) DEFAULT '0'::character varying,",
+			"    deliveryplandate\t\t\t\tdate,",
+			"    deliverydecisionflag\t\t\tcharacter varying(1) DEFAULT '0'::character varying,",
+			"    inspectdate\t\t\t\t\t\tdate,",
+			"    printdatetime\t\t\t\t\ttimestamp(6) without time zone,",
+			"    partneroperator\t\t\t\t\tcharacter varying(40),",
+			"    partneradmitdate\t\t\t\tdate,",
+			"    classoperator\t\t\t\t\tcharacter varying(40),",
+			"    classadmitdate\t\t\t\t\tdate,",
+			"    returndetailtype\t\t\t\tcharacter varying(5),",
+			"    reason1\t\t\t\t\t\t\tcharacter varying(10),",
+			"    reason2\t\t\t\t\t\t\tcharacter varying(10),",
+			"    returndenpmaketype\t\t\t\tcharacter varying(1),",
+			"    totaldeliveryqty\t\t\t\tnumeric(7,1) DEFAULT '0'::numeric NOT NULL,",
+			"    totalgnkkngk\t\t\t\t\tnumeric(14,2) DEFAULT '0'::numeric NOT NULL,",
+			"    totalgnktaxkngk\t\t\t\t\tnumeric(11,2) DEFAULT '0'::numeric NOT NULL,",
+			"    totalbikkngk\t\t\t\t\tnumeric(14,2) DEFAULT '0'::numeric NOT NULL,",
+			"    notes\t\t\t\t\t\t\tcharacter varying(200),",
+			"    returntype\t\t\t\t\t\tcharacter varying(2) DEFAULT '00'::character varying NOT NULL,",
+			"    pendingtype\t\t\t\t\t\tcharacter varying(1) DEFAULT '0'::character varying NOT NULL,",
+			"    rsvchar1\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar2\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar3\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar4\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvnum1\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum2\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum3\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum4\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvdate1\t\t\t\t\t\tdate,",
+			"    rsvdatetime1\t\t\t\t\ttimestamp(6) without time zone,",
+			"    addoperator_cd\t\t\t\t\tcharacter varying(20) DEFAULT 'SYSTEM'::character varying NOT NULL,",
+			"    adddatetime\t\t\t\t\t\ttimestamp(6) without time zone NOT NULL,",
+			"    addproc_cd\t\t\t\t\t\tcharacter varying(40),",
+			"    updoperator_cd\t\t\t\t\tcharacter varying(20) DEFAULT 'SYSTEM'::character varying NOT NULL,",
+			"    upddatetime\t\t\t\t\t\ttimestamp(6) without time zone NOT NULL,",
+			"    updproc_cd\t\t\t\t\t\tcharacter varying(40),",
+			"    CONSTRAINT pk_utrreturnheader PRIMARY KEY (sysdenpno)",
+			");",
+			"",
+			"COMMENT ON TABLE utr_returnheader IS '【返品】返品実績ヘッダです。';",
+			"",
+			"COMMENT ON COLUMN utr_returnheader.sysdenpno IS 'システム伝票番号です。';",
+			"COMMENT ON COLUMN utr_returnheader.denpno IS '返品伝票番号です。';",
+			"COMMENT ON COLUMN utr_returnheader.denpkind IS 'システム伝票種類です。';",
+			"COMMENT ON COLUMN utr_returnheader.userdenpkind IS 'ユーザ伝票種類です。';",
+			"COMMENT ON COLUMN utr_returnheader.denptype IS 'システム伝票区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.userdenptype IS 'ユーザ伝票区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.store_cd IS '店舗コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.floor_cd IS 'フロアコードです。未指定時またはフロア管理していない場合は店舗コードと同じ値が入ります。';",
+			"COMMENT ON COLUMN utr_returnheader.returndate IS '返品日です。';",
+			"COMMENT ON COLUMN utr_returnheader.deliverydate IS '納品日です。';",
+			"COMMENT ON COLUMN utr_returnheader.partner_cd IS '発注先コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.itemattributetype IS '商品属性区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.classtype IS '商品分類階層区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.parentclass_cd IS '代表分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.attributeclass_cd IS '属性分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.taxtype IS '税区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.tax_cd IS '税率コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.logisticscentertype IS '物流センター区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.logisticscenter_cd IS '物流センターコードです。店直の場合はNULLが登録されています。';",
+			"COMMENT ON COLUMN utr_returnheader.partnerdistributionmaster_cd IS '取引先向け配信マスタコードです。';",
+			"COMMENT ON COLUMN utr_returnheader.partnerlayouttype IS '取引先向け配信ファイルのレイアウト区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.directtransfer IS '直接送信先コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.temporarytransfer IS '一時配信先コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.logisticsdistributionmaster_cd IS '物流向け配信マスタコードです。';",
+			"COMMENT ON COLUMN utr_returnheader.logisticslayouttype IS '物流向け配信ファイルのレイアウト区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.businessname IS '営業区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.eosmaketype IS '配信作成区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.instore_cd IS '入庫店舗コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.inclass_cd IS '入庫分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.grosstype IS '総量区分です。（0:店別 1:総量）';",
+			"COMMENT ON COLUMN utr_returnheader.distributionstatus IS '配信ステータスです。（0:未配信、1:配信済）';",
+			"COMMENT ON COLUMN utr_returnheader.distributiondatetime IS '配信時刻です。';",
+			"COMMENT ON COLUMN utr_returnheader.deliveryplanflag IS '納品予定フラグです。';",
+			"COMMENT ON COLUMN utr_returnheader.deliveryplandate IS '納品予定日です。';",
+			"COMMENT ON COLUMN utr_returnheader.deliverydecisionflag IS '納品確定日です。';",
+			"COMMENT ON COLUMN utr_returnheader.inspectdate IS '伝票計上日です。';",
+			"COMMENT ON COLUMN utr_returnheader.printdatetime IS '印刷日時です。未印刷データはNULLが設定されます。';",
+			"COMMENT ON COLUMN utr_returnheader.partneroperator IS '発注先担当者です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.partneradmitdate IS '発注先担当者の了承日です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.classoperator IS '部門担当者名です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.classadmitdate IS '部門担当者の了承日です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.returndetailtype IS '返品方式区分です。　1:直接返品　2:総量返品　3:通過返品　';",
+			"COMMENT ON COLUMN utr_returnheader.reason1 IS '返品理由１です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.reason2 IS '返品理由２です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheader.returndenpmaketype IS '返品実績作成区分です。';",
+			"COMMENT ON COLUMN utr_returnheader.totaldeliveryqty IS '納品数合計です。';",
+			"COMMENT ON COLUMN utr_returnheader.totalgnkkngk IS '返品金額合計です。';",
+			"COMMENT ON COLUMN utr_returnheader.totalgnktaxkngk IS '原価消費税額合計です。';",
+			"COMMENT ON COLUMN utr_returnheader.totalbikkngk IS '売価金額合計です。';",
+			"COMMENT ON COLUMN utr_returnheader.notes IS 'ヘッダコメントです。';",
+			"COMMENT ON COLUMN utr_returnheader.returntype IS '返品区分です。00:返品、03:廃棄';",
+			"COMMENT ON COLUMN utr_returnheader.pendingtype IS '保留区分です。一度、返品保留になったかどうかです。0:なし、1:保留';",
+			"COMMENT ON COLUMN utr_returnheader.rsvchar1 IS '文字列予備項目１です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvchar2 IS '文字列予備項目２です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvchar3 IS '文字列予備項目３です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvchar4 IS '文字列予備項目４です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvnum1 IS '数値予備項目１です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvnum2 IS '数値予備項目２です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvnum3 IS '数値予備項目３です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvnum4 IS '数値予備項目４です。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvdate1 IS '基取引年月日です。発注先マスタの返品税変更経過月数より基取引年月日を算出します。';",
+			"COMMENT ON COLUMN utr_returnheader.rsvdatetime1 IS '日時予備１です。';",
+			"COMMENT ON COLUMN utr_returnheader.addoperator_cd IS '新規作成者です。';",
+			"COMMENT ON COLUMN utr_returnheader.adddatetime IS '新規作成日です。';",
+			"COMMENT ON COLUMN utr_returnheader.addproc_cd IS '新規作成処理コードです。';",
+			"COMMENT ON COLUMN utr_returnheader.updoperator_cd IS '最終更新者です。';",
+			"COMMENT ON COLUMN utr_returnheader.upddatetime IS '最終更新日です。';",
+			"COMMENT ON COLUMN utr_returnheader.updproc_cd IS '最終更新処理コードです。';",
+			"",
+			"CREATE INDEX ix1_utrreturnheader ON utr_returnheader USING btree (denpno);",
+			"CREATE INDEX ix2_utrreturnheader ON utr_returnheader USING btree (store_cd);",
+			"CREATE INDEX ix3_utrreturnheader ON utr_returnheader USING btree (partner_cd);",
+			"CREATE INDEX ix4_utrreturnheader ON utr_returnheader USING btree (returndate, userdenptype);",
+			
+			"\n"
+		],
+		"description": "Defined create table pattern"
+	},
+
+	"Defined create table log pattern": {
+		"prefix": "createtablelog",
+		"body": [
+			"\n",
+			"CREATE TABLE utr_returnheaderlog (",
+			"    log_id\t\t\t\t\t\t\tcharacter varying(36) not null,",
+			"    logdatetime\t\t\t\t\t\ttimestamp without time zone not null,",
+			"    logoperator_cd\t\t\t\t\tcharacter varying(20) not null,",
+			"    logtype\t\t\t\t\t\t\tcharacter varying(1) not null,",
+			"    sysdenpno\t\t\t\t\t\tnumeric(14,0) NOT NULL,",
+			"    denpno\t\t\t\t\t\t\tnumeric(9,0) NOT NULL,",
+			"    denpkind\t\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    userdenpkind\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    denptype\t\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    userdenptype\t\t\t\t\tcharacter varying(2) NOT NULL,",
+			"    store_cd\t\t\t\t\t\tcharacter varying(10) NOT NULL,",
+			"    floor_cd\t\t\t\t\t\tcharacter varying(5),",
+			"    returndate\t\t\t\t\t\tdate NOT NULL,",
+			"    deliverydate\t\t\t\t\tdate NOT NULL,",
+			"    partner_cd\t\t\t\t\t\tcharacter varying(6) NOT NULL,",
+			"    itemattributetype\t\t\t\tcharacter varying(3) NOT NULL,",
+			"    classtype\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    parentclass_cd\t\t\t\t\tcharacter varying(5) NOT NULL,",
+			"    attributeclass_cd\t\t\t\tcharacter varying(5) NOT NULL,",
+			"    taxtype\t\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    tax_cd\t\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    logisticscentertype\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    logisticscenter_cd\t\t\t\tcharacter varying(6),",
+			"    partnerdistributionmaster_cd\tcharacter varying(6),",
+			"    partnerlayouttype\t\t\t\tcharacter varying(2),",
+			"    directtransfer\t\t\t\t\tcharacter varying(6),",
+			"    temporarytransfer\t\t\t\tcharacter varying(6),",
+			"    logisticsdistributionmaster_cd\tcharacter varying(6),",
+			"    logisticslayouttype\t\t\t\tcharacter varying(2),",
+			"    businessname\t\t\t\t\tcharacter varying(2),",
+			"    eosmaketype\t\t\t\t\t\tcharacter varying(2),",
+			"    instore_cd\t\t\t\t\t\tcharacter varying(10),",
+			"    inclass_cd\t\t\t\t\t\tcharacter varying(5),",
+			"    grosstype\t\t\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    distributionstatus\t\t\t\tcharacter varying(1) NOT NULL,",
+			"    distributiondatetime\t\t\ttimestamp(6) without time zone,",
+			"    deliveryplanflag\t\t\t\tcharacter varying(1) DEFAULT '0'::character varying,",
+			"    deliveryplandate\t\t\t\tdate,",
+			"    deliverydecisionflag\t\t\tcharacter varying(1) DEFAULT '0'::character varying,",
+			"    inspectdate\t\t\t\t\t\tdate,",
+			"    printdatetime\t\t\t\t\ttimestamp(6) without time zone,",
+			"    partneroperator\t\t\t\t\tcharacter varying(40),",
+			"    partneradmitdate\t\t\t\tdate,",
+			"    classoperator\t\t\t\t\tcharacter varying(40),",
+			"    classadmitdate\t\t\t\t\tdate,",
+			"    returndetailtype\t\t\t\tcharacter varying(5),",
+			"    reason1\t\t\t\t\t\t\tcharacter varying(10),",
+			"    reason2\t\t\t\t\t\t\tcharacter varying(10),",
+			"    returndenpmaketype\t\t\t\tcharacter varying(1),",
+			"    totaldeliveryqty\t\t\t\tnumeric(7,1) DEFAULT '0'::numeric NOT NULL,",
+			"    totalgnkkngk\t\t\t\t\tnumeric(14,2) DEFAULT '0'::numeric NOT NULL,",
+			"    totalgnktaxkngk\t\t\t\t\tnumeric(11,2) DEFAULT '0'::numeric NOT NULL,",
+			"    totalbikkngk\t\t\t\t\tnumeric(14,2) DEFAULT '0'::numeric NOT NULL,",
+			"    notes\t\t\t\t\t\t\tcharacter varying(200),",
+			"    returntype\t\t\t\t\t\tcharacter varying(2) DEFAULT '00'::character varying NOT NULL,",
+			"    pendingtype\t\t\t\t\t\tcharacter varying(1) DEFAULT '0'::character varying NOT NULL,",
+			"    rsvchar1\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar2\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar3\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvchar4\t\t\t\t\t\tcharacter varying(10),",
+			"    rsvnum1\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum2\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum3\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvnum4\t\t\t\t\t\t\tnumeric(10,0),",
+			"    rsvdate1\t\t\t\t\t\tdate,",
+			"    rsvdatetime1\t\t\t\t\ttimestamp(6) without time zone,",
+			"    addoperator_cd\t\t\t\t\tcharacter varying(20) DEFAULT 'SYSTEM'::character varying NOT NULL,",
+			"    adddatetime\t\t\t\t\t\ttimestamp(6) without time zone NOT NULL,",
+			"    addproc_cd\t\t\t\t\t\tcharacter varying(40),",
+			"    updoperator_cd\t\t\t\t\tcharacter varying(20) DEFAULT 'SYSTEM'::character varying NOT NULL,",
+			"    upddatetime\t\t\t\t\t\ttimestamp(6) without time zone NOT NULL,",
+			"    updproc_cd\t\t\t\t\t\tcharacter varying(40)",
+			");",
+			"",
+			"COMMENT ON TABLE utr_returnheaderlog IS '【返品】返品実績ヘッダログです。';",
+			"",
+			"COMMENT ON COLUMN utr_returnheaderlog.log_id IS 'ログＩＤです。TO_GUIDで生成された文字列（３６バイト）です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logdatetime IS '変更ログ日時です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logoperator_cd IS '変更ログ担当者コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logtype IS '標準変更ログ区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.sysdenpno IS 'システム伝票番号です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.denpno IS '返品伝票番号です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.denpkind IS 'システム伝票種類です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.userdenpkind IS 'ユーザ伝票種類です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.denptype IS 'システム伝票区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.userdenptype IS 'ユーザ伝票区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.store_cd IS '店舗コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.floor_cd IS 'フロアコードです。未指定時またはフロア管理していない場合は店舗コードと同じ値が入ります。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.returndate IS '返品日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.deliverydate IS '納品日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.partner_cd IS '発注先コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.itemattributetype IS '商品属性区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.classtype IS '商品分類階層区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.parentclass_cd IS '代表分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.attributeclass_cd IS '属性分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.taxtype IS '税区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.tax_cd IS '税率コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logisticscentertype IS '物流センター区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logisticscenter_cd IS '物流センターコードです。店直の場合はNULLが登録されています。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.partnerdistributionmaster_cd IS '取引先向け配信マスタコードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.partnerlayouttype IS '取引先向け配信ファイルのレイアウト区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.directtransfer IS '直接送信先コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.temporarytransfer IS '一時配信先コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logisticsdistributionmaster_cd IS '物流向け配信マスタコードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.logisticslayouttype IS '物流向け配信ファイルのレイアウト区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.businessname IS '営業区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.eosmaketype IS '配信作成区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.instore_cd IS '入庫店舗コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.inclass_cd IS '入庫分類コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.grosstype IS '総量区分です。（0:店別 1:総量）';",
+			"COMMENT ON COLUMN utr_returnheaderlog.distributionstatus IS '配信ステータスです。（0:未配信、1:配信済）';",
+			"COMMENT ON COLUMN utr_returnheaderlog.distributiondatetime IS '配信時刻です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.deliveryplanflag IS '納品予定フラグです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.deliveryplandate IS '納品予定日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.deliverydecisionflag IS '納品確定日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.inspectdate IS '伝票計上日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.printdatetime IS '印刷日時です。未印刷データはNULLが設定されます。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.partneroperator IS '発注先担当者です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.partneradmitdate IS '発注先担当者の了承日です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.classoperator IS '部門担当者名です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.classadmitdate IS '部門担当者の了承日です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.returndetailtype IS '返品方式区分です。　1:直接返品　2:総量返品　3:通過返品　';",
+			"COMMENT ON COLUMN utr_returnheaderlog.reason1 IS '返品理由１です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.reason2 IS '返品理由２です。返品伝票の印字項目です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.returndenpmaketype IS '返品実績作成区分です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.totaldeliveryqty IS '納品数合計です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.totalgnkkngk IS '返品金額合計です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.totalgnktaxkngk IS '原価消費税額合計です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.totalbikkngk IS '売価金額合計です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.notes IS 'ヘッダコメントです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.returntype IS '返品区分です。00:返品、03:廃棄';",
+			"COMMENT ON COLUMN utr_returnheaderlog.pendingtype IS '保留区分です。一度、返品保留になったかどうかです。0:なし、1:保留';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvchar1 IS '文字列予備項目１です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvchar2 IS '文字列予備項目２です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvchar3 IS '文字列予備項目３です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvchar4 IS '文字列予備項目４です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvnum1 IS '数値予備項目１です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvnum2 IS '数値予備項目２です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvnum3 IS '数値予備項目３です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvnum4 IS '数値予備項目４です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvdate1 IS '基取引年月日です。発注先マスタの返品税変更経過月数より基取引年月日を算出します。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.rsvdatetime1 IS '日時予備１です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.addoperator_cd IS '新規作成者です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.adddatetime IS '新規作成日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.addproc_cd IS '新規作成処理コードです。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.updoperator_cd IS '最終更新者です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.upddatetime IS '最終更新日です。';",
+			"COMMENT ON COLUMN utr_returnheaderlog.updproc_cd IS '最終更新処理コードです。';",
+			"",
+			"CREATE INDEX ix1_utrreturnheaderlog ON utr_returnheaderlog (log_id, logdatetime);",
+			"CREATE INDEX ix2_utrreturnheaderlog ON utr_returnheaderlog (logdatetime, sysdenpno, logtype); -- 外部IFチーム要望",
+			"\n"
+		],
+		"description": "Defined create table pattern"
 	}
 }
