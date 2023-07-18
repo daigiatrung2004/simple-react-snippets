@@ -23,7 +23,7 @@
 	},
 
 	"Convert DateTime To Character": {
-		"prefix": "cdtc",
+		"prefix": "convertdatetimetocharacter",
 		"body": [
 			"TO_CHAR(lrec_CheckDataNow.UPDDATETIME, 'YYYY/MM/DD HH24:MI:SS')"
 		],
@@ -31,7 +31,7 @@
 	},
 
 	"Convert Date To Character": {
-		"prefix": "cdc",
+		"prefix": "convertdatetocharacter",
 		"body": [
 			"TO_CHAR(lrec_CheckDataNow.DATE 'YYYY/MM/DD')"
 		],
@@ -39,7 +39,7 @@
 	},
 
 	"Convert String To Date": {
-		"prefix": "csd",
+		"prefix": "convertstringtodate",
 		"body": [
 			"fx_ConvertStringToDate(i_Reflectdate, 'YYYY/MM/DD');"
 		],
@@ -47,7 +47,7 @@
 	},
 
 	"EXCEPTION SQL PROGRAMING": {
-		"prefix": "exc",
+		"prefix": "exception",
 		"body": [
 			"EXCEPTION\n\tWHEN RAISE_EXCEPTION THEN\n\t\tSELECT\tSQLERRM\tINTO ls_SqlErrMsg;\n\t\tPERFORM PXS_STANDARD.p_NoticeErrorExpansion(\n\t\t\t'ERROR',\n\t\t\t'',\n\t\t\tls_SqlErrMsg\n\t\t);\n\tWHEN OTHERS THEN\n\t\tSELECT\tSQLSTATE\tINTO ls_SqlState;\n\t\tSELECT\tSQLERRM\t\tINTO ls_SqlErrMsg;\n\t\tPERFORM PXS_STANDARD.p_NoticeError(\n\t\t\t'PXC_EXAMPLE_001.p_Example.SYSTEMERROR',\n\t\t\tls_SqlState,\n\t\t\tls_SqlErrMsg\n\t\t);"
 		],
@@ -55,7 +55,7 @@
 	},
 
 	"Exception Message": {
-		"prefix": "excm",
+		"prefix": "exceptiomessage",
 		"body": [
 			"\t\t\tls_ExceptionMessage := PXS_STANDARD.f_GetResourceVal(\n\t\t\t\t'PXC_EXAMPLE_001.p_EXAMPLE.NAME_RESOURCE',\n\t\t\t\ti_Params1,\n\t\t\t\ti_Params2\n\t\t\t);\n\t\t\tRAISE '%', ls_ExceptionMessage USING ERRCODE = 'raise_exception';"
 		],
@@ -63,7 +63,7 @@
 	},
 
 	"Get Resource Value": {
-		"prefix": "grv",
+		"prefix": "getresourcevalue",
 		"body": [
 			"PXS_STANDARD.f_GetResourceVal('PXC_EXAMPLE_001.p_Example.NAME_RESOURCE', i_Params1, i_Params2);"
 		],
