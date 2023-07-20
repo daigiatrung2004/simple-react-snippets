@@ -22,6 +22,214 @@
 		"description": "Get User Info"
 	},
 
+	"Truncate Table": {
+		"prefix": "truncate",
+		"body": [
+			"",
+			"TRUNCATE TABLE $1;",
+			""
+		],
+		"description": "Truncate Table"
+	},
+
+	"Drop Table": {
+		"prefix": "droptable",
+		"body": [
+			"",
+			"DROP TABLE IF EXISTS $1;",
+			""
+		],
+		"description": "Drop Table"
+	},
+
+	"Query CSV LAYOUT IMPORT": {
+		"prefix": "select_csvlayoutimport",
+		"body": [
+			"",
+			"SELECT * FROM UMF_CSVFILEDEF WHERE CSVFILE_CD ='$1';",
+			"",
+			"",
+			"SELECT * FROM UMF_CSVFILELAYOUTDEF WHERE CSVFILE_CD ='$2' AND COLUMNNAME ='COLUMN1_EXAMPLE';",
+			"",
+			"",
+			"SELECT * FROM UMF_CSVFILEERRORCODEDEF WHERE CSVFILE_CD ='$3' AND ERROR_CD ='00001';",
+			""
+		],
+		"description": "Drop Table"
+	},
+
+	"Query System Config": {
+		"prefix": "select_systemconfig",
+		"body": [
+			"",
+			"SELECT * FROM UMF_SYSTEMMODECONFIG WHERE CODE = '$1'",
+			"",
+			"SELECT * FROM UMF_SYSTEMCONFIG WHERE CODE = '$1'",
+			""
+		],
+		"description": "Query System Config"
+	},
+
+	"Query Regex": {
+		"prefix": "select_regex",
+		"body": [
+			"",
+			"SELECT '-12312' ~ '^([-+])?[0-9]+$'",
+			""
+		],
+		"description": "Query Regex"
+	},
+
+	"Query SP in tool": {
+		"prefix": "select_SeeSP",
+		"body": [
+			"",
+			"select  nspname                         as packagename,",
+			"      proname                         as spname,",
+			"      oidvectortypes(proargtypes)     as arguments_type,",
+			"      pg_get_functiondef(f.oid)||';'  as content,",
+			"      'drop function ' || nspname || '.' || proname || '(' || oidvectortypes(proargtypes) || ');' as dropsql",
+			"from    pg_catalog.pg_proc f",
+			"      inner join pg_catalog.pg_namespace n",
+			"      on  (f.pronamespace = n.oid)",
+			"where   UPPER(n.nspname) = 'PXC_C04_001'",
+			"order by nspname, proname, arguments_type;",
+			""
+		],
+		"description": "Query Regex"
+	},
+
+	"Query CSV LAYOUT EXPORT": {
+		"prefix": "select_csvlayoutexport",
+		"body": [
+			"",
+			"SELECT * FROM UMF_CSVFILEDEF WHERE CSVFILE_CD ='$1';",
+			"",
+			"SELECT * FROM UMF_CSVFILELAYOUTDEF WHERE CSVFILE_CD ='$1' AND COLUMNNAME ='SKU_CD';",
+			""
+		],
+		"description": "Drop Table"
+	},
+
+	"Query CodeCategory": {
+		"prefix": "select_codecategory",
+		"body": [
+			"",
+			"SELECT * FROM UMF_CODECATEGORYDEF WHERE CODECATEGORY ='$1';",
+			""
+		],
+		"description": "Drop Table"
+	},
+
+	"Query CodeDef": {
+		"prefix": "select_codedef",
+		"body": [
+			"",
+			"SELECT * FROM UMF_CODEDEF WHERE CODECATEGORY ='$1' AND CODE ='0';",
+			""
+		],
+		"description": "Drop Table"
+	},
+
+	"Create Menu": {
+		"prefix": "create_menu",
+		"body": [
+			"",
+			"SELECT * FROM UMF_MENUDEF WHERE FUNC_CD = '$1';",
+			"",
+			"CREATE TEMPORARY TABLE TMP_MENU AS SELECT * FROM UMF_MENUDEF WHERE FUNC_CD = '$1' AND MENUPATTERN_CD = 'VTDEV1';",
+			"",
+			"",
+			"SELECT MAX(MENUKEY) FROM UMF_MENUDEF;-- LẤY GIÁ TRỊ MAX CỦA MENUKEY",
+			"-- Lưu ý: Tên menu không được có space (kể cả 1 byte lẫn 2 bytes)",
+			"",
+			"",
+			"UPDATE TMP_MENU SET MENUKEY ='MAX MENUKEY + 1', NAME = 'XA02.TEST', FUNC_CD = 'XA02', SCREEN_CD = 'XA02';",
+			"",
+			"INSERT INTO UMF_MENUDEF SELECT * FROM TMP_MENU;",
+			""
+		],
+		"description": "Create Menu"
+	},
+
+	"Get Url Batch": {
+		"prefix": "batchUrl",
+		"body": [
+			"",
+			"-- reset batch",
+			"cd /home/ntuser/taurus/bin/shell/framework/batch",
+			"",
+			"-- ※Kiểm tra batch có đang chạy hay không",
+			"ps -ef | grep batch",
+			"",
+			"-- shutdown",
+			"sh batchsv.sh -s",
+			"",
+			"-- start",
+			"sh batchsv.sh &",
+			"",
+			"",
+			"",
+			"-- ===================================run batch directory==================================",
+			"/bin/sh /home/nt200/taurus/bin/shell/framework/batch/tshbatchexec.sh true XX01:1:UpdateData STORE_CD=00001",
+			"-- /bin/sh ${HOME}/taurus/bin/shell/framework/batch/tshbatchexec.sh true EA42:1:FileImport DIRECTORYNAME=${EXEC_PATH},FILENAME=${FILENAME_WEB},AFTERPROCESS_FUNC_CD=EA42,AFTERPROCESS_REVISIONNO=1,AFTERPROCESS_PROC_CD=ImportDeliveryData,OKFILE_FLAG=0,BYTESPLIT=979,IMPORTNO=${IFIMPORTNO}",
+			"",
+			"-- ===================================run batch from file shell============================",
+			"",
+			"-- change directory to container file shell",
+			"cd /home/ntuser/taurus/bin/shell/user/ea",
+			"",
+			"-- run file shell",
+			"sh tshea42001_import_shukka.sh",
+			""
+		],
+		"description": "Get Url Batch"
+	},
+
+	"Write Batch Log": {
+		"prefix": "batchlog",
+		"body": [
+			"",
+			"\tPERFORM PXS_BATCH.p_WriteBatchLog('Trace', 'DATA COUNT :' || ln_DataCount);",
+			""
+		],
+		"description": "Write Batch Log"
+	},
+
+	"Call sp in tool have use PXS_BATCH.p_WriteBatchLog": {
+		"prefix": "batch_Sp_Call_In_Tool",
+		"body": [
+			"",
+			"-- PXS_BATCH.P_WRITEBATCHLOG LÀ HÀM DÙNG ĐỂ GHI LOG KHI CHẠY BATCH",
+			"",
+			"PXS_BATCH.P_WRITEBATCHLOG('TRACE', TO_CHAR(CLOCK_TIMESTAMP(), 'YYYY/MM/DD HH24:MI:SS') || '[' || LS_PROC_CD || '] ' || LN_DATACOUNT || '件処理。');",
+			"",
+			"-- DÙ TRÊN TOOL ( VÍ DỤ NHƯ SQL EXPLORER ) MÌNH ĐÃ GỌI HÀM PXS_USER.P_SETUSERINFO ĐỂ KHỞI TẠO SESSION USER INFO THÌ VẪN BỊ LỖI, VÌ TRONG HÀM NÀY CÓ DÙNG BATCH INFO",
+			"-- NÊN MÌNH PHẢI GỌI THÊM HÀM PXS_BATCH.P_SETBATCHINFO ĐỂ KHỞI TẠO THÔNG TIN CHO BATCH",
+			"",
+			"SELECT PXS_USER.P_SETUSERINFO(",
+			"        'U117',",
+			"        'JA-JP',",
+			"        'SYSTEM',",
+			"        'TAKUYA',",
+			"        '00001', ",
+			"        '001',",
+			"        '001',",
+			"        'ENTRY',",
+			"        '000001',",
+			"        'TEST',",
+			"        'TEST',",
+			"        1,",
+			"        0,",
+			"        0",
+			"    );",
+			"",
+			"SELECT PXS_BATCH.P_SETBATCHINFO('U117', NEXTVAL('SEQ_BATCHQUEUEKEY'), 'HEOS');",
+			""
+		],
+		"description": "Call sp in tool have use PXS_BATCH.p_WriteBatchLog"
+	},
+
 	"Convert DateTime To Character": {
 		"prefix": "convertdatetimetocharacter",
 		"body": [
@@ -519,7 +727,7 @@
 	},
 
 	"Check Error Import Pattern": {
-		"prefix": "erp",
+		"prefix": "checkerrorimportpattern",
 		"body": [
 			"\n",
 			"\t\t-- 発注実績物流センター不整合チェック",
@@ -545,6 +753,1189 @@
 			"\n"
 		],
 		"description": "Check Error Import Pattern"
+	},
+
+	"Check Exists Import UMFSGROUP": {
+		"prefix": "check_exists_import_UMFSGROUP",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSGROUP (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN4,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN2,COLUMN4'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFSGROUP"
+	},
+
+	"Check Exists Import UmfItemClass": {
+		"prefix": "check_exists_import_UmfItemClass",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUmfItemClass (",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tls_ItemAttributeType,",
+			"\t\t\t\t\t\tls_Sku_Cd,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN10'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UmfItemClass"
+	},
+
+	"Check Exists Import UMFStoreGroupPattern": {
+		"prefix": "check_exists_import_UMFStoreGroupPattern",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSGroupPattern (",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN25,",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN25'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFStoreGroupPattern"
+	},
+
+	"Check Exists Import UMFSystemMode": {
+		"prefix": "check_exists_import_UMFSystemMode",
+		"body": [
+			"\n",
+			"\t\t\t-- マスタ存在チェック(●共通チェック)",
+			"\t\t\tSELECT\tio_lineno,",
+			"\t\t\t\t\tio_errorcount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSystemMode (",
+			"\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFSystemMode"
+	},
+
+	"Check Exists Import UMFPARTNER": {
+		"prefix": "check_exists_import_UMFPARTNER",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFPARTNER (",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\ti_Server_cd,",
+			"\t\t\t\t\t\ti_ImportBatchKey,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN4,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFPARTNER"
+	},
+
+	"Check Exists Import UMFClass": {
+		"prefix": "check_exists_import_UMFClass",
+		"body": [
+			"\n",
+			"\t\t\t\tIF (lrec_CSVUploadColumnData.COLUMN3 = C_CODETYPE_DEPT) THEN",
+			"\t\t\t\t\tls_CodeType := '1';",
+			"",
+			"\t\t\t\tELSIF (lrec_CSVUploadColumnData.COLUMN3 = C_CODETYPE_GROUP) THEN",
+			"\t\t\t\t\tls_CodeType := '2';",
+			"\t\t\t\tELSE",
+			"\t\t\t\t\tls_CodeType := '3';",
+			"\t\t\t\tEND IF;",
+			"",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFClass (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tls_Code,",
+			"\t\t\t\t\t\t\tls_CodeType,",
+			"\t\t\t\t\t\t\tls_ItemAttributeType,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN4'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFClass"
+	},
+
+	"Check Exists Import UMFClass4": {
+		"prefix": "check_exists_import_UMFClass4",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFClass4 (",
+			"\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tls_Class3_Cd,",
+			"\t\t\t\t\t\tls_Class4_Cd,",
+			"\t\t\t\t\t\tlrec_UserInfo.ITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN5,COLUMN6'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFClass4"
+	},
+
+	"Check Exists Import UMFCLASS5": {
+		"prefix": "check_exists_import_UMFCLASS5",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFCLASS5 (",
+			"\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tls_Class3_Cd,",
+			"\t\t\t\t\t\tls_Class4_Cd,",
+			"\t\t\t\t\t\tls_Class5_Cd,",
+			"\t\t\t\t\t\tlrec_UserInfo.ITEMATTRIBUTETYPE,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN5,COLUMN6,COLUMN7'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFCLASS5"
+	},
+
+	"Check Exists Import UMFAlcohol": {
+		"prefix": "check_exists_import_UMFAlcohol",
+		"body": [
+			"\n",
+			"\t\t\t\t\t-- 酒類マスタの存在チェック(●共通チェック)",
+			"\t\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFAlcohol (",
+			"\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN7,",
+			"\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t\t'COLUMN7'",
+			"\t\t\t\t\t\t\t);--10024,10025",
+			"\n"
+		],
+		"description": "Check Exists Import UMFAlcohol"
+	},
+
+	"Check Exists Import UMFGENERALTREECODEDEF": {
+		"prefix": "check_exists_import_UMFGENERALTREECODEDEF",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFGENERALTREECODEDEF(",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN87,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_ErrorCount);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFGENERALTREECODEDEF"
+	},
+
+	"Check Exists Import UMFSKUSEASON": {
+		"prefix": "check_exists_import_UMFSKUSEASON",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSKUSEASON(",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN92,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_ErrorCount);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFSKUSEASON"
+	},
+
+	"Check Exists Import UMFSKUATTRIBUTE": {
+		"prefix": "check_exists_import_UMFSKUATTRIBUTE",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSKUATTRIBUTE(",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN85,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_ErrorCount);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFSKUATTRIBUTE"
+	},
+
+	"Check Exists Import Umfrackdisplayuse": {
+		"prefix": "check_exists_import_Umfrackdisplayuse",
+		"body": [
+			"\n",
+			"\t\t\t\t-- 棚割コードのマスタ存在チェック(●共通チェック)",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUmfrackdisplayuse (",
+			"\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN7,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN7'",
+			"\t\t\t\t\t\t);--10071,10072",
+			"\n"
+		],
+		"description": "Check Exists Import Umfrackdisplayuse"
+	},
+
+	"Check Exists Import UMFRackdisplaygroup": {
+		"prefix": "check_exists_import_UMFRackdisplaygroup",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\t*",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFRackdisplaygroup(",
+			"\t\t\t\t\t\tnull,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN3,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN3'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFRackdisplaygroup"
+	},
+
+	"Check Exists Import UMFTAX": {
+		"prefix": "check_exists_import_UMFTAX",
+		"body": [
+			"\n",
+			"\t\t\t\t\t\t-- 税率マスタの存在チェック(●共通チェック)",
+			"\t\t\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFTAX(",
+			"\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN7,",
+			"\t\t\t\t\t\t\t\t\tCURRENT_DATE,",
+			"\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t\t\t'COLUMN7'",
+			"\t\t\t\t\t\t\t\t);--10061,10062",
+			"\n"
+		],
+		"description": "Check Exists Import UMFTAX"
+	},
+
+	"Check Exists Import SystemModeUMFStore": {
+		"prefix": "check_exists_import_SystemModeUMFStore",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\t*",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistSystemModeUMFStore(",
+			"\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\t\t\tls_SystemMode_Cd,",
+			"\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t\t'COLUMN2'",
+			"\t\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import SystemModeUMFStore"
+	},
+
+	"Check Exists Import UMFDistribution": {
+		"prefix": "check_exists_import_UMFDistribution",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFDistribution (",
+			"\t\t\t\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN6,",
+			"\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t\t\t\t'COLUMN6',",
+			"\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.EXCELTAGINDEX,",
+			"\t\t\t\t\t\t\t\t\t\t'1'",
+			"\t\t\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFDistribution"
+	},
+
+	"Check Exists Import UMFBank": {
+		"prefix": "check_exists_import_UMFBank",
+		"body": [
+			"\n",
+			"\t\t\t\t-- 銀行マスタの存在チェック",
+			"\t\t\t\tSELECT\tio_lineno,",
+			"\t\t\t\t\t\tio_errorcount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFBank (",
+			"\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN89,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN89'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFBank"
+	},
+
+	"Check Exists Import UMFBankBranch": {
+		"prefix": "check_exists_import_UMFBankBranch",
+		"body": [
+			"\n",
+			"\t\t\t\t-- 支店マスタの存在チェック",
+			"\t\t\t\tSELECT\tio_lineno,",
+			"\t\t\t\t\t\tio_errorcount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFBankBranch (",
+			"\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN89,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN90,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN89,COLUMN90'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFBankBranch"
+	},
+
+	"Check Exists Import UMFPayPartner": {
+		"prefix": "check_exists_import_UMFPayPartner",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFPayPartner (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN1'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFPayPartner"
+	},
+
+	"Check Exists Import UMFPayPartnerSight": {
+		"prefix": "check_exists_import_UMFPayPartnerSight",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFPayPartnerSight (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN1,COLUMN2'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFPayPartnerSight"
+	},
+
+	"Check Exists Import UMFAllocatePattern": {
+		"prefix": "check_exists_import_UMFAllocatePattern",
+		"body": [
+			"\n",
+			"\t\t-- 按分パターンコード存在チェック(●共通チェック)",
+			"\t\tSELECT\tio_LineNo,",
+			"\t\t\t\tio_ErrorCount",
+			"\t\tINTO\tln_LineNo,",
+			"\t\t\t\tln_ErrorCount",
+			"\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFAllocatePattern (",
+			"\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\tls_CSVFile_Cd,",
+			"\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\tCAST(lrec_CSVUploadColumnData.COLUMN1 AS VARCHAR),",
+			"\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFAllocatePattern"
+	},
+
+	"Check Exists Import UMFLogisticsCenter": {
+		"prefix": "check_exists_import_UMFLogisticsCenter",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFLogisticsCenter (",
+			"\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN2'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFLogisticsCenter"
+	},
+
+	"Check Not equals updatedatetime": {
+		"prefix": "check_not_equals_updatedatetime",
+		"body": [
+			"\n",
+			"IF (TO_CHAR(lrec_CheckData.UPDDATETIME, 'YYYY/MM/DD HH24:MI:SS') <> i_UpdDateTime) THEN",
+			"",
+			"END IF;",
+			"\n"
+		],
+		"description": "Check Not equals updatedatetime"
+	},
+
+	"Alter table update column": {
+		"prefix": "alter_table_update_column",
+		"body": [
+			"\n",
+			"ALTER TABLE UMF_PAYPARTNERLOG ALTER COLUMN RSVCHAR4 SET DATA TYPE character varying(14)",
+			"\n"
+		],
+		"description": "Alter table update column"
+	},
+
+	"Alter table add column": {
+		"prefix": "alter_table_add_column",
+		"body": [
+			"\n",
+			"ALTER TABLE table_name ADD column_name datatype;",
+			"\n"
+		],
+		"description": "Alter table add column"
+	},
+
+	"Alter table enable triggers column": {
+		"prefix": "alter_table_enable_trigger",
+		"body": [
+			"\n",
+			"ALTER TABLE [tên bảng] ENABLE TRIGGER [tên trigger]",
+			"\n"
+		],
+		"description": "Alter table enable triggers column"
+	},
+
+	"INNER JOIN": {
+		"prefix": "innerjoin",
+		"body": [
+			"INNER JOIN TBL_TEMP1 T1",
+			"\tON\tT1.COLUMN_A\t\t= MN.COLUMN_A",
+			"\tAND\tT1.COLUMN_B\t\t= MN.COLUMN_B"
+		],
+		"description": "INNER JOIN"
+	},
+
+	"LEFT JOIN": {
+		"prefix": "leftjoin",
+		"body": [
+			"LEFT OUTER JOIN TBL_TEMP1 T1",
+			"\tON\tT1.COLUMN_A\t\t= MN.COLUMN_A",
+			"\tAND\tT1.COLUMN_B\t\t= MN.COLUMN_B"
+		],
+		"description": "LEFT JOIN"
+	},
+
+	"Get Number Update/Insert": {
+		"prefix": "get_num_update/insert",
+		"body": [
+			"GET DIAGNOSTICS ln_RowCount := ROW_COUNT;"
+		],
+		"description": "Get Number Update/Insert"
+	},
+
+	"Get Substring": {
+		"prefix": "getSubString",
+		"body": [
+			"fx_substrstring(i_targetstring character varying, i_startindex integer, i_endindex integer)"
+		],
+		"description": "Get Substring"
+	},
+
+	"Get clock timestamp": {
+		"prefix": "clock_timestamp",
+		"body": [
+			"CLOCK_TIMESTAMP()"
+		],
+		"description": "Get clock timestamp"
+	},
+
+	"Get current date": {
+		"prefix": "currentdate",
+		"body": [
+			"CURRENT_DATE "
+		],
+		"description": "Get current date"
+	},
+
+	"Get current timsetamp": {
+		"prefix": "currenttimestamp",
+		"body": [
+			"CURRENT_TIMESTAMP  "
+		],
+		"description": "Get current timsetamp"
+	},
+
+	"Get Next Squence": {
+		"prefix": "seq_next",
+		"body": [
+			"NEXTVAL('SEQ_SYSDENPNO')  "
+		],
+		"description": "Get Next Squence"
+	},
+
+	"Set Squence": {
+		"prefix": "seq_set",
+		"body": [
+			"SETVAL('SEQ_SYSDENPNO', 99)"
+		],
+		"description": "Set Squence"
+	},
+
+	"left": {
+		"prefix": "left(",
+		"body": [
+			"LEFT(PTP.POSTNO, 3)"
+		],
+		"description": "left"
+	},
+
+	"right": {
+		"prefix": "right(",
+		"body": [
+			"RIGHT(PPN.POSTNO, 4)"
+		],
+		"description": "left"
+	},
+
+	"menu option": {
+		"prefix": "menuoption",
+		"body": [
+			"SELECT MENUOPTION FROM UMF_MENUDEF WHERE FUNC_CD = '$1'"
+		],
+		"description": "menu option"
+	},
+
+	"Array Append": {
+		"prefix": "array_append",
+		"body": [
+			"ARRAY_APPEND(ARRAY[2,3], 1);   -- [2,3,1]"
+		],
+		"description": "Array append"
+	},
+
+	"Array Prepend": {
+		"prefix": "array_prepend",
+		"body": [
+			"ARRAY_PREPEND(1, ARRAY[2,3]); -- [1,2,3]"
+		],
+		"description": "Array Prepend"
+	},
+
+	"Array Length": {
+		"prefix": "array_length",
+		"body": [
+			"ARRAY_LENGTH(ARRAY[1,2,3], 1); -- return 3 integer"
+		],
+		"description": "Array Length"
+	},
+
+	"Translate": {
+		"prefix": "translate(",
+		"body": [
+			"TRANSLATE('12345', '134', 'ax') -- a2x5"
+		],
+		"description": "Translate"
+	},
+
+	"Replace": {
+		"prefix": "replace(",
+		"body": [
+			"REPLACE('abc', 'b', 'x') -- axc"
+		],
+		"description": "Replace"
+	},
+
+	"Alter table disable triggers column": {
+		"prefix": "alter_table_disable_trigger",
+		"body": [
+			"\n",
+			"ALTER TABLE [tên bảng] DISABLE TRIGGER [tên trigger]",
+			"\n"
+		],
+		"description": "Alter table disable triggers column"
+	},
+
+	"Query table store validation": {
+		"prefix": "select_validation",
+		"body": [
+			"\n",
+			"SELECT * FROM UMF_SCREENVALIDDEF WHERE VALIDNAME = ’UMFFileCreateDefValidation’;",
+			"SELECT * FROM UMF_PROCDEF WHERE PROC_CD = ’UMFFileCreateDef’ AND FUNC_CD = ’STANDARD_VALIDATION’;",
+			"\n"
+		],
+		"description": "Query table store validation"
+	},
+
+	"Query table store lookup": {
+		"prefix": "select_lookup",
+		"body": [
+			"\n",
+			"SELECT * FROM UMF_SCREENDEF WHERE FUNC_CD = ’STANDARD_LOOKUP’ AND SCREEN_CD = ’UMFFileCreateDef’;",
+			"\n"
+		],
+		"description": "Query table store lookup"
+	},
+
+	"Check Exists Import UMFStorefloor": {
+		"prefix": "check_exists_import_UMFStorefloor",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\t*",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFStorefloor(",
+			"\t\t\t\t\t\t\tnull,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN1, COLUMN2'",
+			"\t\t\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFStorefloor"
+	},
+
+	"Check Exists Import UMFUNIT": {
+		"prefix": "check_exists_import_UMFUNIT",
+		"body": [
+			"\n",
+			"\t\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFUNIT (",
+			"\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\ti_CheckType,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN56,",
+			"\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t\t'COLUMN56'",
+			"\t\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFUNIT"
+	},
+
+	"Check Exists Import UMFMAKER": {
+		"prefix": "check_exists_import_UMFMAKER",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFMAKER(",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN10,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_ErrorCount);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFMAKER"
+	},
+
+	"Check Exists Import UMFPartnerLogisticsCenter": {
+		"prefix": "check_exists_import_UMFPartnerLogisticsCenter",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFPartnerLogisticsCenter(",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN40,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\t\t\t\t\t\t\tln_ErrorCount);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFPartnerLogisticsCenter"
+	},
+
+	"Check Exists Import UMFDenpKind": {
+		"prefix": "check_exists_import_UMFDenpKind",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_lineno,",
+			"\t\t\t\t\tio_errorcount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFDenpKind (",
+			"\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\t\t);",
+			
+			"\n"
+		],
+		"description": "Check Exists Import UMFDenpKind"
+	},
+
+	"Check Exists Import UMFOperator": {
+		"prefix": "check_exists_import_UMFOperator",
+		"body": [
+			"\n",
+			"\t\t\t-- 担当者マスタ存在チェック",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUploadCommonCheck.f_CheckExistUMFOperator (",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN1'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFOperator"
+	},
+
+	"Check Exists Import UMFItem": {
+		"prefix": "check_exists_import_UMFItem",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\t*",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFItem (",
+			"\t\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tls_Sku_Cd,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN8'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFItem"
+	},
+
+	"Check Exists Import UMFITEMSTORE": {
+		"prefix": "check_exists_import_UMFITEMSTORE",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFITEMSTORE (",
+			"\t\t\t\t\t\ti_User_Cd,",
+			"\t\t\t\t\t\ti_Server_cd,",
+			"\t\t\t\t\t\ti_ImportBatchKey,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tls_Store_Cd,",
+			"\t\t\t\t\t\tls_Sku_Cd,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN2,COLUMN8'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFITEMSTORE"
+	},
+
+	"Check Exists Import UMFOpeSystemMode": {
+		"prefix": "check_exists_import_UMFOpeSystemMode",
+		"body": [
+			"\n",
+			"\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\tio_ErrorCount",
+			"\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\tln_ErrorCount",
+			"\t\t\tFROM\tPXS_CSVUploadCommonCheck.f_CheckExistUMFOpeSystemMode (",
+			"\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN1,",
+			"\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN2,",
+			"\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t'COLUMN1,COLUMN2'",
+			"\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFOpeSystemMode"
+	},
+
+	"Check Exists Import UMFCOMPANY": {
+		"prefix": "check_exists_import_UMFCOMPANY",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFCOMPANY (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN3,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN3'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFCOMPANY"
+	},
+
+	"Check Exists Import UMFFuncAuth": {
+		"prefix": "check_exists_import_UMFFuncAuth",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFFuncAuth (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN16,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN16'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFFuncAuth"
+	},
+
+	"Check Exists Import UMFSpecialAuth": {
+		"prefix": "check_exists_import_UMFSpecialAuth",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFSpecialAuth (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN18,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN18'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFSpecialAuth"
+	},
+
+	"Check Exists Import UMFDepartment": {
+		"prefix": "check_exists_import_UMFDepartment",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFDepartment (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tCOALESCE(lrec_CSVUploadColumnData.COLUMN12, ls_Company_Cd),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN24,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN24'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFDepartment"
+	},
+
+	"Check Exists Import UMFStore": {
+		"prefix": "check_exists_import_UMFStore",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFStore (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN26,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN26'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFStore"
+	},
+
+	"Check Exists Import UMFStore": {
+		"prefix": "check_exists_import_UMFStore",
+		"body": [
+			"\n",
+			"\t\t\t\tSELECT\tio_LineNo,",
+			"\t\t\t\t\t\tio_ErrorCount",
+			"\t\t\t\tINTO\tln_LineNo,",
+			"\t\t\t\t\t\tln_ErrorCount",
+			"\t\t\t\tFROM\tPXS_CSVUPLOADCOMMONCHECK.f_CheckExistUMFStore (",
+			"\t\t\t\t\t\t\tNULL,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.SERVER_CD,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.IMPORTBATCHKEY,",
+			"\t\t\t\t\t\t\ti_CSVFile_Cd,",
+			"\t\t\t\t\t\t\tCAST(i_CheckType AS VARCHAR),",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.CSVLINENO,",
+			"\t\t\t\t\t\t\tlrec_CSVUploadColumnData.COLUMN26,",
+			"\t\t\t\t\t\t\tln_LineNo,",
+			"\t\t\t\t\t\t\tln_ErrorCount,",
+			"\t\t\t\t\t\t\t'COLUMN26'",
+			"\t\t\t\t\t\t);",
+			"\n"
+		],
+		"description": "Check Exists Import UMFStore"
 	},
 
 	"Accept CSV Update Error Data": {
@@ -711,7 +2102,7 @@
 	},
 
 	"Select Query Normal": {
-		"prefix": "sqn",
+		"prefix": "select_normal",
 		"body": [
 			"\n",
 			"SELECT * FROM $1 WHERE CONDITION_1 = CONDITION_OTHER",
@@ -720,8 +2111,18 @@
 		"description": "Select Query Normal"
 	},
 
+	"Limit Offset Query": {
+		"prefix": "limit_offset_pxsbuilder",
+		"body": [
+			"\n",
+			"\t\tPERFORM PXS_PLSBUILDER.Append('\t\tOFFSET ' || i_LimitOffSet || ' LIMIT ' || i_LimitCount);",
+			"\n"
+		],
+		"description": "Limit Offset Query"
+	},
+
 	"Select Query Format": {
-		"prefix": "sqf",
+		"prefix": "select_querystandardformat",
 		"body": [
 			"\n",
 			"\t\tSELECT  PXS_USER.p_GetOperatorName(NULL, CLASS2.ADDOPERATOR_CD)\tAS ADDOPERATOR_CD,",
