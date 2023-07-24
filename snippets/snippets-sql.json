@@ -152,6 +152,67 @@
 		"description": "Create Menu"
 	},
 
+	"Create Schema": {
+		"prefix": "create_schema",
+		"body": [
+			"SET CLIENT_ENCODING TO 'SJIS';",
+			"",
+			"-- DROP SCHEMA PXC_AB17_001 CASCADE;",
+			"CREATE SCHEMA IF NOT EXISTS PXC_AB17_001 AUTHORIZATION ntuser;",
+			"COMMENT ON SCHEMA PXC_AB17_001",
+			"IS '",
+			"\t[サブ機能  ] AB.基本マスタ",
+			"\t[機能ＩＤ  ] AB17",
+			"\t[機能名称  ] 発注先/支払先マスタ一覧",
+			"\t[説明      ] 発注先/支払先マスタを検索します。",
+			"\t[リビジョン] 1",
+			"\t[作 成 日  ] 2022/01/17",
+			"\t[作 成 者  ] UNICCS/n1-dung",
+			"\t[関数一覧  ] 1.f_GetOtherAuthFlag",
+			"\t             2.f_InsertErrorData",
+			"\t             3.f_InsertTmpPayPartnerSight",
+			"\t             4.p_CsvEntry_Partner_PayPartner",
+			"\t             5.p_CsvEntry_Partner",
+			"\t             6.p_CsvEntry_PayPartner",
+			"\t             7.p_CsvImportCheck_Partner_PayPartner",
+			"\t             8.p_CsvImportCheck_Partner",
+			"\t             9.p_CsvImportCheck_PayPartner",
+			"\t             10.p_GridSearch",
+			"\t             11.p_Export_Partner_ProcessFee",
+			"\t             12.p_Export_Partner",
+			"\t             13.p_Export_PayPartner",
+			"\t[更新履歴  ] ",
+			"';",
+			"",
+			"RESET CLIENT_ENCODING;"
+		],
+		"description": "Create Schema"
+	},
+
+	"Deploy All Server": {
+		"prefix": "deploy_all_server",
+		"body": [
+			"# change direction",
+			"cd /home/ntuser/taurus/uniccs_work/release/function/d-vu",
+			"",
+			"# copy source from code function , delete config only dbms, delete schema, error defined.",
+			"",
+			"# run all server",
+			"sh ~/taurus/bin/shell/release/svnFunctionRelease.sh d-vu 0 EA42"
+		],
+		"description": "Deploy All Server"
+	},
+
+	"Rule Align Column": {
+		"prefix": "rule_align_column",
+		"body": [
+			"",
+			"Codes = 'center aligned', names = 'left aligned', numbers = 'right aligned', date = 'center', codedef = 'left aligned'",
+			""
+		],
+		"description": "ule Align Column"
+	},
+
 	"Get Url Batch": {
 		"prefix": "batchUrl",
 		"body": [
