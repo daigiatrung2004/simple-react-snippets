@@ -1,284 +1,553 @@
 {
-  "Import React": {
-    "prefix": "imr",
-    "body": ["import React from 'react';\n"],
-    "description": "Import React"
-  },
+	"Import React": {
+		"prefix": "imr",
+		"body": ["import React from 'react';\n"],
+		"description": "Import React"
+	},
 
-  "Import React and Component": {
-    "prefix": "imrc",
-    "body": ["import React, { Component } from 'react';\n"],
-    "description": "Import React, { Component }"
-  },
+	"Import React and Component": {
+		"prefix": "imrc",
+		"body": ["import React, { Component } from 'react';\n"],
+		"description": "Import React, { Component }"
+	},
 
-  "Import ReactDOM": {
-    "prefix": "imrd",
-    "body": ["import ReactDOM from 'react-dom';"],
-    "description": "Import ReactDOM"
-  },
+	"Import ReactDOM": {
+		"prefix": "imrd",
+		"body": ["import ReactDOM from 'react-dom';"],
+		"description": "Import ReactDOM"
+	},
 
-  "Import React, { useState }": {
-    "prefix": "imrs",
-    "body": [
-      "import React, { useState } from 'react';\n"
-    ],
-    "description": "Import React, { useState }"
-  },
+	"Import React, { useState }": {
+		"prefix": "imrs",
+		"body": [
+			"import React, { useState } from 'react';\n"
+		],
+		"description": "Import React, { useState }"
+	},
 
-  "Import React, { useState, useEffect }": {
-    "prefix": "imrse",
-    "body": [
-      "import React, { useState, useEffect } from 'react';\n"
-    ],
-    "description": "Import React, { useState, useEffect }"
-  },
+	"Import React, { useState, useEffect }": {
+		"prefix": "imrse",
+		"body": [
+			"import React, { useState, useEffect } from 'react';\n"
+		],
+		"description": "Import React, { useState, useEffect }"
+	},
 
-  "Import PropTypes": {
-    "prefix": "impt",
-    "body": ["import PropTypes from 'prop-types';"],
-    "description": "Import PropTypes"
-  },
+	"Import PropTypes": {
+		"prefix": "impt",
+		"body": ["import PropTypes from 'prop-types';"],
+		"description": "Import PropTypes"
+	},
 
-  "Import Pure Component": {
-    "prefix": "impc",
-    "body": ["import React, { PureComponent } from 'react';\n"],
-    "description": "Import React, { PureComponent }"
-  },
+	"Import Pure Component": {
+		"prefix": "impc",
+		"body": ["import React, { PureComponent } from 'react';\n"],
+		"description": "Import React, { PureComponent }"
+	},
 
-  "Class Component": {
-    "prefix": "cc",
-    "body": [
-      "class $1 extends Component {",
-      "\tstate = { $2 } ",
-      "\trender() { ",
-      "\t\treturn ($0);",
-      "\t}",
-      "}",
-      " ",
-      "export default $1;"
-    ],
-    "description": "Class Component"
-  },
+	"Class Component": {
+		"prefix": "cc",
+		"body": [
+			"class $1 extends Component {",
+			"\tstate = { $2 } ",
+			"\trender() { ",
+			"\t\treturn ($0);",
+			"\t}",
+			"}",
+			" ",
+			"export default $1;"
+		],
+		"description": "Class Component"
+	},
 
-  "Class Pure Component": {
-    "prefix": "cpc",
-    "body": [
-      "class $1 extends PureComponent {",
-      "\tstate = { $2 }",
-      "\trender() { ",
-      "\t\treturn ( $0 );",
-      "\t}",
-      "}",
-      " ",
-      "export default $1;"
-    ],
-    "description": "Class Pure Component"
-  },
+	"Class Pure Component": {
+		"prefix": "cpc",
+		"body": [
+			"class $1 extends PureComponent {",
+			"\tstate = { $2 }",
+			"\trender() { ",
+			"\t\treturn ( $0 );",
+			"\t}",
+			"}",
+			" ",
+			"export default $1;"
+		],
+		"description": "Class Pure Component"
+	},
 
-  "Class Component With Constructor": {
-    "prefix": "ccc",
-    "body": [
-      "class $1 extends Component {",
-      "\tconstructor(props) {",
-      "\t\tsuper(props);",
-      "\t}",
-      "\tstate = { $2 }",
-      "\trender() { ",
-      "\t\treturn ( $0 );",
-      "\t}",
-      "}",
-      " ",
-      "export default $1;"
-    ],
-    "description": "Class Component With Constructor"
-  },
+	"Class Component With Constructor": {
+		"prefix": "ccc",
+		"body": [
+			"class $1 extends Component {",
+			"\tconstructor(props) {",
+			"\t\tsuper(props);",
+			"\t}",
+			"\tstate = { $2 }",
+			"\trender() { ",
+			"\t\treturn ( $0 );",
+			"\t}",
+			"}",
+			" ",
+			"export default $1;"
+		],
+		"description": "Class Component With Constructor"
+	},
 
-  "Stateless Function Component": {
-    "prefix": "sfc",
-    "body": [
-      "const $1 = ($2) => {",
-      "\treturn ( $0 );",
-      "}",
-      " ",
-      "export default $1;"
-    ],
-    "description": "Stateless Function Component"
-  },
+	"Stateless Function Component": {
+		"prefix": "sfc",
+		"body": [
+			"const $1 = ($2) => {",
+			"\treturn ( $0 );",
+			"}",
+			" ",
+			"export default $1;"
+		],
+		"description": "Stateless Function Component"
+	},
 
-  "Function Syntax Component": {
-    "prefix": "ffc",
-    "body": [
-      "function $1($2) {",
-      "\treturn ( $0 );",
-      "}",
-      "",
-      "export default $1;"
-    ],
-    "description": "Function Syntax Component"
-  },
-  
-  "componentDidMount": {
-    "prefix": "cdm",
-    "body": ["componentDidMount() {", "\t$0", "}"],
-    "description": "componentDidMount"
-  },
+	"Function Syntax Component": {
+		"prefix": "ffc",
+		"body": [
+			"function $1($2) {",
+			"\treturn ( $0 );",
+			"}",
+			"",
+			"export default $1;"
+		],
+		"description": "Function Syntax Component"
+	},
+	
+	"componentDidMount": {
+		"prefix": "cdm",
+		"body": ["componentDidMount() {", "\t$0", "}"],
+		"description": "componentDidMount"
+	},
 
-  "useEffect": {
-    "prefix": "uef",
-    "body": [
-      "useEffect(() => {",
-      "\t$1",
-      "}, []);"
-    ],
-    "description": "useEffect Hook"
-  },
+	"useEffect": {
+		"prefix": "uef",
+		"body": [
+			"useEffect(() => {",
+			"\t$1",
+			"}, []);"
+		],
+		"description": "useEffect Hook"
+	},
 
-  "componentWillMount": {
-    "prefix": "cwm",
-    "body": ["//WARNING! To be deprecated in React v17. Use componentDidMount instead.", "componentWillMount() {", "\t$0", "}"],
-    "description": "componentWillMount"
-  },
+	"componentWillMount": {
+		"prefix": "cwm",
+		"body": ["//WARNING! To be deprecated in React v17. Use componentDidMount instead.", "componentWillMount() {", "\t$0", "}"],
+		"description": "componentWillMount"
+	},
 
-  "componentWillReceiveProps": {
-    "prefix": "cwrp",
-    "body": ["//WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.", "componentWillReceiveProps(nextProps) {", "\t$0", "}"],
-    "description": "componentWillReceiveProps"
-  },
+	"componentWillReceiveProps": {
+		"prefix": "cwrp",
+		"body": ["//WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.", "componentWillReceiveProps(nextProps) {", "\t$0", "}"],
+		"description": "componentWillReceiveProps"
+	},
 
-  "getDerivedStateFromProps": {
-    "prefix": "gds",
-    "body": ["static getDerivedStateFromProps(nextProps, prevState) {", "\t$0", "}"],
-    "description": "getDerivedStateFromProps"
-  },
+	"getDerivedStateFromProps": {
+		"prefix": "gds",
+		"body": ["static getDerivedStateFromProps(nextProps, prevState) {", "\t$0", "}"],
+		"description": "getDerivedStateFromProps"
+	},
 
-  "shouldComponentUpdate": {
-    "prefix": "scu",
-    "body": ["shouldComponentUpdate(nextProps, nextState) {", "\t$0", "}"],
-    "description": "shouldComponentUpdate"
-  },
+	"shouldComponentUpdate": {
+		"prefix": "scu",
+		"body": ["shouldComponentUpdate(nextProps, nextState) {", "\t$0", "}"],
+		"description": "shouldComponentUpdate"
+	},
 
-  "componentWillUpdate": {
-    "prefix": "cwu",
-    "body": ["//WARNING! To be deprecated in React v17. Use componentDidUpdate instead.", "componentWillUpdate(nextProps, nextState) {", "\t$0", "}"],
-    "description": "componentWillUpdate"
-  },
+	"componentWillUpdate": {
+		"prefix": "cwu",
+		"body": ["//WARNING! To be deprecated in React v17. Use componentDidUpdate instead.", "componentWillUpdate(nextProps, nextState) {", "\t$0", "}"],
+		"description": "componentWillUpdate"
+	},
 
-  "componentDidUpdate": {
-    "prefix": "cdu",
-    "body": ["componentDidUpdate(prevProps, prevState) {", "\t$0", "}"],
-    "description": "componentDidUpdate"
-  },
+	"componentDidUpdate": {
+		"prefix": "cdu",
+		"body": ["componentDidUpdate(prevProps, prevState) {", "\t$0", "}"],
+		"description": "componentDidUpdate"
+	},
 
-  "componentWillUnmount": {
-    "prefix": "cwun",
-    "body": ["componentWillUnmount() {", "\t$0", "}"],
-    "description": "componentWillUnmount"
-  },
+	"componentWillUnmount": {
+		"prefix": "cwun",
+		"body": ["componentWillUnmount() {", "\t$0", "}"],
+		"description": "componentWillUnmount"
+	},
 
-  "componentDidCatch": {
-    "prefix": "cdc",
-    "body": ["componentDidCatch(error, info) {", "\t$0", "}"],
-    "description": "componentDidCatch"
-  },
+	"componentDidCatch": {
+		"prefix": "cdc",
+		"body": ["componentDidCatch(error, info) {", "\t$0", "}"],
+		"description": "componentDidCatch"
+	},
 
-  "getSnapshotBeforeUpdate": {
-    "prefix": "gsbu",
-    "body": ["getSnapshotBeforeUpdate(prevProps, prevState) {", "\t$0", "}"],
-    "description": "getSnapshotBeforeUpdate"
-  },
+	"getSnapshotBeforeUpdate": {
+		"prefix": "gsbu",
+		"body": ["getSnapshotBeforeUpdate(prevProps, prevState) {", "\t$0", "}"],
+		"description": "getSnapshotBeforeUpdate"
+	},
 
-  "setState": {
-    "prefix": "ss",
-    "body": ["this.setState({ $1: $2 });"],
-    "description": "setState"
-  },
+	"setState": {
+		"prefix": "ss",
+		"body": ["this.setState({ $1: $2 });"],
+		"description": "setState"
+	},
 
-  "Functional setState": {
-    "prefix": "ssf",
-    "body": ["this.setState(prevState => {", "\treturn { $1: prevState.$1 };", "});"],
-    "description": "Functional setState"
-  },
+	"Functional setState": {
+		"prefix": "ssf",
+		"body": ["this.setState(prevState => {", "\treturn { $1: prevState.$1 };", "});"],
+		"description": "Functional setState"
+	},
 
-  "Declare a new state variable using State Hook": {
-    "prefix": "usf",
-    "body": ["const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);"],
-    "description": "Declare a new state Variable using the State Hook. Hit Tab to apply CamelCase to function"
-  },
+	"Declare a new state variable using State Hook": {
+		"prefix": "usf",
+		"body": ["const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);"],
+		"description": "Declare a new state Variable using the State Hook. Hit Tab to apply CamelCase to function"
+	},
 
-  "render": {
-    "prefix": "ren",
-    "body": ["render() {", "\treturn (", "\t\t $0", "\t);", "}"],
-    "description": "render"
-  },
+	"render": {
+		"prefix": "ren",
+		"body": ["render() {", "\treturn (", "\t\t $0", "\t);", "}"],
+		"description": "render"
+	},
 
-  "Render Prop": {
-    "prefix": "rprop",
-    "body": [
-      "class $1 extends Component {",
-      "\tstate = { $2: $3 }",
-      "\trender() { ",
-      "\t\treturn this.props.render({",
-      "\t\t\t$2: this.state.$2",
-      "\t\t});",
-      "\t}",
-      "}",
-      " ",
-      "export default $1;"
-    ],
-    "description": "Render Prop"
-  },
+	"Render Prop": {
+		"prefix": "rprop",
+		"body": [
+			"class $1 extends Component {",
+			"\tstate = { $2: $3 }",
+			"\trender() { ",
+			"\t\treturn this.props.render({",
+			"\t\t\t$2: this.state.$2",
+			"\t\t});",
+			"\t}",
+			"}",
+			" ",
+			"export default $1;"
+		],
+		"description": "Render Prop"
+	},
 
-  "Higher Order Component": {
-    "prefix": "hoc",
-    "body": [
-      "function $1($2) {",
-      "\treturn class extends Component {",
-      "\t\tconstructor(props) {",
-      "\t\t\tsuper(props);",
-      "\t\t}",
-      " ",
-      "\t\trender() {",
-      "\t\t\treturn <$2 {...this.props} $0/>",
-      "\t\t}",
-      "\t}",
-      "}"
-    ],
-    "description": "Higher Order Component"
-  },
+	"Higher Order Component": {
+		"prefix": "hoc",
+		"body": [
+			"function $1($2) {",
+			"\treturn class extends Component {",
+			"\t\tconstructor(props) {",
+			"\t\t\tsuper(props);",
+			"\t\t}",
+			" ",
+			"\t\trender() {",
+			"\t\t\treturn <$2 {...this.props} $0/>",
+			"\t\t}",
+			"\t}",
+			"}"
+		],
+		"description": "Higher Order Component"
+	},
 
-  "Context Provider": {
-    "prefix": "cp",
-    "body": [
-      "export const $1 = React.createContext();",
-      "",
-      "const $1Provider = (props) => {",
-      "\t// Initial Provider State",
-      "\tconst state = {};",
-      "",
-      "\t// Reducer Function",
-      "\tconst $2 = (state, action) => {",
-      "\t\t",
-      "\t};",
-      "",
-      "\treturn (",
-      "\t\t<$1.Provider value={{state: state, $2}}>",
-      "\t\t\t{props.children}",
-      "\t\t</$1.Provider>",
-      "\t);",
-      "}",
-      "",
-      "export default $1Provider;"
-    ],
-    "description": "Context Provider"
-  },
-  
-  "Class Property Function": {
-    "prefix": "cpf",
-    "body": [
-      "$1 = (${2:e${TM_SELECTED_TEXT}}) => {",
-      "\t $0",
-      "};"
-    ],
-    "description": "Class Property Function"
-  }
+	"Context Provider": {
+		"prefix": "cp",
+		"body": [
+			"export const $1 = React.createContext();",
+			"",
+			"const $1Provider = (props) => {",
+			"\t// Initial Provider State",
+			"\tconst state = {};",
+			"",
+			"\t// Reducer Function",
+			"\tconst $2 = (state, action) => {",
+			"\t\t",
+			"\t};",
+			"",
+			"\treturn (",
+			"\t\t<$1.Provider value={{state: state, $2}}>",
+			"\t\t\t{props.children}",
+			"\t\t</$1.Provider>",
+			"\t);",
+			"}",
+			"",
+			"export default $1Provider;"
+		],
+		"description": "Context Provider"
+	},
+	
+	"Variable user info": {
+		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
+		"body": [
+			"SYSTEM_INFO_DEFINITION"
+		],
+		"description": "Variable user info"
+	},
+
+	"INFO DEFINED COLUMN": {
+		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
+		"body": [
+			"SYSTEM_INFO_DEFINITION"
+		],
+		"description": "DB_ITEM_DEFINITION : info DEFINED COLUMN"
+	},
+
+	
+	"Parameter condition search from screen parent": {
+		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
+		"body": [
+			"parent_search_parameter"
+		],
+		"description": "SYSTEM_INFO_DEFINITION : infomation user login login_cd,operator_cd, operator_name, store_cd, store_name, system_mode, system_mode_name, ..."
+	},
+
+	"Create Process Queue Pattern": {
+		"prefix": "queue",
+		"body": [
+			"\tvar queue = new ProcessQueue();",
+			"",
+			"\t// チェックの付いているｼｽﾃﾑﾓｰﾄﾞ分、分類権限取得",
+			"\tqueue.push({",
+			"\t\tfunc_cd\t\t:\t'AA07',",
+			"\t\trevision_no\t:\t'1',",
+			"\t\tproc_cd\t\t:\t'GetClassAuth',",
+			"\t\tsqlParam\t:\t{",
+			"\t\t\t OPERATOR_CD\t: $('#GROUP_3').find('#OPERATOR_CD').getValue(),",
+			"\t\t\t SYSTEMMODE_CD\t:  $('#ASSIST_1').find('#SYSTEMMODE_CD').getValue()",
+			"\t\t},",
+			"\t\tsuccessFunc\t:\tfunction (jsonData) {",
+			"\t\t\t\t\tclassAuthData = jsonData;",
+			"\t\t\t\t\treturn true;",
+			"\t\t}",
+			"\t});",
+			"\tqueue.push(function(){",
+			"\t\t\tnew asyncExecuter([",
+			"\t\t\t\t{",
+			"\t\t\t\t\tLINE_NO\t\t\t:1,",
+			"\t\t\t\t\tTYPE\t\t\t:'PROC',",
+			"\t\t\t\t\tDETAIL_TYPE\t\t:'search',",
+			"\t\t\t\t\tDATA\t\t\t: classAuthData,",
+			"\t\t\t\t\tREQUEST_TARGET\t:'',",
+			"\t\t\t\t\tRESULT_TARGET\t: 'GROUP_6'",
+			"\t\t\t\t}",
+			"\t\t\t],",
+			"\t\t\t'',",
+			"\t\t\tfalse",
+			"\t\t\t).execute();",
+			"\t});",
+			"\tqueue.push(function(){ executer.gotoNextProcess() });",
+			"\tqueue.execute();"
+		],
+		"description": "Create Process Queue Pattern"
+	},
+
+	"Create Async Executer Pattern": {
+		"prefix": "asyncExecuter",
+		"body": [
+			"\tvar processList = [",
+			"\t\t{",
+			"\t\t\tLINE_NO\t\t\t: 1,",
+			"\t\t\tTYPE\t\t\t: 'PROC',",
+			"\t\t\tDETAIL_TYPE\t\t: 'Password_Setting',",
+			"\t\t\tFUNC_CD\t\t\t: 'AA01',",
+			"\t\t\tREVISION_NO\t\t: '1',",
+			"\t\t\tPROC_CD\t\t\t: 'PasswordReset',",
+			"\t\t\tREQUEST_TARGET\t: 'GROUP_1'",
+			"\t\t}",
+			"\t]",
+			"",
+			"\t// 処理の実行",
+			"\tnew asyncExecuter(processList, function() { executer.gotoNextProcess(); }).execute();"
+		],
+		"description": "Create Async Executer Pattern"
+	},
+
+	"Get Queue Function Constructor": {
+		"prefix": "queue.constructor(property)",
+		"body": [
+			"function ProcessQueue(){",
+			"\t/** 個々の処理を入れるキュー */",
+			"\tthis._queue\t\t\t\t\t= [];",
+			"\t/** 現在実行している処理の ID （ProcessQueue の内部で自動的に割り振られる） */",
+			"\tthis._executeId\t\t\t\t= 0;",
+			"\t/** キャンセルされた処理 ID のリスト */",
+			"\tthis._canceledExecuteIdList = [];",
+			"\t/** コールバック */",
+			"\tthis.callBackFunction\t\t= function(){};",
+			"\t/** 再帰一括起動最大回数 */",
+			"\tthis.maxReflexivePronoun\t= 1000;",
+			"\t/** 再帰エラーフラグ */",
+			"\tthis.errorFlag\t\t\t\t= false;",
+			"}"
+			
+		],
+		"description": "Get Queue Function Constructor"
+	},
+
+	"Get Queue Function Clear": {
+		"prefix": "queue.clear_df",
+		"body": [
+			"//==========================================================================================",
+			"// キューをクリアする",
+			"//==========================================================================================",
+			"ProcessQueue.prototype.clear = function() {",
+			"\tthis._queue = [];",
+			"}",
+			
+		],
+		"description": "Get Queue Function Clear"
+	},
+
+	"Get Queue Function Push": {
+		"prefix": "queue.push_df",
+		"body": [
+			"//==========================================================================================",
+			"// キューに処理を追加する",
+			"//==========================================================================================",
+			"ProcessQueue.prototype.push = function(func) {",
+			"\tthis._queue.push(func);",
+			"}",
+			
+		],
+		"description": "Get Queue Function push"
+	},
+
+	"Get Queue Function Push Pattern": {
+		"prefix": "queue.push",
+		"body": [
+			"\tqueue.push(function(){",
+			"\t\t// グリッドオブジェクトを取得",
+			"\t\tvar assistObject = GROUP_ELEMENT['ASSIST_1'].gridAssist.object;",
+			"\t\tassistObject.entry();",
+			"\t\t$('#GROUP_6').find('#GRID_DETAIL tbody').each(function() {",
+			"\t\t\tvar rowNo = $(this).attr('rownumber');",
+			"\t\t\tif (GROUP_ELEMENT.GROUP_6.grid.object.getRowData(rowNo).rowState == 'DEL') {",
+			"\t\t\t\t$(this).addClass('GRID_DETAIL_DISABLED_COLOR').disable();",
+			"\t\t\t}",
+			"\t\t});",
+			"\t\tchangeClassType($('#ASSIST_1').find('#CODETYPE'));",
+			"\t\t$('#ASSIST_1').find('#CODETYPE').focus();",
+			"\t\texecuter.gotoNextProcess();",
+			"\t});"
+		],
+		"description": "Get Queue Function Push Pattern"
+	},
+
+	"Go to Next Process": {
+		"prefix": "gotonextprocess",
+		"body": [
+			"executer.gotoNextProcess();"
+		],
+		"description": "Go to Next Process"
+	},
+
+	"Go to Process": {
+		"prefix": "gotoprocess",
+		"body": [
+			"executer.gotoProcess(7);"
+		],
+		"description": "Go to Process"
+	},
+
+	"exit": {
+		"prefix": "exit",
+		"body": [
+			"executer.exit();"
+		],
+		"description": "exit"
+	},
+
+	"Get Queue Function Cancel Pattern": {
+		"prefix": "queue.cancel_df",
+		"body": [
+			"//==========================================================================================",
+			"// 指定された executeId の処理をキャンセルする。executeId は execute() の戻り値として取得できる。",
+			"//==========================================================================================",
+			"ProcessQueue.prototype.cancel = function(executeId) {",
+			"\tthis._canceledExecuteIdList[executeId] = true;",
+			"}"
+		],
+		"description": "Get Queue Function Cancel Pattern"
+	},
+
+	"Get Queue Function Cancel All Pattern": {
+		"prefix": "queue.cancelAll_df",
+		"body": [
+			"//==========================================================================================",
+			"// キューで全てプロセスをキャンセルする",
+			"//==========================================================================================",
+			"ProcessQueue.prototype.cancelAll = function() {",
+			"\tfor(var i = this._queue.length - 1; i >= 0; i--) {",
+			"\t\tthis.cancel(i);",
+			"\t}",
+			"}"
+		],
+		"description": "Get Queue Function Cancel All Pattern"
+	},
+
+	"Get Queue Function Execute Pattern": {
+		"prefix": "queue.execute_df",
+		"body": [
+			"//==========================================================================================",
+			"// キューに入れた処理を順番に実行する。",
+			"// @returns この execute() に関連付けられた executeId を返す。executeId は cancel() する際に使われる。",
+			"//==========================================================================================",
+			"ProcessQueue.prototype.execute = function(callback){",
+			"",
+			"\tif(this._queue.length !== 0){",
+			"\t\tif($.isFunction(callback)){",
+			"\t\t\tthis.callBackFunction = callback;",
+			"\t\t}",
+			"\t\tthis._executeId += 1;",
+			"\t\tthis._executeRecursive(this._queue, 0, this._executeId);",
+			"\t}else{",
+			"\t\tif($.isFunction(callback)){",
+			"\t\t\tcallback();",
+			"\t\t}",
+			"\t}",
+			"",
+			"\treturn this._executeId;",
+			"}"
+		],
+		"description": "Get Queue Function Execute Pattern"
+	},
+
+	"Get Queue Function _isAjaxParameter Pattern": {
+		"prefix": "queue._isAjaxParameter_df",
+		"body": [
+			"//==========================================================================================",
+			"// push() されたパラメータが Ajax 通信のためのパラメータか、単なる関数か判断する。",
+			"// @returns Ajax 通信用のパラメータであれば true を返す。",
+			"//==========================================================================================",
+			"ProcessQueue.prototype._isAjaxParameter = function (params) {",
+			"\tif (!params || params === true) {",
+			"\t\treturn false;",
+			"\t}",
+			"\treturn params.func_cd;",
+			"}"
+		],
+		"description": "Get Queue Function _isAjaxParameter Pattern"
+	},
+
+	"Get Queue Function _executeRecursive Pattern": {
+		"prefix": "queue._executeRecursive_df",
+		"body": [
+			"console.log(ProcessQueue.prototype._executeRecursive);"
+		],
+		"description": "Get Queue Function _executeRecursive Pattern"
+	},
+
+	"Queue.execute": {
+		"prefix": "queue.execute",
+		"body": [
+			"queue.execute();"
+		],
+		"description": "Queue.execute"
+	},
+
+	"Class Property Function": {
+		"prefix": "cpf",
+		"body": [
+			"$1 = (${2:e${TM_SELECTED_TEXT}}) => {",
+			"\t $0",
+			"};"
+		],
+		"description": "Class Property Function"
+	}
 }
