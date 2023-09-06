@@ -298,11 +298,11 @@
 	},
 
 	"Create Process Queue Pattern": {
-		"prefix": "queue",
+		"prefix": "search_with_param",
 		"body": [
 			"\tvar queue = new ProcessQueue();",
 			"",
-			"\t// ƒ`ƒFƒbƒN‚Ì•t‚¢‚Ä‚¢‚é¼½ÃÑÓ°ÄŞ•ªA•ª—ŞŒ ŒÀæ“¾",
+			"\t// ãƒã‚§ãƒƒã‚¯ã®ä»˜ã„ã¦ã„ã‚‹ï½¼ï½½ï¾ƒï¾‘ï¾“ï½°ï¾„ï¾åˆ†ã€åˆ†é¡æ¨©é™å–å¾—",
 			"\tqueue.push({",
 			"\t\tfunc_cd\t\t:\t'AA07',",
 			"\t\trevision_no\t:\t'1',",
@@ -337,6 +337,169 @@
 		"description": "Create Process Queue Pattern"
 	},
 
+	"Get Value From Resource" : {
+		"prefix": "GET_DB_SCREEN_RESOURCE_DEFINITION_ResourceVal",
+		"body": [
+			"DB_SCREEN_RESOURCE_DEFINITION['HD05_001.LABELTEXT.CONFIRM.OK'].ResourceVal"
+		],
+		"description": "Get Value From Resource"
+	},
+
+	"Get Value From Error code" : {
+		"prefix": "GET_DB_ERROR_CODE_DEFINITION_ResourceVal",
+		"body": [
+			"DB_ERROR_CODE_DEFINITION['1000']['Normal']['MESSAGE']"
+		],
+		"description": "Get Value From Error code"
+	},
+
+	"Dialog ERROR" : {
+		"prefix": "DIALOG_ERROR",
+		"body": [
+			"\t\t\t\tvar settings = {",
+			"\t\t\t\t\tmessage\t\t: 'æ—¥æ™‚(TO)ã¯æ—¥æ™‚(FROM)ä»¥é™ã‚’æŒ‡å®šã—ã¦ä¸‹ã•ã„ã€‚',",
+			"\t\t\t\t\ttype\t\t: 'ok',",
+			"\t\t\t\t\tfocus\t\t: 'ok',",
+			"\t\t\t\t\tbuttonTitle\t: {",
+			"\t\t\t\t\t\t\t\t\tok  : ''",
+			"\t\t\t\t\t},",
+			"\t\t\t\t\tcallback\t: {",
+			"\t\t\t\t\t\t\t\t\tok  : function() {",
+			"\t\t\t\t\t\t\t\t\t\t\toverlayController.hideAll();",
+			"\t\t\t\t\t\t\t\t\t\t\texecuter.exit();",
+			"\t\t\t\t\t\t\t\t\t\t}",
+			"\t\t\t\t\t},",
+			"\t\t\t\t\tbody_css\t: {",
+			"\t\t\t\t\t\t\t\t\taddClass    : 'WAITING_ACTION'",
+			"\t\t\t\t\t},",
+			"\t\t\t\t\ttitle\t\t: 'Error'",
+			"\t\t\t\t};",
+			"",
+			"\t\t\t\tsetTimeout(function() { dialog.error(settings); }, 10);"
+		],
+		"description": "Dialog ERROR"
+	},
+
+	"Dialog CONFIRM/INFO" : {
+		"prefix": "DIALOG_CONFIRM_INFO",
+		"body": [
+			"var settings = {",
+			"\tmessage\t\t: msg,",
+			"\ttype\t\t: 'ok_cancel',",
+			"\tfocus\t\t: 'ok',",
+			"\tbuttonTitle\t: {",
+			"\t\t\t\t\tok\t\t: DB_SCREEN_RESOURCE_DEFINITION['HD05_001.LABELTEXT.CONFIRM.OK'].ResourceVal,",
+			"\t\t\t\t\tcancel\t: DB_SCREEN_RESOURCE_DEFINITION['HD05_001.LABELTEXT.CONFIRM.CANCEL'].ResourceVal",
+			"\t},",
+			"\tcallback\t: {",
+			"\t\t\t\t\tok\t\t: function() {",
+			"\t\t\t\t\t\t\t\texecuter.gotoNextProcess();",
+			"\t\t\t\t\t\t\t},",
+			"\t\t\t\t\tcancel\t: function() {",
+			"\t\t\t\t\t\t\t\texecuter.exit();",
+			"\t\t\t\t\t\t\t\t$('#ASSIST').find('#LINENO').focus();",
+			"\t\t\t\t\t\t\t}",
+			"\t},",
+			"\tbody_css\t: {",
+			"\t\t\t\t\taddClass    : 'WAITING_ACTION'",
+			"\t\t\t\t},",
+			"\ttitle\t\t: DB_SCREEN_RESOURCE_DEFINITION['HD05_001.LABELTEXT.WAITTING.CONFIRM'].ResourceVal",
+			"};",
+			"",
+			"setTimeout(function() { dialog.confirm(settings); }, 10);"
+		],
+		"description": "Dialog ERROR"
+	},
+
+	"Create Process Queue Pattern with wait action": {
+		"prefix": "search_with_param_and_wait_action",
+		"body": [
+			"\t// æ©Ÿèƒ½ã‚³ãƒ¼ãƒ‰è¨­å®šãƒ†ãƒ¼ãƒ–ãƒ«ã‚’æ¤œç´¢",
+			"\tvar queue = new ProcessQueue();",
+			"\tqueue.push(function() {",
+			"\t\tdialog.waitAction({",
+			"\t\t\tmessage     : DB_SCREEN_RESOURCE_DEFINITION['CC01_001.LABELTEXT.WAITING_MESSAGE'].ResourceVal,",
+			"\t\t\ttype        : 'ok',",
+			"\t\t\tbuttonTitle : { ok : DB_SCREEN_RESOURCE_DEFINITION['CC01_001.LABELTEXT.WAITING_MESSAGE_CANCEL'].ResourceVal},",
+			"\t\t\tcallback    : { ok : function() {}},",
+			"\t\t\tbody_css    : { addClass : 'WAITING_ACTION'},",
+			"\t\t\ttitle       : 'none'",
+			"\t\t});",
+			"\t});",
+			"",
+			"\tqueue.push({",
+			"\t\tfunc_cd         : 'CC01',",
+			"\t\tproc_cd         : 'GridSearchKind',",
+			"\t\trevision_no     : '1',",
+			"\t\tsqlParam        : {",
+			"\t\t\t\t\t\t\tWFREGISTERKIND_CD   : $('#GROUP_1').find('#WFREGISTERKIND_CD').getValue(),",
+			"\t\t\t\t\t\t\tREGNO               : $('#GROUP_1').find('#REGNO').getValue()",
+			"\t\t\t\t\t\t},",
+			"\t\tsuccessFunc     : function (jsonData) {",
+			"\t\t\t\t\t\t\tif (jsonData == null || jsonData.length == 0) {",
+			"\t\t\t\t\t\t\t\toverlayController.hideAll();",
+			"\t\t\t\t\t\t\t\treturn;",
+			"\t\t\t\t\t\t\t}",
+			"",
+			"\t\t\t\t\t\t\tvar topElement = [];",
+			"",
+			"\t\t\t\t\t\t\tfor(var i = 0; i < 10; i++) {",
+			"\t\t\t\t\t\t\t\tvar rowData = jsonData[i];",
+			"",
+			"\t\t\t\t\t\t\t\tfor (var colName in rowData) {",
+			"\t\t\t\t\t\t\t\t\tif (i == 0) {",
+			"\t\t\t\t\t\t\t\t\t\ttopElement.push(colName);",
+			"\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName] = jQuery.extend(true, {}, ITEM_DEFINITION['GROUP_2']['DYNAMIC_COLUMN']);",
+			"\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].name = colName;",
+			"\t\t\t\t\t\t\t\t\t\tvar colWidthByData = defaultColWidth * rowData[colName].length;",
+			"\t\t\t\t\t\t\t\t\t\tvar colWidthByColName = defaultColWidth * colName.length;",
+			"",
+			"\t\t\t\t\t\t\t\t\t\tif (colWidthByColName >= colWidthByData) {",
+			"\t\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].element_width = colWidthByColName;",
+			"\t\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].titlelabel_width = colWidthByColName;",
+			"",
+			"\t\t\t\t\t\t\t\t\t\t} else {",
+			"\t\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].element_width = colWidthByData;",
+			"\t\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].titlelabel_width = colWidthByData;",
+			"\t\t\t\t\t\t\t\t\t\t}",
+			"",
+			"\t\t\t\t\t\t\t\t\t\tcontinue;",
+			"\t\t\t\t\t\t\t\t\t}",
+			"",
+			"\t\t\t\t\t\t\t\t\tvar colWidth = defaultColWidth * rowData[colName].length;",
+			"",
+			"\t\t\t\t\t\t\t\t\tif (ITEM_DEFINITION['GROUP_2'][colName].element_width < colWidth) {",
+			"\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].element_width = colWidth;",
+			"\t\t\t\t\t\t\t\t\t\tITEM_DEFINITION['GROUP_2'][colName].titlelabel_width = colWidth;",
+			"\t\t\t\t\t\t\t\t\t}",
+			"\t\t\t\t\t\t\t\t}",
+			"\t\t\t\t\t\t\t}",
+			"",
+			"\t\t\t\t\t\t\tvar GridElement = [topElement];",
+			"\t\t\t\t\t\t\tvar layout = {};",
+			"\t\t\t\t\t\t\tlayout.pattern_1 = {};",
+			"\t\t\t\t\t\t\tlayout.pattern_1.HEADER = GridElement;",
+			"\t\t\t\t\t\t\tlayout.pattern_1.DETAIL = GridElement;",
+			"",
+			"\t\t\t\t\t\t\tGROUP_ELEMENT.GROUP_2.grid.object.resetGridLayout(layout);",
+			"\t\t\t\t\t\t\tGROUP_ELEMENT.GROUP_2.grid.object.setResultSet(new ResultSet(jsonData));",
+			"\t\t\t\t\t\t\tGROUP_ELEMENT.GROUP_2.grid.object.updateRow(-1, GROUP_ELEMENT.GROUP_2.grid.object.getResultSet().getAllData()[0]);",
+			"\t\t\t\t\t\t\toverlayController.hideAll();",
+			"\t\t\t\t\t\t},",
+			"\t\tprocessEndFunc  : function () {",
+			"\t\t\t\t\t\t\t$('#GROUP_1').find('#CONFIRMATION').disable();",
+			"\t\t\t\t\t\t\t$('#GROUP_1').find('#SENDBACK').disable();",
+			"\t\t\t\t\t\t\t$('#GROUP_1').find('#RECOGNITION').disable();",
+			"\t\t\t\t\t\t\t$('#GROUP_1').find('#REJECTION').disable();",
+			"\t\t\t\t\t\t\t$('#GROUP_1').find('#COMMENT').disable();",
+			"\t\t\t\t\t\t\t$('#ESC_BUTTON').focus();",
+			"\t\t\t\t\t\t}",
+			"\t});",
+			"\tqueue.execute();"
+		],
+		"description": "Create Process Queue Pattern with wait action"
+	},
+
 	"Create Async Executer Pattern": {
 		"prefix": "asyncExecuter",
 		"body": [
@@ -352,7 +515,7 @@
 			"\t\t}",
 			"\t]",
 			"",
-			"\t// ˆ—‚ÌÀs",
+			"\t// å‡¦ç†ã®å®Ÿè¡Œ",
 			"\tnew asyncExecuter(processList, function() { executer.gotoNextProcess(); }).execute();"
 		],
 		"description": "Create Async Executer Pattern"
@@ -362,17 +525,17 @@
 		"prefix": "queue.constructor(property)",
 		"body": [
 			"function ProcessQueue(){",
-			"\t/** ŒÂX‚Ìˆ—‚ğ“ü‚ê‚éƒLƒ…[ */",
+			"\t/** å€‹ã€…ã®å‡¦ç†ã‚’å…¥ã‚Œã‚‹ã‚­ãƒ¥ãƒ¼ */",
 			"\tthis._queue\t\t\t\t\t= [];",
-			"\t/** Œ»İÀs‚µ‚Ä‚¢‚éˆ—‚Ì ID iProcessQueue ‚Ì“à•”‚Å©“®“I‚ÉŠ„‚èU‚ç‚ê‚éj */",
+			"\t/** ç¾åœ¨å®Ÿè¡Œã—ã¦ã„ã‚‹å‡¦ç†ã® ID ï¼ˆProcessQueue ã®å†…éƒ¨ã§è‡ªå‹•çš„ã«å‰²ã‚ŠæŒ¯ã‚‰ã‚Œã‚‹ï¼‰ */",
 			"\tthis._executeId\t\t\t\t= 0;",
-			"\t/** ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚½ˆ— ID ‚ÌƒŠƒXƒg */",
+			"\t/** ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚ŒãŸå‡¦ç† ID ã®ãƒªã‚¹ãƒˆ */",
 			"\tthis._canceledExecuteIdList = [];",
-			"\t/** ƒR[ƒ‹ƒoƒbƒN */",
+			"\t/** ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ */",
 			"\tthis.callBackFunction\t\t= function(){};",
-			"\t/** Ä‹AˆêŠ‡‹N“®Å‘å‰ñ” */",
+			"\t/** å†å¸°ä¸€æ‹¬èµ·å‹•æœ€å¤§å›æ•° */",
 			"\tthis.maxReflexivePronoun\t= 1000;",
-			"\t/** Ä‹AƒGƒ‰[ƒtƒ‰ƒO */",
+			"\t/** å†å¸°ã‚¨ãƒ©ãƒ¼ãƒ•ãƒ©ã‚° */",
 			"\tthis.errorFlag\t\t\t\t= false;",
 			"}"
 			
@@ -384,11 +547,11 @@
 		"prefix": "queue.clear_df",
 		"body": [
 			"//==========================================================================================",
-			"// ƒLƒ…[‚ğƒNƒŠƒA‚·‚é",
+			"// ã‚­ãƒ¥ãƒ¼ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.clear = function() {",
 			"\tthis._queue = [];",
-			"}",
+			"}"
 			
 		],
 		"description": "Get Queue Function Clear"
@@ -398,11 +561,11 @@
 		"prefix": "queue.push_df",
 		"body": [
 			"//==========================================================================================",
-			"// ƒLƒ…[‚Éˆ—‚ğ’Ç‰Á‚·‚é",
+			"// ã‚­ãƒ¥ãƒ¼ã«å‡¦ç†ã‚’è¿½åŠ ã™ã‚‹",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.push = function(func) {",
 			"\tthis._queue.push(func);",
-			"}",
+			"}"
 			
 		],
 		"description": "Get Queue Function push"
@@ -412,7 +575,7 @@
 		"prefix": "queue.push",
 		"body": [
 			"\tqueue.push(function(){",
-			"\t\t// ƒOƒŠƒbƒhƒIƒuƒWƒFƒNƒg‚ğæ“¾",
+			"\t\t// ã‚°ãƒªãƒƒãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—",
 			"\t\tvar assistObject = GROUP_ELEMENT['ASSIST_1'].gridAssist.object;",
 			"\t\tassistObject.entry();",
 			"\t\t$('#GROUP_6').find('#GRID_DETAIL tbody').each(function() {",
@@ -457,7 +620,7 @@
 		"prefix": "queue.cancel_df",
 		"body": [
 			"//==========================================================================================",
-			"// w’è‚³‚ê‚½ executeId ‚Ìˆ—‚ğƒLƒƒƒ“ƒZƒ‹‚·‚éBexecuteId ‚Í execute() ‚Ì–ß‚è’l‚Æ‚µ‚Äæ“¾‚Å‚«‚éB",
+			"// æŒ‡å®šã•ã‚ŒãŸ executeId ã®å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹ã€‚executeId ã¯ execute() ã®æˆ»ã‚Šå€¤ã¨ã—ã¦å–å¾—ã§ãã‚‹ã€‚",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.cancel = function(executeId) {",
 			"\tthis._canceledExecuteIdList[executeId] = true;",
@@ -470,7 +633,7 @@
 		"prefix": "queue.cancelAll_df",
 		"body": [
 			"//==========================================================================================",
-			"// ƒLƒ…[‚Å‘S‚ÄƒvƒƒZƒX‚ğƒLƒƒƒ“ƒZƒ‹‚·‚é",
+			"// ã‚­ãƒ¥ãƒ¼ã§å…¨ã¦ãƒ—ãƒ­ã‚»ã‚¹ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.cancelAll = function() {",
 			"\tfor(var i = this._queue.length - 1; i >= 0; i--) {",
@@ -485,8 +648,8 @@
 		"prefix": "queue.execute_df",
 		"body": [
 			"//==========================================================================================",
-			"// ƒLƒ…[‚É“ü‚ê‚½ˆ—‚ğ‡”Ô‚ÉÀs‚·‚éB",
-			"// @returns ‚±‚Ì execute() ‚ÉŠÖ˜A•t‚¯‚ç‚ê‚½ executeId ‚ğ•Ô‚·BexecuteId ‚Í cancel() ‚·‚éÛ‚Ég‚í‚ê‚éB",
+			"// ã‚­ãƒ¥ãƒ¼ã«å…¥ã‚ŒãŸå‡¦ç†ã‚’é †ç•ªã«å®Ÿè¡Œã™ã‚‹ã€‚",
+			"// @returns ã“ã® execute() ã«é–¢é€£ä»˜ã‘ã‚‰ã‚ŒãŸ executeId ã‚’è¿”ã™ã€‚executeId ã¯ cancel() ã™ã‚‹éš›ã«ä½¿ã‚ã‚Œã‚‹ã€‚",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.execute = function(callback){",
 			"",
@@ -512,8 +675,8 @@
 		"prefix": "queue._isAjaxParameter_df",
 		"body": [
 			"//==========================================================================================",
-			"// push() ‚³‚ê‚½ƒpƒ‰ƒ[ƒ^‚ª Ajax ’ÊM‚Ì‚½‚ß‚Ìƒpƒ‰ƒ[ƒ^‚©A’P‚È‚éŠÖ”‚©”»’f‚·‚éB",
-			"// @returns Ajax ’ÊM—p‚Ìƒpƒ‰ƒ[ƒ^‚Å‚ ‚ê‚Î true ‚ğ•Ô‚·B",
+			"// push() ã•ã‚ŒãŸãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒ Ajax é€šä¿¡ã®ãŸã‚ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‹ã€å˜ãªã‚‹é–¢æ•°ã‹åˆ¤æ–­ã™ã‚‹ã€‚",
+			"// @returns Ajax é€šä¿¡ç”¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§ã‚ã‚Œã° true ã‚’è¿”ã™ã€‚",
 			"//==========================================================================================",
 			"ProcessQueue.prototype._isAjaxParameter = function (params) {",
 			"\tif (!params || params === true) {",
