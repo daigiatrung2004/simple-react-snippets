@@ -304,8 +304,8 @@
 			"}",
 			"",
 			"if (isDeviceTablet()) {",
-			"\tscriptDeviceDir = "tablet_script";",
-			"\tcssDeviceDir = "tablet_css";",
+			"\tscriptDeviceDir = 'tablet_script';",
+			"\tcssDeviceDir = 'tablet_css';",
 			"}"
 		],
 		"description": "SYSTEM_INFO_DEFINITION : infomation user login login_cd,operator_cd, operator_name, store_cd, store_name, system_mode, system_mode_name, ..."
