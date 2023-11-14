@@ -397,7 +397,7 @@
 		"description": "Create Cursor"
 	},
 	"Create pxs builder sql": {
-		"prefix": "create_perform_builder",
+		"prefix": "pxs_create_perform_builder",
 		"body": [
 			"",
 			"\treturnCursor\tREFCURSOR;",
@@ -418,8 +418,29 @@
 		],
 		"description": "Create pxs builder sql"
 	},
+	"pxs plsbuilder initialize": {
+		"prefix": "pxs_perform_initialize",
+		"body": [
+			"PERFORM PXS_PLSBUILDER.Initialize();"
+		],
+		"description": "pxs plsbuilder initialize"
+	},
+	"pxs plsbuilder get": {
+		"prefix": "pxs_perform_get",
+		"body": [
+			"OPEN returnCursor FOR EXECUTE PXS_PLSBUILDER.Get();"
+		],
+		"description": "pxs plsbuilder get"
+	},
+	"pxs plsbuilder drop": {
+		"prefix": "pxs_perform_drop",
+		"body": [
+			"PERFORM PXS_PLSBUILDER.Drop();"
+		],
+		"description": "pxs plsbuilder drop"
+	},
 	"Create pxs builder append sql": {
-		"prefix": "perform_builder_append",
+		"prefix": "pxs_perform_builder_append",
 		"body": [
 			"PERFORM PXS_PLSBUILDER.Append('\tSELECT\t*');"
 		],
