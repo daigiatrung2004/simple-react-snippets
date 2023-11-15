@@ -396,6 +396,141 @@
 		],
 		"description": "Create Cursor"
 	},
+	"Select data from json": {
+		"prefix": "select_data_from_json",
+		"body": [
+			"\t\t\t\t\tSELECT\tVALUE ->> 'csvfile_cd'\t\t\tAS CSVFILE_CD,",
+			"\t\t\t\t\t\t\tVALUE ->> 'createdatetimefrom'\tAS CREATEDATETIMEFROM,",
+			"\t\t\t\t\t\t\tVALUE ->> 'createdatetimeto'\t\tAS CREATEDATETIMETO,",
+			"\t\t\t\t\t\t\tVALUE ->> 'operator_cd'\t\t\tAS OPERATOR_CD,",
+			"\t\t\t\t\t\t\tVALUE ->> 'status'\t\t\t\tAS STATUS,",
+			"\t\t\t\t\t\t\tVALUE ->> 'filesname'\t\t\t\tAS FILESNAME,",
+			"\t\t\t\t\t\t\tVALUE ->> 'filesize'\t\t\t\tAS FILESIZE,",
+			"\t\t\t\t\t\t\tVALUE ->> 'downloaddatetime'\t\tAS DOWNLOADDATETIME,",
+			"\t\t\t\t\t\t\tVALUE ->> 'filename'\t\t\t\tAS FILENAME,",
+			"\t\t\t\t\t\t\tVALUE ->> 'directoryname'\t\t\tAS DIRECTORYNAME,",
+			"\t\t\t\t\t\t\tVALUE ->> 'server_cd'\t\t\t\tAS SERVER_CD,",
+			"\t\t\t\t\t\t\tVALUE ->> 'seqno'\t\t\t\t\tAS SEQNO,",
+			"\t\t\t\t\t\t\tVALUE ->> 'company_cd'\t\t\tAS COMPANY_CD",
+			"\t\t\t\t\tFROM\tJSONB_ARRAY_ELEMENTS(CURRENT_SETTING('UNICCS.TMP_AB95_FILEDOWNLOADDATA', TRUE)::JSONB)"
+		],
+		"description": "Select data from json"
+	},
+	"current settings": {
+		"prefix": "current_settings",
+		"body": [
+			"CURRENT_SETTING('UNICCS.TMP_AB95_FILEDOWNLOADDATA', TRUE)"
+		],
+		"description": "current settings"
+	},
+	"set config": {
+		"prefix": "set_config",
+		"body": [
+			"SELECT SET_CONFIG(''UNICCS.TMP_AB95_FILEDOWNLOADDATA'', JSON_AGG(TMP)::JSONB::VARCHAR, FALSE) FROM ('|| ls_QueryString ||')"
+		],
+		"description": "set config"
+	},
+	"execute query": {
+		"prefix": "execute_query",
+		"body": [
+			"EXECUTE 'SELECT SET_CONFIG(''UNICCS.TMP_AB95_FILEDOWNLOADDATA'', JSON_AGG(TMP)::JSONB::VARCHAR, FALSE) FROM ('|| ls_QueryString ||') TMP';"
+		],
+		"description": "execute query"
+	},
+	"dblink execute": {
+		"prefix": "dblink_exec",
+		"body": [
+			"PERFORM dblink_exec(ls_ConnectionName, ls_SQLPHUOCLOGry);"
+		],
+		"description": "dblink execute"
+	},
+	"Create table vulog next10": {
+		"prefix": "vulog_create_table_next10",
+		"body": [
+			"-- ========================================================",
+			"-- Create Logging Table - Start",
+			"-- ======================================================== ",
+			"",
+			"DROP TABLE IF EXISTS VULOG;",
+			"",
+			"CREATE TABLE VULOG",
+			"(",
+			"\tID\t\t\tSERIAL NOT NULL,",
+			"\tMESSAGELOG\t\tTEXT,",
+			"\tCREATEDDATE\tTIMESTAMP DEFAULT CURRENT_TIMESTAMP,",
+			"\tCLOCK\t\tVARCHAR(100) DEFAULT TO_CHAR(clock_timestamp(), 'YYYY/MM/DD HH24:MI:SS.US'::text),",
+			"\tCONSTRAINT  VUMSG_PKEY PRIMARY KEY (ID)",
+			")",
+			"WITH (",
+			"\tOIDS=FALSE",
+			");",
+			"",
+			"ALTER TABLE VULOG OWNER TO NTUSER;"
+		],
+		"description": "Create table vulog next10"
+	},
+	"Create function insert vulog next10": {
+		"prefix": "vulog_create_function_insert_next10",
+		"body": [
+			"SET CLIENT_ENCODING TO 'SJIS';",
+			"",
+			"-- DROP SCHEMA VN CASCADE;",
+			"-- CREATE SCHEMA VN AUTHORIZATION uvuser;",
+			"",
+			"CREATE OR REPLACE FUNCTION VULOG(i_message character varying)",
+			"RETURNS void AS",
+			"$BODY$",
+			"/*",
+			"\tInsert data to table",
+			"*/",
+			"DECLARE",
+			"\t-- 変数定義",
+			"\tls_SqlState\t\t\tVARCHAR(5);",
+			"\tls_SqlErrMsg\t\tUMF_RESOURCEDEF.RESOURCEVAL%TYPE := '';",
+			"\tls_ConnectionName\tTEXT;",
+			"\tls_ConnStr\t\t\tTEXT;",
+			"\tls_SQLPHUOCLOGry\tTEXT;",
+			"\tls_Password\tTEXT;",
+			"",
+			"\t-- レコードとカーソル定義",
+			"\tlrec_StatActivity\tRECORD;",
+			"BEGIN",
+			"\tls_ConnectionName := 'ConnectionVNLog';",
+			"\tls_Password := 'ntuser';",
+			"",
+			"\tSELECT\t*",
+			"\tINTO\tlrec_StatActivity",
+			"\tFROM\tPG_STAT_ACTIVITY",
+			"\tWHERE\tpid = (SELECT pg_backend_pid());",
+			"",
+			"\tls_ConnStr = 'host=nt-poc-parent-db1.cluster-cz55bk9crgju.ap-northeast-1.rds.amazonaws.com dbname=parent user=ntuser password=ntuser';",
+			"\t-- ls_ConnStr = 'dbname=' || lrec_StatActivity.DATNAME || ' user=' || lrec_StatActivity.USENAME || ' password=' || ls_Password;",
+			"",
+			"\tIF ((\tSELECT\tCOUNT(*)",
+			"\t\t\tFROM\t(\tSELECT\tUNNEST(DBLINK_GET_CONNECTIONS()) AS CONNAME) A",
+			"\t\t\tWHERE\tA.CONNAME = ls_ConnectionName) <> 0) THEN",
+			"\t\tPERFORM DBLINK_DISCONNECT(ls_ConnectionName);",
+			"\tEND IF;",
+			"",
+			"\tls_SQLPHUOCLOGry := 'INSERT INTO VULOG (MESSAGELOG) values($$' || i_Message || '$$);';",
+			"",
+			"\tPERFORM dblink_connect(ls_ConnectionName, ls_ConnStr);",
+			"\tPERFORM dblink_exec(ls_ConnectionName, 'BEGIN;');",
+			"\tPERFORM dblink_exec(ls_ConnectionName, ls_SQLPHUOCLOGry);",
+			"\tPERFORM dblink_exec(ls_ConnectionName, 'COMMIT;');",
+			"\tPERFORM dblink_disconnect(ls_ConnectionName);",
+			"",
+			"END;",
+			"$BODY$",
+			"LANGUAGE plpgsql VOLATILE",
+			"COST 100;",
+			"",
+			"ALTER FUNCTION VULOG(character varying) OWNER TO NTUSER;",
+			"",
+			"RESET CLIENT_ENCODING;"
+		],
+		"description": "Create function insert vulog next10"
+	},
 	"Create pxs builder sql": {
 		"prefix": "pxs_create_perform_builder",
 		"body": [
