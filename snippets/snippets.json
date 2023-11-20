@@ -751,5 +751,76 @@
 			"import * as $ from './Styles';"
 		],
 		"description": "import * from styled-component"
+	},
+
+	"Import mediaqueries for reponsive": {
+		"prefix": "import_mediaqueries",
+		"body": [
+			"import { mediaQueries } from '~/utils/reponsive';"
+		],
+		"description": "Import mediaqueries for reponsive"
+	},
+
+	"Import mediaqueries mobile reponsive": {
+		"prefix": "import_mediaqueries_mobile",
+		"body": [
+			"\t${mediaQueries(",
+			"\t\t'mobile',",
+			"\t\t`",
+			"\t\t`",
+			"\t)}"
+		],
+		"description": "Import mediaqueries mobile reponsive"
+	},
+
+	"Import mediaqueries desktop reponsive": {
+		"prefix": "import_mediaqueries_desktop",
+		"body": [
+			"\t${mediaQueries(",
+			"\t\t'desktop',",
+			"\t\t`",
+			"\t\t`",
+			"\t)}"
+		],
+		"description": "Import mediaqueries desktop reponsive"
+	},
+
+	"Devices argument handle": {
+		"prefix": "device_argument_handle",
+		"body": [
+			"\t${({ devicearguments }) => {",
+			"\t\tif (devicearguments) {",
+			"\t\t\tlet queries = Object.keys(devicearguments).map(key => {",
+			"\t\t\t\treturn mediaQueries(key, devicearguments[key]['style']);",
+			"\t\t\t});",
+			"\t\t\treturn queries.join('');",
+			"\t\t}",
+			"\t}}"
+		],
+		"description": "Devices argument handle"
+	},
+
+	"Devices argument attribute component": {
+		"prefix": "device_argument_attributte_component",
+		"body": [
+			"\t\t\t\t\t\t\t\tdevicearguments={{",
+			"\t\t\t\t\t\t\t\t\tmobile: {",
+			"\t\t\t\t\t\t\t\t\t\tstyle: 'width: 9.1rem',",
+			"\t\t\t\t\t\t\t\t\t},",
+			"\t\t\t\t\t\t\t\t}}"
+		],
+		"description": "Devices argument attribute component"
+	},
+
+	"Import mediaqueries tablet reponsive": {
+		"prefix": "import_mediaqueries_tablet",
+		"body": [
+			"\t${mediaQueries(",
+			"\t\t'tablet',",
+			"\t\t`",
+			"\t\t`",
+			"\t)}"
+		],
+		"description": "Import mediaqueries tablet reponsive"
 	}
 }
