@@ -838,6 +838,13 @@
 		],
 		"description": "Remove comma string type numberic"
 	},
+	"Get byte length": {
+		"prefix": "get_Byte_Length",
+		"body": [
+			"getByteLength(val)"
+		],
+		"description": "Get byte length"
+	},
 	"Error message append in validation": {
 		"prefix": "error_message_append",
 		"body": [
