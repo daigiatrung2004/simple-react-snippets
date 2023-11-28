@@ -1,22 +1,25 @@
 {
 	"Import React": {
 		"prefix": "imr",
-		"body": ["import React from 'react';\n"],
+		"body": [
+			"import React from 'react';\n"
+		],
 		"description": "Import React"
 	},
-
 	"Import React and Component": {
 		"prefix": "imrc",
-		"body": ["import React, { Component } from 'react';\n"],
+		"body": [
+			"import React, { Component } from 'react';\n"
+		],
 		"description": "Import React, { Component }"
 	},
-
 	"Import ReactDOM": {
 		"prefix": "imrd",
-		"body": ["import ReactDOM from 'react-dom';"],
+		"body": [
+			"import ReactDOM from 'react-dom';"
+		],
 		"description": "Import ReactDOM"
 	},
-
 	"Import React, { useState }": {
 		"prefix": "imrs",
 		"body": [
@@ -24,7 +27,6 @@
 		],
 		"description": "Import React, { useState }"
 	},
-
 	"Import React, { useState, useEffect }": {
 		"prefix": "imrse",
 		"body": [
@@ -32,19 +34,20 @@
 		],
 		"description": "Import React, { useState, useEffect }"
 	},
-
 	"Import PropTypes": {
 		"prefix": "impt",
-		"body": ["import PropTypes from 'prop-types';"],
+		"body": [
+			"import PropTypes from 'prop-types';"
+		],
 		"description": "Import PropTypes"
 	},
-
 	"Import Pure Component": {
 		"prefix": "impc",
-		"body": ["import React, { PureComponent } from 'react';\n"],
+		"body": [
+			"import React, { PureComponent } from 'react';\n"
+		],
 		"description": "Import React, { PureComponent }"
 	},
-
 	"Class Component": {
 		"prefix": "cc",
 		"body": [
@@ -59,7 +62,6 @@
 		],
 		"description": "Class Component"
 	},
-
 	"Class Pure Component": {
 		"prefix": "cpc",
 		"body": [
@@ -74,7 +76,6 @@
 		],
 		"description": "Class Pure Component"
 	},
-
 	"Class Component With Constructor": {
 		"prefix": "ccc",
 		"body": [
@@ -92,7 +93,6 @@
 		],
 		"description": "Class Component With Constructor"
 	},
-
 	"Stateless Function Component": {
 		"prefix": "sfc",
 		"body": [
@@ -104,7 +104,6 @@
 		],
 		"description": "Stateless Function Component"
 	},
-
 	"Function Syntax Component": {
 		"prefix": "ffc",
 		"body": [
@@ -116,13 +115,15 @@
 		],
 		"description": "Function Syntax Component"
 	},
-	
 	"componentDidMount": {
 		"prefix": "cdm",
-		"body": ["componentDidMount() {", "\t$0", "}"],
+		"body": [
+			"componentDidMount() {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentDidMount"
 	},
-
 	"useEffect": {
 		"prefix": "uef",
 		"body": [
@@ -132,85 +133,124 @@
 		],
 		"description": "useEffect Hook"
 	},
-
 	"componentWillMount": {
 		"prefix": "cwm",
-		"body": ["//WARNING! To be deprecated in React v17. Use componentDidMount instead.", "componentWillMount() {", "\t$0", "}"],
+		"body": [
+			"//WARNING! To be deprecated in React v17. Use componentDidMount instead.",
+			"componentWillMount() {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentWillMount"
 	},
-
 	"componentWillReceiveProps": {
 		"prefix": "cwrp",
-		"body": ["//WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.", "componentWillReceiveProps(nextProps) {", "\t$0", "}"],
+		"body": [
+			"//WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.",
+			"componentWillReceiveProps(nextProps) {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentWillReceiveProps"
 	},
-
 	"getDerivedStateFromProps": {
 		"prefix": "gds",
-		"body": ["static getDerivedStateFromProps(nextProps, prevState) {", "\t$0", "}"],
+		"body": [
+			"static getDerivedStateFromProps(nextProps, prevState) {",
+			"\t$0",
+			"}"
+		],
 		"description": "getDerivedStateFromProps"
 	},
-
 	"shouldComponentUpdate": {
 		"prefix": "scu",
-		"body": ["shouldComponentUpdate(nextProps, nextState) {", "\t$0", "}"],
+		"body": [
+			"shouldComponentUpdate(nextProps, nextState) {",
+			"\t$0",
+			"}"
+		],
 		"description": "shouldComponentUpdate"
 	},
-
 	"componentWillUpdate": {
 		"prefix": "cwu",
-		"body": ["//WARNING! To be deprecated in React v17. Use componentDidUpdate instead.", "componentWillUpdate(nextProps, nextState) {", "\t$0", "}"],
+		"body": [
+			"//WARNING! To be deprecated in React v17. Use componentDidUpdate instead.",
+			"componentWillUpdate(nextProps, nextState) {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentWillUpdate"
 	},
-
 	"componentDidUpdate": {
 		"prefix": "cdu",
-		"body": ["componentDidUpdate(prevProps, prevState) {", "\t$0", "}"],
+		"body": [
+			"componentDidUpdate(prevProps, prevState) {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentDidUpdate"
 	},
-
 	"componentWillUnmount": {
 		"prefix": "cwun",
-		"body": ["componentWillUnmount() {", "\t$0", "}"],
+		"body": [
+			"componentWillUnmount() {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentWillUnmount"
 	},
-
 	"componentDidCatch": {
 		"prefix": "cdc",
-		"body": ["componentDidCatch(error, info) {", "\t$0", "}"],
+		"body": [
+			"componentDidCatch(error, info) {",
+			"\t$0",
+			"}"
+		],
 		"description": "componentDidCatch"
 	},
-
 	"getSnapshotBeforeUpdate": {
 		"prefix": "gsbu",
-		"body": ["getSnapshotBeforeUpdate(prevProps, prevState) {", "\t$0", "}"],
+		"body": [
+			"getSnapshotBeforeUpdate(prevProps, prevState) {",
+			"\t$0",
+			"}"
+		],
 		"description": "getSnapshotBeforeUpdate"
 	},
-
 	"setState": {
 		"prefix": "ss",
-		"body": ["this.setState({ $1: $2 });"],
+		"body": [
+			"this.setState({ $1: $2 });"
+		],
 		"description": "setState"
 	},
-
 	"Functional setState": {
 		"prefix": "ssf",
-		"body": ["this.setState(prevState => {", "\treturn { $1: prevState.$1 };", "});"],
+		"body": [
+			"this.setState(prevState => {",
+			"\treturn { $1: prevState.$1 };",
+			"});"
+		],
 		"description": "Functional setState"
 	},
-
 	"Declare a new state variable using State Hook": {
 		"prefix": "usf",
-		"body": ["const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);"],
+		"body": [
+			"const [${1}, set${1/(.*)/${1:/capitalize}/}] = useState($2);"
+		],
 		"description": "Declare a new state Variable using the State Hook. Hit Tab to apply CamelCase to function"
 	},
-
 	"render": {
 		"prefix": "ren",
-		"body": ["render() {", "\treturn (", "\t\t $0", "\t);", "}"],
+		"body": [
+			"render() {",
+			"\treturn (",
+			"\t\t $0",
+			"\t);",
+			"}"
+		],
 		"description": "render"
 	},
-
 	"Render Prop": {
 		"prefix": "rprop",
 		"body": [
@@ -227,7 +267,6 @@
 		],
 		"description": "Render Prop"
 	},
-
 	"Higher Order Component": {
 		"prefix": "hoc",
 		"body": [
@@ -245,7 +284,6 @@
 		],
 		"description": "Higher Order Component"
 	},
-
 	"Context Provider": {
 		"prefix": "cp",
 		"body": [
@@ -271,7 +309,6 @@
 		],
 		"description": "Context Provider"
 	},
-	
 	"Variable user info": {
 		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
 		"body": [
@@ -279,7 +316,6 @@
 		],
 		"description": "Variable user info"
 	},
-
 	"INFO DEFINED COLUMN": {
 		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
 		"body": [
@@ -287,7 +323,6 @@
 		],
 		"description": "DB_ITEM_DEFINITION : info DEFINED COLUMN"
 	},
-
 	"Parameter condition search from screen parent": {
 		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
 		"body": [
@@ -310,8 +345,6 @@
 		],
 		"description": "SYSTEM_INFO_DEFINITION : infomation user login login_cd,operator_cd, operator_name, store_cd, store_name, system_mode, system_mode_name, ..."
 	},
-
-		
 	"Detect devices": {
 		"prefix": "check_browser_detect_devices",
 		"body": [
@@ -319,7 +352,6 @@
 		],
 		"description": "Detect devices"
 	},
-
 	"Create Process Queue Pattern": {
 		"prefix": "search_with_param",
 		"body": [
@@ -359,24 +391,21 @@
 		],
 		"description": "Create Process Queue Pattern"
 	},
-
-	"Get Value From Resource" : {
+	"Get Value From Resource": {
 		"prefix": "GET_DB_SCREEN_RESOURCE_DEFINITION_ResourceVal",
 		"body": [
 			"DB_SCREEN_RESOURCE_DEFINITION['HD05_001.LABELTEXT.CONFIRM.OK'].ResourceVal"
 		],
 		"description": "Get Value From Resource"
 	},
-
-	"Get Value From Error code" : {
+	"Get Value From Error code": {
 		"prefix": "GET_DB_ERROR_CODE_DEFINITION_ResourceVal",
 		"body": [
 			"DB_ERROR_CODE_DEFINITION['1000']['Normal']['MESSAGE']"
 		],
 		"description": "Get Value From Error code"
 	},
-
-	"Dialog ERROR" : {
+	"Dialog ERROR": {
 		"prefix": "DIALOG_ERROR",
 		"body": [
 			"\t\t\t\tvar settings = {",
@@ -402,8 +431,7 @@
 		],
 		"description": "Dialog ERROR"
 	},
-
-	"Dialog CONFIRM/INFO" : {
+	"Dialog CONFIRM/INFO": {
 		"prefix": "DIALOG_CONFIRM_INFO",
 		"body": [
 			"var settings = {",
@@ -433,7 +461,6 @@
 		],
 		"description": "Dialog ERROR"
 	},
-
 	"Create Process Queue Pattern with wait action": {
 		"prefix": "search_with_param_and_wait_action",
 		"body": [
@@ -522,7 +549,6 @@
 		],
 		"description": "Create Process Queue Pattern with wait action"
 	},
-
 	"Create Async Executer Pattern": {
 		"prefix": "asyncExecuter",
 		"body": [
@@ -543,7 +569,6 @@
 		],
 		"description": "Create Async Executer Pattern"
 	},
-
 	"Get Queue Function Constructor": {
 		"prefix": "queue.constructor(property)",
 		"body": [
@@ -561,11 +586,9 @@
 			"\t/** 再帰エラーフラグ */",
 			"\tthis.errorFlag\t\t\t\t= false;",
 			"}"
-			
 		],
 		"description": "Get Queue Function Constructor"
 	},
-
 	"Get Queue Function Clear": {
 		"prefix": "queue.clear_df",
 		"body": [
@@ -575,11 +598,9 @@
 			"ProcessQueue.prototype.clear = function() {",
 			"\tthis._queue = [];",
 			"}"
-			
 		],
 		"description": "Get Queue Function Clear"
 	},
-
 	"Get Queue Function Push": {
 		"prefix": "queue.push_df",
 		"body": [
@@ -589,11 +610,9 @@
 			"ProcessQueue.prototype.push = function(func) {",
 			"\tthis._queue.push(func);",
 			"}"
-			
 		],
 		"description": "Get Queue Function push"
 	},
-
 	"Get Queue Function Push Pattern": {
 		"prefix": "queue.push",
 		"body": [
@@ -614,7 +633,6 @@
 		],
 		"description": "Get Queue Function Push Pattern"
 	},
-
 	"Go to Next Process": {
 		"prefix": "gotonextprocess",
 		"body": [
@@ -622,7 +640,6 @@
 		],
 		"description": "Go to Next Process"
 	},
-
 	"Go to Process": {
 		"prefix": "gotoprocess",
 		"body": [
@@ -630,7 +647,6 @@
 		],
 		"description": "Go to Process"
 	},
-
 	"exit": {
 		"prefix": "exit",
 		"body": [
@@ -638,7 +654,6 @@
 		],
 		"description": "exit"
 	},
-
 	"Get Queue Function Cancel Pattern": {
 		"prefix": "queue.cancel_df",
 		"body": [
@@ -651,7 +666,6 @@
 		],
 		"description": "Get Queue Function Cancel Pattern"
 	},
-
 	"Get Queue Function Cancel All Pattern": {
 		"prefix": "queue.cancelAll_df",
 		"body": [
@@ -666,7 +680,6 @@
 		],
 		"description": "Get Queue Function Cancel All Pattern"
 	},
-
 	"Get Queue Function Execute Pattern": {
 		"prefix": "queue.execute_df",
 		"body": [
@@ -693,7 +706,6 @@
 		],
 		"description": "Get Queue Function Execute Pattern"
 	},
-
 	"Get Queue Function _isAjaxParameter Pattern": {
 		"prefix": "queue._isAjaxParameter_df",
 		"body": [
@@ -710,7 +722,6 @@
 		],
 		"description": "Get Queue Function _isAjaxParameter Pattern"
 	},
-
 	"Get Queue Function _executeRecursive Pattern": {
 		"prefix": "queue._executeRecursive_df",
 		"body": [
@@ -718,7 +729,6 @@
 		],
 		"description": "Get Queue Function _executeRecursive Pattern"
 	},
-
 	"Queue.execute": {
 		"prefix": "queue.execute",
 		"body": [
@@ -726,7 +736,6 @@
 		],
 		"description": "Queue.execute"
 	},
-
 	"Class Property Function": {
 		"prefix": "cpf",
 		"body": [
@@ -736,7 +745,6 @@
 		],
 		"description": "Class Property Function"
 	},
-
 	"Export default": {
 		"prefix": "export_default",
 		"body": [
@@ -744,7 +752,6 @@
 		],
 		"description": "export default for component"
 	},
-
 	"IMPORT $": {
 		"prefix": "import_$",
 		"body": [
@@ -752,7 +759,6 @@
 		],
 		"description": "import * from styled-component"
 	},
-
 	"Import mediaqueries for reponsive": {
 		"prefix": "import_mediaqueries",
 		"body": [
@@ -760,7 +766,6 @@
 		],
 		"description": "Import mediaqueries for reponsive"
 	},
-
 	"Import mediaqueries mobile reponsive": {
 		"prefix": "import_mediaqueries_mobile",
 		"body": [
@@ -772,7 +777,6 @@
 		],
 		"description": "Import mediaqueries mobile reponsive"
 	},
-
 	"Import mediaqueries desktop reponsive": {
 		"prefix": "import_mediaqueries_desktop",
 		"body": [
@@ -784,7 +788,6 @@
 		],
 		"description": "Import mediaqueries desktop reponsive"
 	},
-
 	"Devices argument handle": {
 		"prefix": "device_argument_handle",
 		"body": [
@@ -799,7 +802,6 @@
 		],
 		"description": "Devices argument handle"
 	},
-
 	"Devices argument attribute component": {
 		"prefix": "device_argument_attributte_component",
 		"body": [
@@ -811,7 +813,6 @@
 		],
 		"description": "Devices argument attribute component"
 	},
-
 	"Import mediaqueries tablet reponsive": {
 		"prefix": "import_mediaqueries_tablet",
 		"body": [
@@ -822,5 +823,35 @@
 			"\t)}"
 		],
 		"description": "Import mediaqueries tablet reponsive"
+	},
+	"Add comma string type numberic": {
+		"prefix": "add_comma",
+		"body": [
+			"addComma('10000')"
+		],
+		"description": "Add comma string type numberic"
+	},
+	"Remove comma string type numberic": {
+		"prefix": "remove_comma",
+		"body": [
+			"removeComma('10,000')"
+		],
+		"description": "Remove comma string type numberic"
+	},
+	"Error message append in validation": {
+		"prefix": "error_message_append",
+		"body": [
+			"errorMessage.appendMessage(",
+			"\tVALIDATION_ERROR_TYPE.ERROR,",
+			"\telement.attr('groupid'),",
+			"\telement.attr('itemid'),",
+			"\telement.attr('groupid'),",
+			"\telement.attr('itemid'),",
+			"\t'',",
+			"\tDB_ERROR_CODE_DEFINITION['00010']['Normal']['MESSAGE'],",
+			"\t''",
+			");"
+		],
+		"description": "Error message append in validation"
 	}
 }
