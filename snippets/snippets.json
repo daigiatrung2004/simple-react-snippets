@@ -845,6 +845,13 @@
 		],
 		"description": "Get byte length"
 	},
+	"expression check for element pattern": {
+		"prefix": "expression_check_for_element_pattern",
+		"body": [
+			"{FUNCTION({expression_Check_DisplayOrder})?#50004:none}"
+		],
+		"description": "expression check for element pattern"
+	},
 	"Error message append in validation": {
 		"prefix": "error_message_append",
 		"body": [
