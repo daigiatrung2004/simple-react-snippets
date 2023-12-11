@@ -327,7 +327,7 @@
 		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
 		"body": [
 			"//==============================================",
-			"//IPAD判�?",
+			"//IPAD判�?",
 			"//==============================================",
 			"function isDeviceTablet() {",
 			"\tvar userAgent = window.navigator.userAgent.toLowerCase();",
@@ -357,7 +357,7 @@
 		"body": [
 			"\tvar queue = new ProcessQueue();",
 			"",
-			"\t// チェ�?クの付いて�?るｼ?��?�??��ﾓｰ?�??���??、�??類権限取�?",
+			"\t// チェ�?クの付いて�?るｼ?��?�??��ﾓｰ?�??���??、�??類権限取�?",
 			"\tqueue.push({",
 			"\t\tfunc_cd\t\t:\t'AA07',",
 			"\t\trevision_no\t:\t'1',",
@@ -409,7 +409,7 @@
 		"prefix": "DIALOG_ERROR",
 		"body": [
 			"\t\t\t\tvar settings = {",
-			"\t\t\t\t\tmessage\t\t: '日�?(TO)は日�?(FROM)以降を�?定して下さ�?�?',",
+			"\t\t\t\t\tmessage\t\t: '日�?(TO)は日�?(FROM)以降を�?定して下さ�?�?',",
 			"\t\t\t\t\ttype\t\t: 'ok',",
 			"\t\t\t\t\tfocus\t\t: 'ok',",
 			"\t\t\t\t\tbuttonTitle\t: {",
@@ -464,7 +464,7 @@
 	"Create Process Queue Pattern with wait action": {
 		"prefix": "search_with_param_and_wait_action",
 		"body": [
-			"\t// 機�?�コード設定テーブルを検索",
+			"\t// 機�?�コード設定テーブルを検索",
 			"\tvar queue = new ProcessQueue();",
 			"\tqueue.push(function() {",
 			"\t\tdialog.waitAction({",
@@ -564,7 +564,7 @@
 			"\t\t}",
 			"\t]",
 			"",
-			"\t// 処�?の実�?",
+			"\t// 処�?の実�?",
 			"\tnew asyncExecuter(processList, function() { executer.gotoNextProcess(); }).execute();"
 		],
 		"description": "Create Async Executer Pattern"
@@ -573,11 +573,11 @@
 		"prefix": "queue.constructor(property)",
 		"body": [
 			"function ProcessQueue(){",
-			"\t/** 個�?の処�?を�?�れるキュー */",
+			"\t/** 個�?の処�?を�?�れるキュー */",
 			"\tthis._queue\t\t\t\t\t= [];",
-			"\t/** 現在実行して�?る�?��?の ID ?�?ProcessQueue の�?部で自動的に割り振られる�? */",
+			"\t/** 現在実行して�?る�?��?の ID ?�?ProcessQueue の�?部で自動的に割り振られる�? */",
 			"\tthis._executeId\t\t\t\t= 0;",
-			"\t/** キャンセルされた�?��? ID のリス�? */",
+			"\t/** キャンセルされた�?��? ID のリス�? */",
 			"\tthis._canceledExecuteIdList = [];",
 			"\t/** コールバック */",
 			"\tthis.callBackFunction\t\t= function(){};",
@@ -605,7 +605,7 @@
 		"prefix": "queue.push_df",
 		"body": [
 			"//==========================================================================================",
-			"// キューに処�?を追�?する",
+			"// キューに処�?を追�?する",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.push = function(func) {",
 			"\tthis._queue.push(func);",
@@ -617,7 +617,7 @@
 		"prefix": "queue.push",
 		"body": [
 			"\tqueue.push(function(){",
-			"\t\t// グリ�?ドオブジェクトを取�?",
+			"\t\t// グリ�?ドオブジェクトを取�?",
 			"\t\tvar assistObject = GROUP_ELEMENT['ASSIST_1'].gridAssist.object;",
 			"\t\tassistObject.entry();",
 			"\t\t$('#GROUP_6').find('#GRID_DETAIL tbody').each(function() {",
@@ -658,7 +658,7 @@
 		"prefix": "queue.cancel_df",
 		"body": [
 			"//==========================================================================================",
-			"// �?定された executeId の処�?をキャンセルする。executeId は execute() の戻り値として取得できる�?",
+			"// �?定された executeId の処�?をキャンセルする。executeId は execute() の戻り値として取得できる�?",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.cancel = function(executeId) {",
 			"\tthis._canceledExecuteIdList[executeId] = true;",
@@ -684,8 +684,8 @@
 		"prefix": "queue.execute_df",
 		"body": [
 			"//==========================================================================================",
-			"// キューに入れた処�?を�??番に実行する�?",
-			"// @returns こ�?� execute() に関連付けられ�? executeId を返す。executeId は cancel() する際に使われる�?",
+			"// キューに入れた処�?を�??番に実行する�?",
+			"// @returns こ�?� execute() に関連付けられ�? executeId を返す。executeId は cancel() する際に使われる�?",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.execute = function(callback){",
 			"",
@@ -710,8 +710,8 @@
 		"prefix": "queue._isAjaxParameter_df",
 		"body": [
 			"//==========================================================================================",
-			"// push() されたパラメータ�? Ajax 通信のためのパラメータか、単なる関数か判断する�?",
-			"// @returns Ajax 通信用のパラメータであれば true を返す�?",
+			"// push() されたパラメータ�? Ajax 通信のためのパラメータか、単なる関数か判断する�?",
+			"// @returns Ajax 通信用のパラメータであれば true を返す�?",
 			"//==========================================================================================",
 			"ProcessQueue.prototype._isAjaxParameter = function (params) {",
 			"\tif (!params || params === true) {",
@@ -852,20 +852,45 @@
 		],
 		"description": "expression check for element pattern"
 	},
+	"Device arugments for react component": {
+		"prefix": "device_arguments_for_react_component",
+		"body": [
+			"\t\t\t\t\t\tdevicearguments={{",
+			"\t\t\t\t\t\t\tmobile: {",
+			"\t\t\t\t\t\t\t\tstyle: '$1',",
+			"\t\t\t\t\t\t\t},",
+			"\t\t\t\t\t\t}}"
+		],
+		"description": "Device arugments for react component"
+	},
+	"Device arugments for styled component": {
+		"prefix": "device_arguments_for_styled_component",
+		"body": [
+			"\t${({ devicearguments }) => {",
+			"\t\tif (devicearguments) {",
+			"\t\t\tlet queries = Object.keys(devicearguments).map(key => {",
+			"\t\t\t\treturn mediaQueries(key, devicearguments[key]['style']);",
+			"\t\t\t});",
+			"\t\t\treturn queries.join('');",
+			"\t\t}",
+			"\t}}"
+		],
+		"description": "Device arugments for styled component"
+	},
 	"shortcut javascript for generateTool": {
 		"prefix": "shortcut_javascript_for_generateTool",
 		"body": [
-			"M?t s? ph�m t?t trong Javascript editor tr?n Gentool",
-			"tCtrl + Q / Toggle line comment",
-			"tHold Alt /  Vertical selection",
+			"Một số phím tắt trong Javascript editor trên Gentool",
+			"\tCtrl + Q / Toggle line comment",
+			"\tHold Alt /  Vertical selection",
 			" Search: highlight on scrollbar",
-			"tCtrl-F / Start searching",
-			"tCtrl-G / Find next",
-			"tShift-Ctrl-G / Find previous",
-			"tShift-Ctrl-F / Replace",
-			"tShift-Ctrl-R / Replace all",
-			"tAlt-F / Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous)",
-			"tAlt-G / Jump to line"
+			"\tCtrl-F / Start searching",
+			"\tCtrl-G / Find next",
+			"\tShift-Ctrl-G / Find previous",
+			"\tShift-Ctrl-F / Replace",
+			"\tShift-Ctrl-R / Replace all",
+			"\tAlt-F / Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous)",
+			"\tAlt-G / Jump to line"
 		],
 		"description": "shortcut javascript for generateTool"
 	},
