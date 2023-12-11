@@ -852,6 +852,23 @@
 		],
 		"description": "expression check for element pattern"
 	},
+	"shortcut javascript for generateTool": {
+		"prefix": "shortcut_javascript_for_generateTool",
+		"body": [
+			"M?t s? phím t?t trong Javascript editor tr?n Gentool",
+			"tCtrl + Q / Toggle line comment",
+			"tHold Alt /  Vertical selection",
+			" Search: highlight on scrollbar",
+			"tCtrl-F / Start searching",
+			"tCtrl-G / Find next",
+			"tShift-Ctrl-G / Find previous",
+			"tShift-Ctrl-F / Replace",
+			"tShift-Ctrl-R / Replace all",
+			"tAlt-F / Persistent search (dialog doesn't autoclose, enter to find next, Shift-Enter to find previous)",
+			"tAlt-G / Jump to line"
+		],
+		"description": "shortcut javascript for generateTool"
+	},
 	"Error message append in validation": {
 		"prefix": "error_message_append",
 		"body": [
