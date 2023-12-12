@@ -912,7 +912,19 @@
 			"-- SUNDRUG DB REPLICATION",
 			"jdbc:postgresql://172.28.2.166:5432/parent",
 			"",
-			"ntuser/ntuser"
+			"ntuser/ntuser",
+			"",
+			"-- test nt10.0",
+			"http://webapptestalb-2114479135.ap-northeast-1.elb.amazonaws.com:8080/GenerateToolWebApp/",
+			"http://webapptestalb-2114479135.ap-northeast-1.elb.amazonaws.com:8080/portal/PortalServlet",
+			"",
+			"Server web, batch giống môi trường hiện tại, chỉ khác vị trí deploy",
+			"",
+			"uniccs-core, uniccs-web, Javascript",
+			"/home/ntuser/webapps/taurus_tomcat10",
+			"",
+			"uniccs-core, uniccs-batch",
+			"/lib_jdk21"
 		],
 		"description": "Server Infomation"
 	},
@@ -4001,6 +4013,7 @@
 			"who: cho biết ai đang đăng nhập hệ thống.",
 			"w: tương tự như lệnh who.",
 			"man: xem hướng dẫn về dòng lệnh như cú pháp, các tham số...",
+			"usermod -aG sudo sammy: add command sudo for user regular",
 			"",
 			"2. Trên terminal",
 			"clear: xoá trắng cửa sổ dòng lệnh.",
