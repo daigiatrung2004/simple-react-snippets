@@ -342,7 +342,7 @@
 		"description": "Call sp in tool have use PXS_BATCH.p_WriteBatchLog"
 	},
 	"Set Session User Info": {
-		"prefix": "set_session_userinfo",
+		"prefix": "set_exists_session_userinfo",
 		"body": [
 			"",
 			"SELECT PXS_USER.P_SETUSERINFO(",
@@ -2490,7 +2490,7 @@
 		"description": "Get Account Pay Date"
 	},
 	"Check Exist Session Array Company": {
-		"prefix": "check_session_company",
+		"prefix": "exists_array_company",
 		"body": [
 			"\n",
 			"\tlb_existsCompany\tBOOLEAN;",
@@ -2500,8 +2500,8 @@
 		],
 		"description": "Check Exist Session Array Company"
 	},
-	"Check Session Array Store": {
-		"prefix": "check_session_store",
+	"Check Session Exists Array Store": {
+		"prefix": "exists_array_store",
 		"body": [
 			"\n",
 			"\tlb_existsStore\t\tBOOLEAN;",
@@ -2509,10 +2509,10 @@
 			"\t\tlb_existsStore\t\t:= PXS_UTILITY.f_ExistsArrayStore();",
 			"\n"
 		],
-		"description": "Check Session Array Store"
+		"description": "Check Session Exists Array Store"
 	},
-	"Check Session Array Update Operator": {
-		"prefix": "check_session_store",
+	"Check Session Exists Array Update Operator": {
+		"prefix": "exists_array_store",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayUpdOperator\t\tBOOLEAN\t\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2520,10 +2520,10 @@
 			"\t\tlb_ExistsArrayUpdOperator\t\t:= PXS_UTILITY.f_ExistsArrayUpdOperator();",
 			"\n"
 		],
-		"description": "Check Session Array Update Operator"
+		"description": "Check Session Exists Array Update Operator"
 	},
-	"Check Session Array Floor": {
-		"prefix": "check_session_floor",
+	"Check Session Exists Array Floor": {
+		"prefix": "exists_array_floor",
 		"body": [
 			"\n",
 			"\tlb_existsFloor\t\tBOOLEAN;",
@@ -2531,73 +2531,73 @@
 			"\tlb_existsFloor\t\t:= PXS_UTILITY.f_ExistsStoreFloor();",
 			"\n"
 		],
-		"description": "Check Session Array Floor"
+		"description": "Check Session Exists Array Floor"
 	},
-	"Check Session Array Class2": {
-		"prefix": "check_session_class2",
+	"Check Session Exists Array Class2": {
+		"prefix": "exists_array_class2",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayClass2\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayClass2();",
 			"\n"
 		],
-		"description": "Check Session Array Class2"
+		"description": "Check Session Exists Array Class2"
 	},
-	"Check Session Array Class3": {
-		"prefix": "check_session_class3",
+	"Check Session Exists Array Class3": {
+		"prefix": "exists_array_class3",
 		"body": [
 			"\n",
 			"lb_ExistsArrayClass3\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayClass3();",
 			"\n"
 		],
-		"description": "Check Session Array Class3"
+		"description": "Check Session Exists Array Class3"
 	},
-	"Check Session Array Class4": {
-		"prefix": "check_session_class4",
+	"Check Session Exists Array Class4": {
+		"prefix": "exists_array_class4",
 		"body": [
 			"\n",
 			"lb_ExistsArrayClass4\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayClass4();",
 			"\n"
 		],
-		"description": "Check Session Array Class4"
+		"description": "Check Session Exists Array Class4"
 	},
-	"Check Session Array Class5": {
-		"prefix": "check_session_class5",
+	"Check Session Exists Array Class5": {
+		"prefix": "exists_array_class5",
 		"body": [
 			"\n",
 			"lb_ExistsArrayClass5\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayClass5();",
 			"\n"
 		],
-		"description": "Check Session Array Class5"
+		"description": "Check Session Exists Array Class5"
 	},
-	"Check Session Array Sku": {
-		"prefix": "check_session_sku",
+	"Check Session Exists Array Sku": {
+		"prefix": "exists_array_sku",
 		"body": [
 			"\n",
 			"lb_ExistsArraySku\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArraySku();",
 			"\n"
 		],
-		"description": "Check Session Array Sku"
+		"description": "Check Session Exists Array Sku"
 	},
-	"Check Session Array StoreFloor": {
-		"prefix": "check_session_store_floor",
+	"Check Session Exists Array StoreFloor": {
+		"prefix": "exists_array_store_floor",
 		"body": [
 			"\n",
 			"lb_ExistsArrayStoreFloor\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsStoreFloor();",
 			"\n"
 		],
-		"description": "Check Session Array StoreFloor"
+		"description": "Check Session Exists Array StoreFloor"
 	},
-	"Check Session Array Logistics": {
-		"prefix": "check_session_logistics",
+	"Check Session Exists Array Logistics": {
+		"prefix": "exists_array_logistics",
 		"body": [
 			"\n",
 			"lb_ExistsArrayClass3\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsStoreFloor();",
 			"\n"
 		],
-		"description": "Check Session Array Logistics"
+		"description": "Check Session Exists Array Logistics"
 	},
-	"Check Session Array Partner": {
-		"prefix": "check_session_partner",
+	"Check Session Exists Array Partner": {
+		"prefix": "exists_array_partner",
 		"body": [
 			"\n",
 			"\tlb_ExistsPartner\tBOOLEAN := FALSE;",
@@ -2605,73 +2605,73 @@
 			"\tlb_ExistsPartner\t:= PXS_UTILITY.f_ExistsArrayPartner();",
 			"\n"
 		],
-		"description": "Check Session Array Partner"
+		"description": "Check Session Exists Array Partner"
 	},
-	"Check Session Array PayPartner": {
-		"prefix": "check_session_pay_partner",
+	"Check Session Exists Array PayPartner": {
+		"prefix": "exists_array_pay_partner",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayPayPartner\tBOOLEAN\t\t\t\t\t\t\t\t:= PXS_UTILITY.f_ExistsArrayPayPartner();",
 			"\n"
 		],
-		"description": "Check Session Array PayPartner"
+		"description": "Check Session Exists Array PayPartner"
 	},
-	"Check Session Array Ingredient": {
-		"prefix": "check_session_ingredient",
+	"Check Session Exists Array Ingredient": {
+		"prefix": "exists_array_ingredient",
 		"body": [
 			"\n",
 			"\tlb_ExistsIngredient\t\tBOOLEAN\t\t\t\t\t\t\t\t:= PXS_UTILITY.f_ExistsIngredient();",
 			"\n"
 		],
-		"description": "Check Session Array PayPartner"
+		"description": "Check Session Exists Array PayPartner"
 	},
-	"Check Session Array SuibaiType": {
-		"prefix": "check_session_sui_bai_type",
+	"Check Session Exists Array SuibaiType": {
+		"prefix": "exists_array_sui_bai_type",
 		"body": [
 			"\n",
 			"\tlb_ExistsSuibaiType\t\tBOOLEAN\t\t\t\t\t\t\t\t:= PXS_UTILITY.f_ExistsArraySuibaiType();",
 			"\n"
 		],
-		"description": "Check Session Array SuibaiType"
+		"description": "Check Session Exists Array SuibaiType"
 	},
-	"Check Session Array Operator": {
-		"prefix": "check_session_operator",
+	"Check Session Exists Array Operator": {
+		"prefix": "exists_array_operator",
 		"body": [
 			"\n",
 			"\tlb_existsOperator\t\t\t\tBOOLEAN := PXS_UTILITY.f_ExistsArrayOperator();",
 			"\n"
 		],
-		"description": "Check Session Array Operator"
+		"description": "Check Session Exists Array Operator"
 	},
-	"Check Session Array Plan No": {
-		"prefix": "check_session_plan_no",
+	"Check Session Exists Array Plan No": {
+		"prefix": "exists_array_plan_no",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayPlanNo\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayPlanNo();",
 			"\n"
 		],
-		"description": "Check Session Array Plan No"
+		"description": "Check Session Exists Array Plan No"
 	},
-	"Check Session Array Plan Code": {
-		"prefix": "check_session_plan_cd",
+	"Check Session Exists Array Plan Code": {
+		"prefix": "exists_array_plan_cd",
 		"body": [
 			"\n",
 			"\tlb_ExistsPlan\t\t\t\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayPlanCode();",
 			"\n"
 		],
-		"description": "Check Session Array Plan Code"
+		"description": "Check Session Exists Array Plan Code"
 	},
-	"Check Session Array Error Code": {
-		"prefix": "check_session_error_code",
+	"Check Session Exists Array Error Code": {
+		"prefix": "exists_array_error_code",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayErrorCode\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayErrorCode();",
 			"\n"
 		],
-		"description": "Check Session Array Error Code"
+		"description": "Check Session Exists Array Error Code"
 	},
-	"Check Session Array Attribute Pattern": {
-		"prefix": "check_session_attribute_pattern",
+	"Check Session Exists Array Attribute Pattern": {
+		"prefix": "exists_array_attribute_pattern",
 		"body": [
 			"\n",
 			"\tlb_ExistsPattern\t\t\t\tBOOLEAN;",
@@ -2679,10 +2679,10 @@
 			"\tlb_ExistsPattern\t\t\t= PXS_UTILITY.f_ExistsArrayAttributePattern();",
 			"\n"
 		],
-		"description": "Check Session Array Attribute Pattern"
+		"description": "Check Session Exists Array Attribute Pattern"
 	},
-	"Check Session Array Attribute Group": {
-		"prefix": "check_session_attibute_group",
+	"Check Session Exists Array Attribute Group": {
+		"prefix": "exists_array_attibute_group",
 		"body": [
 			"\n",
 			"\tlb_ExistsGroup\t\t\t\t\tBOOLEAN;",
@@ -2690,10 +2690,10 @@
 			"\tlb_ExistsGroup\t\t\t\t= PXS_UTILITY.f_ExistsArrayAttributeGroup();",
 			"\n"
 		],
-		"description": "Check Session Array Attribute Group"
+		"description": "Check Session Exists Array Attribute Group"
 	},
-	"Check Session Array OffsetCategory": {
-		"prefix": "check_session_offset_category",
+	"Check Session Exists Array OffsetCategory": {
+		"prefix": "exists_array_offset_category",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayOffsetCategory\tBOOLEAN;",
@@ -2701,10 +2701,10 @@
 			"\tlb_ExistsArrayOffsetCategory\t:= PXS_UTILITY.f_ExistsArrayOffsetCategory();",
 			"\n"
 		],
-		"description": "Check Session Array OffsetCategory"
+		"description": "Check Session Exists Array OffsetCategory"
 	},
-	"Check Session Array Contract Company": {
-		"prefix": "check_session_contract_company",
+	"Check Session Exists Array Contract Company": {
+		"prefix": "exists_array_contract_company",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayContractCompany\tBOOLEAN;",
@@ -2712,10 +2712,10 @@
 			"\tlb_ExistsArrayContractCompany\t:= PXS_UTILITY.f_ExistsArrayContractCompany();",
 			"\n"
 		],
-		"description": "Check Session Contract Company"
+		"description": "Check Session Exists Contract Company"
 	},
-	"Check Session Array StoreGroup": {
-		"prefix": "check_session_store_group",
+	"Check Session Exists Array StoreGroup": {
+		"prefix": "exists_array_store_group",
 		"body": [
 			"\n",
 			"\tlb_ExistsArraystoreGroup\tBOOLEAN;",
@@ -2724,10 +2724,10 @@
 			"\tlb_ExistsArraystoreGroup\t:= PXS_UTILITY.f_ExistsArrayStoreGroup();",
 			"\n"
 		],
-		"description": "Check Session Array StoreGroup"
+		"description": "Check Session Exists Array StoreGroup"
 	},
-	"Check Session Array RackDisplayUse": {
-		"prefix": "check_session_rack_display_use",
+	"Check Session Exists Array RackDisplayUse": {
+		"prefix": "exists_array_rack_display_use",
 		"body": [
 			"\n",
 			"\tlb_ExistsRackDisplayUse\t\t\t\t\tBOOLEAN;",
@@ -2735,10 +2735,10 @@
 			"\tlb_ExistsRackDisplayUse\t\t\t\t= PXS_UTILITY.f_ExistsRackDisplayUse();",
 			"\n"
 		],
-		"description": "Check Session Array RackDisplayUse"
+		"description": "Check Session Exists Array RackDisplayUse"
 	},
-	"Check Session Array RackDisplayGroup": {
-		"prefix": "check_session_rack_display_group",
+	"Check Session Exists Array RackDisplayGroup": {
+		"prefix": "exists_array_rack_display_group",
 		"body": [
 			"\n",
 			"\tlb_ExistsRackDisplayGroup\t\t\t\t\tBOOLEAN;",
@@ -2746,28 +2746,28 @@
 			"\tlb_ExistsRackDisplayGroup\t\t\t\t= PXS_UTILITY.f_ExistsRackDisplayGroup();",
 			"\n"
 		],
-		"description": "Check Session Array RackDisplayGroup"
+		"description": "Check Session Exists Array RackDisplayGroup"
 	},
-	"Check Session Array CombiGroupCode": {
-		"prefix": "check_session_combi_group_code",
+	"Check Session Exists Array CombiGroupCode": {
+		"prefix": "exists_array_combi_group_code",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayCombiGroup\tBOOLEAN\t:= PXS_UTILITY.f_ExistsArrayCombiGroupCode();",
 			"\n"
 		],
-		"description": "Check Session Array CombiGroupCode"
+		"description": "Check Session Exists Array CombiGroupCode"
 	},
-	"Check Session Array Order Operator": {
-		"prefix": "check_session_order_operator",
+	"Check Session Exists Array Order Operator": {
+		"prefix": "exists_array_order_operator",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayOrderOperator\tBOOLEAN\t:= PXS_UTILITY.PXS_UTILITY.f_ExistsArrayOrderOperator();",
 			"\n"
 		],
-		"description": "Check Session Array Order Operator"
+		"description": "Check Session Exists Array Order Operator"
 	},
-	"Check Session Array Maker": {
-		"prefix": "check_session_maker",
+	"Check Session Exists Array Maker": {
+		"prefix": "exists_array_maker",
 		"body": [
 			"\n",
 			"\tlb_ExistsMaker\t\t\tBOOLEAN;",
@@ -2775,10 +2775,10 @@
 			"\tlb_ExistsMaker\t\t\t:= PXS_UTILITY.f_ExistsArrayMaker();",
 			"\n"
 		],
-		"description": "Check Session Array Maker"
+		"description": "Check Session Exists Array Maker"
 	},
-	"Check Session Array Auth Store": {
-		"prefix": "check_session_store_group",
+	"Check Session Exists Array Auth Store": {
+		"prefix": "exists_array_store_group",
 		"body": [
 			"\n",
 			"\tlb_ExistsAuthStore\t\t\tBOOLEAN;",
@@ -2787,10 +2787,10 @@
 			"\tlb_ExistsAuthStore\t:= PXS_AUTH.p_Initilize_Store(NULL, NULL, FALSE);",
 			"\n"
 		],
-		"description": "Check Session Array Auth Store"
+		"description": "Check Session Exists Array Auth Store"
 	},
-	"Check Session Array In Company": {
-		"prefix": "check_session_in_company",
+	"Check Session Exists Array In Company": {
+		"prefix": "exists_array_in_company",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayInCompany\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2798,10 +2798,10 @@
 			"\tlb_ExistsArrayInCompany\t\t:= PXS_UTILITY.f_ExistsArrayInCompany();",
 			"\n"
 		],
-		"description": "Check Session Array In Company"
+		"description": "Check Session Exists Array In Company"
 	},
-	"Check Session Array Out Company": {
-		"prefix": "check_session_out_company",
+	"Check Session Exists Array Out Company": {
+		"prefix": "exists_array_out_company",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayOutCompany\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2809,10 +2809,10 @@
 			"\tlb_ExistsArrayOutCompany\t:= PXS_UTILITY.f_ExistsArrayOutCompany();",
 			"\n"
 		],
-		"description": "Check Session Array Out Company"
+		"description": "Check Session Exists Array Out Company"
 	},
-	"Check Session Array In Store": {
-		"prefix": "check_session_in_store",
+	"Check Session Exists Array In Store": {
+		"prefix": "exists_array_in_store",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayInStore\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= false;",
@@ -2820,10 +2820,10 @@
 			"\tlb_ExistsArrayInStore\t\t:= PXS_UTILITY.f_ExistsArrayInStore();",
 			"\n"
 		],
-		"description": "Check Session Array In Store"
+		"description": "Check Session Exists Array In Store"
 	},
-	"Check Session Array Out Store": {
-		"prefix": "check_session_out_store",
+	"Check Session Exists Array Out Store": {
+		"prefix": "exists_array_out_store",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayOutStore\t\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2831,10 +2831,10 @@
 			"\tlb_ExistsArrayOutStore\t\t:= PXS_UTILITY.f_ExistsArrayOutStore();",
 			"\n"
 		],
-		"description": "Check Session Array Out Store"
+		"description": "Check Session Exists Array Out Store"
 	},
-	"Check Session Array In Store Floor": {
-		"prefix": "check_session_in_store_floor",
+	"Check Session Exists Array In Store Floor": {
+		"prefix": "exists_array_in_store_floor",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayInStoreFloor\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2842,10 +2842,10 @@
 			"\tlb_ExistsArrayInStoreFloor\t:= PXS_UTILITY.f_ExistsArrayInStoreFloor();",
 			"\n"
 		],
-		"description": "Check Session Array In Store Floor"
+		"description": "Check Session Exists Array In Store Floor"
 	},
-	"Check Session Array Out Store Floor": {
-		"prefix": "check_session_out_store_floor",
+	"Check Session Exists Array Out Store Floor": {
+		"prefix": "exists_array_out_store_floor",
 		"body": [
 			"\n",
 			"\tlb_ExistsArrayOutStoreFloor\t\tBOOLEAN\t\t\t\t\t\t\t\t:= FALSE;",
@@ -2853,10 +2853,10 @@
 			"\tlb_ExistsArrayOutStoreFloor\t:= PXS_UTILITY.f_ExistsArrayOutStoreFloor();",
 			"\n"
 		],
-		"description": "Check Session Array Out Store Floor"
+		"description": "Check Session Exists Array Out Store Floor"
 	},
-	"Check Session Array Tenant Name": {
-		"prefix": "check_session_tenant_name",
+	"Check Session Exists Array Tenant Name": {
+		"prefix": "exists_array_tenant_name",
 		"body": [
 			"\n",
 			"\tlb_ExistArrayTenantName\t\tBOOLEAN DEFAULT FALSE;",
@@ -2864,7 +2864,7 @@
 			"\tlb_ExistArrayTenantName\t\t:= PXS_UTILITY.f_ExistsArrayTenantName();",
 			"\n"
 		],
-		"description": "Check Session Array Out Store Floor"
+		"description": "Check Session Exists Array Out Store Floor"
 	},
 	"Check Error Code import csv": {
 		"prefix": "check_error_code",
