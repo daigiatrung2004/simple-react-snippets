@@ -634,21 +634,21 @@
 		"description": "Get Queue Function Push Pattern"
 	},
 	"Go to Next Process": {
-		"prefix": "gotonextprocess",
+		"prefix": "executer_gotonextprocess",
 		"body": [
 			"executer.gotoNextProcess();"
 		],
 		"description": "Go to Next Process"
 	},
 	"Go to Process": {
-		"prefix": "gotoprocess",
+		"prefix": "executer_gotoprocess",
 		"body": [
 			"executer.gotoProcess(7);"
 		],
 		"description": "Go to Process"
 	},
 	"exit": {
-		"prefix": "exit",
+		"prefix": "executer_exit",
 		"body": [
 			"executer.exit();"
 		],

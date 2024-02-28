@@ -252,17 +252,15 @@
 		"body": [
 			"",
 			"/*",
-			"\t[繧ｵ繝匁ｩ溯?ｽ  ] AB.蝓ｺ譛ｬ繝槭せ繧ｿ",
-			"\t[讖溯?ｽ?ｼｩ?ｼ､  ] AB17",
-			"\t[讖溯?ｽ蜷咲ｧｰ  ] 繝代?ｼ繝医リ繝ｼ繝槭せ繧ｿ讀懃ｴ｢",
-			"\t[繝ｪ繝薙ず繝ｧ繝ｳ] 1",
-			"\t[髢｢謨ｰ蜷?    ] p_CsvImportCheck_Payment2",
-			"\t[菴? 謌? 譌･  ] 2014/04/03",
-			"\t[菴? 謌? 閠?  ] UNICCS/l-loan",
-			"\t[譖ｴ譁ｰ螻･豁ｴ  ] 2016/07/11 UNICCS/t-tou 荳芽ｧ呈ｧ倥き繧ｹ繧ｿ繝槭う繧ｺ",
-			"\t             2017/07/25 UNICCS/p-nguyen CSV蜃ｺ蜉帙?ｻ蜿冶ｾｼ鬆?逶ｮ縺ｫ[謇区嶌莉募?･遞主玄蛻?][遞守紫繧ｳ繝ｼ繝云繧定ｿｽ蜉?縺吶ｋ縲?",
-			"*/",
-			""
+			"\t[サブ機能  ] LH.カレンダーユーティリティ",
+			"\t[機能ＩＤ  ] LH06",
+			"\t[機能名称  ] カレンダーお知らせマスタ",
+			"\t[リビジョン] 1",
+			"\t[関数名    ] p_FormSearch",
+			"\t[作 成 日  ] 2023/12/29",
+			"\t[作 成 者  ] UNICCS/d-vu",
+			"\t[更新履歴  ] ",
+			"*/"
 		],
 		"description": "Comment Params Header Sp"
 	},
@@ -298,6 +296,15 @@
 			""
 		],
 		"description": "Get Url Batch"
+	},
+	"Command run batch shell script": {
+		"prefix": "command_run_batch_shell_script_task",
+		"body": [
+			"",
+			"\t/bin/sh /home/nt200/taurus/bin/shell/framework/batch/tshbatchexec.sh true XX01:1:UpdateData STORE_CD=00001",
+			""
+		],
+		"description": "Command run batch shell script"
 	},
 	"Write Batch Log": {
 		"prefix": "batchlog",
@@ -3269,6 +3276,34 @@
 		],
 		"description": "Get Reserve Item Bitnk Pattern"
 	},
+	"Selector find element in jquery": {
+		"prefix": "$_find",
+		"body": [
+			"$('#GROUP_1').find('#COMMAND')"
+		],
+		"description": "Selector find element in jquery"
+	},
+	"Set value element in jquery": {
+		"prefix": "$_setValue",
+		"body": [
+			"$('#GROUP_1').find('#COMMAND').setValue('')"
+		],
+		"description": "Set value element in jquery"
+	},
+	"Get value element in jquery": {
+		"prefix": "$_setValue",
+		"body": [
+			"$('#GROUP_1').find('#COMMAND').getValue()"
+		],
+		"description": "Get value element in jquery"
+	},
+	"Get grid data in jquery": {
+		"prefix": "group_grid_data_in_jquery",
+		"body": [
+			"GROUP_ELEMENT.GROUP_2.grid.object.getResultSet().getAllData();"
+		],
+		"description": "Get grid data in jquery"
+	},
 	"Get Reserve Item Class": {
 		"prefix": "get_reserve_item_class",
 		"body": [
@@ -3429,6 +3464,39 @@
 			"\n"
 		],
 		"description": "Get Delivery Store Code"
+	},
+	"Resourceval very popular use": {
+		"prefix": "resourceval_popular_use",
+		"body": [
+			"-- RESOURCE THUONG DUNG ",
+			"",
+			"ﾘｿｰｽｺｰﾄﾞ\t\t\t\t\t\t\t\t\t\t\t\tﾘｿｰｽﾀｲﾌﾟ\t\t\t\t\t\t\tﾘｿｰｽ値",
+			"-- label cac nut ",
+			"LA09_001.LABELTEXT.CONFIRM_MESSAGE_YES\t\t\t\t   画面使用メッセージ\t\t\t\t\tはい",
+			"",
+			"-- label normal",
+			"LA09_001.LABELTEXT.FILENAMEDOWNLOAD\t\t\t\t\t   画面使用メッセージ\t\t\t\t\tファイル配信照会_",
+			"",
+			"-- label ERROR",
+			"PXC_LA09_001.p_GridSearch.SYSTEMERROR\t\t\t\t   メッセージ\t\t\t\t\t\t\tデータ検索時に致命的なエラーが発生しました。(SQLSTATE:{1}, SQLERRM:{2})",
+			"LA09_001.MESSAGETEXT.ERROR.MESSAGE\t\t\t\t\t   画面使用メッセージ\t\t\t\t\t選択対象がありません。",
+			"PXC_LA04_001.p_GridDelete.SYSTEMERROR\t\t\t\t   メッセージ\t\t\t\t\t\t\tデータ削除時に致命的なエラーが発生しました。(SQLSTATE:{1}, SQLERRM:{2})",
+			"PXC_AA19_001.p_GridEntryTab1.SYSTEMERROR\t\t\t   メッセージ\t\t\t\t\t\t\tデータ登録時に致命的なエラーが発生しました。(SQLSTATE:{1}, SQLERRM:{2})",
+			"",
+			"-- label ALREADY UPDATED",
+			"PXC_LA04_001.p_GridDelete.EXP_ALREADY_DELETED\t\t   メッセージ\t\t\t\t\t\t\t既にデータが削除されています。再度検索してください。",
+			"PXC_AA19_001.p_FormEntryTab2.EXP_ALREADY_UPDATED\t   メッセージ\t\t\t\t\t\t\t他のユーザによりデータが更新されています。再度検索してください。",
+			"HA33_001.LABELTEXT.CONFIRM.OK\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\tはい",
+			"HA33_001.LABELTEXT.CONFIRM.CANCEL\t\t\t\t\t   メッセージ\t\t\t\t\t\t\tいいえ",
+			"HA33_001.LABELTEXT.WAITTING.CONFIRM\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t確認",
+			"PXC_HA33_001.p_GridSearchDetail.HASCOMMENT\t\t\t   メッセージ\t\t\t\t\t\t\t有",
+			"B13.MESSAGE_ERROR.NO_DATA\t\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t登録データがありません。",
+			"LA09_001.MESSAGETEXT.ERROR.MESSAGE\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t選択対象がありません。",
+			"AB13.MESSAGETEXT.ALL_STORE_CD\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t全店舗",
+			"AB13.MESSAGETEXT.ALL_CLASS_CD\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t全分類",
+			"AB85_001.TEXT.NO\t\t\t\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\tいいえ",
+		],
+		"description": "Resourceval very popular use"
 	},
 	"Get Zeigaku": {
 		"prefix": "get_zeigaku",
