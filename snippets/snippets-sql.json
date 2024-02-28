@@ -13,12 +13,12 @@
 		"description": "Create SQL PROGRAMING"
 	},
 	"Get User Info": {
-		"prefix": "get_user_info",
+		"prefix": "lrec_UserInfo",
 		"body": [
 			"\tlrec_UserInfo\t\t\tRECORD;",
 			"\tlrec_UserInfo\t:= PXS_USER.p_GetUserInfo();"
 		],
-		"description": "Get User Info"
+		"description": "lrec_UserInfo"
 	},
 	"Truncate Table": {
 		"prefix": "truncate",
