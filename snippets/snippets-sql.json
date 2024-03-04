@@ -1744,6 +1744,15 @@
 		],
 		"description": "Alter table add column"
 	},
+	"Alter table delete column": {
+		"prefix": "alter_table_delete_column",
+		"body": [
+			"\n",
+			"ALTER TABLE table_name ",
+			"DROP COLUMN column_name;""\n"
+		],
+		"description": "Alter table add column"
+	},
 	"Alter table enable triggers column": {
 		"prefix": "alter_table_enable_trigger",
 		"body": [
@@ -2517,6 +2526,27 @@
 			"\n"
 		],
 		"description": "Check Session Exists Array Store"
+	},
+	"postgresql dump data from this server to server other": {
+		"prefix": "pg_dump_1",
+		"body": [
+			"pg_dump --column-inserts --table=UTR_PURCHASEDENPHEADER parent > UTR_PURCHASEDENPHEADER.sql"
+		],
+		"description": "postgresql dump data from this server to server other"
+	},
+	"postgresql dump data from this server to server other": {
+		"prefix": "pg_dump_2",
+		"body": [
+			"pg_dump --no-tablespaces -Fp -v --table ntuser.umf_company -f umf_company.sql -d postgresql://ntuser:ntuser@nt-poc-parent-db1.cluster-cz55bk9crgju.ap-northeast-1.rds.amazonaws.com:5432/parent "
+		],
+		"description": "postgresql dump data from this server to server other"
+	},
+	"postgresql restore data from this server to server other": {
+		"prefix": "pg_restore_1",
+		"body": [
+			"psql postgresql://ntuser:ntuser@nt-poc-parent-db1.cluster-cz55bk9crgju.ap-northeast-1.rds.amazonaws.com:5432/parent -f umf_company.sql"
+		],
+		"description": "postgresql restore data from this server to server other"
 	},
 	"Check Session Exists Array Update Operator": {
 		"prefix": "exists_array_store",
