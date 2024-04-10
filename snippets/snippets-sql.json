@@ -3327,13 +3327,6 @@
 		],
 		"description": "Get value element in jquery"
 	},
-	"Get grid data in jquery": {
-		"prefix": "group_grid_data_in_jquery",
-		"body": [
-			"GROUP_ELEMENT.GROUP_2.grid.object.getResultSet().getAllData();"
-		],
-		"description": "Get grid data in jquery"
-	},
 	"Get Reserve Item Class": {
 		"prefix": "get_reserve_item_class",
 		"body": [

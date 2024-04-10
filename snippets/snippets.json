@@ -549,6 +549,13 @@
 		],
 		"description": "Create Process Queue Pattern with wait action"
 	},
+	"Get grid data in jquery": {
+		"prefix": "group_element_grid_data_in_jquery",
+		"body": [
+			"GROUP_ELEMENT.GROUP_2.grid.object.getResultSet().getAllData();"
+		],
+		"description": "Get grid data in jquery"
+	},
 	"Create Async Executer Pattern": {
 		"prefix": "asyncExecuter",
 		"body": [
