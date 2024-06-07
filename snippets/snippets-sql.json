@@ -3772,6 +3772,27 @@
 		],
 		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
 	},
+	"raise log pxsbuilder error sp": {
+		"prefix": "raise_log_pxs_builder_error_sp",
+		"body": [
+			"raise notice 'SQL = % ',PXS_PLSBUILDER.Get();"
+		],
+		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
+	},
+	"create new name folder fftp": {
+		"prefix": "create_new_name_folder_fftp",
+		"body": [
+			"新規_20230113_中北"
+		],
+		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
+	},
+	"create update name folder fftp": {
+		"prefix": "create_update_name_folder_fftp",
+		"body": [
+			"変更_20240604_山田"
+		],
+		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
+	},
 	"btrim format": {
 		"prefix": "btrim",
 		"body": [
@@ -3800,12 +3821,113 @@
 		],
 		"description": "insert log"
 	},
+	"create index": {
+		"prefix": "create_index_pattern",
+		"body": [
+			"CREATE INDEX IF NOT EXISTS IDX1_TMP_LA15_DATA ON TMP_LA15_DATA(CALENDARTYPE);"
+		],
+		"description": "create vu log"
+	},
+	"create vu log server": {
+		"prefix": "create_vu_log_debug_server",
+		"body": [
+			"SET CLIENT_ENCODING TO 'SJIS';",
+			"",
+			"-- DROP SCHEMA VN CASCADE;",
+			"-- CREATE SCHEMA VN AUTHORIZATION uvuser;",
+			"",
+			"CREATE OR REPLACE FUNCTION VULOG(i_message character varying)",
+			"RETURNS void AS",
+			"$BODY$",
+			"/*",
+			"\tInsert data to table",
+			"*/",
+			"DECLARE",
+			"\t-- 変数定義",
+			"\tls_SqlState\t\t\tVARCHAR(5);",
+			"\tls_SqlErrMsg\t\tUMF_RESOURCEDEF.RESOURCEVAL%TYPE := '';",
+			"\tls_ConnectionName\tTEXT;",
+			"\tls_ConnStr\t\t\tTEXT;",
+			"\tls_SQLPHUOCLOGry\tTEXT;",
+			"\tls_Password\tTEXT;",
+			"",
+			"\t-- レコードとカーソル定義",
+			"\tlrec_StatActivity\tRECORD;",
+			"BEGIN",
+			"\tls_ConnectionName := 'ConnectionVNLog';",
+			"\tls_Password := 'ntuser';",
+			"",
+			"\tSELECT\t*",
+			"\tINTO\tlrec_StatActivity",
+			"\tFROM\tPG_STAT_ACTIVITY",
+			"\tWHERE\tpid = (SELECT pg_backend_pid());",
+			"",
+			"\tls_ConnStr = 'host=172.28.1.107 dbname=area user=nt200 password=nt200';",
+			"\t-- ls_ConnStr = 'dbname=' || lrec_StatActivity.DATNAME || ' user=' || lrec_StatActivity.USENAME || ' password=' || ls_Password;",
+			"",
+			"\tIF ((\tSELECT\tCOUNT(*)",
+			"\t\t\tFROM\t(\tSELECT\tUNNEST(DBLINK_GET_CONNECTIONS()) AS CONNAME) A",
+			"\t\t\tWHERE\tA.CONNAME = ls_ConnectionName) <> 0) THEN",
+			"\t\tPERFORM DBLINK_DISCONNECT(ls_ConnectionName);",
+			"\tEND IF;",
+			"",
+			"\tls_SQLPHUOCLOGry := 'INSERT INTO VULOG (MESSAGELOG) values($$' || i_Message || '$$);';",
+			"",
+			"\tPERFORM dblink_connect(ls_ConnectionName, ls_ConnStr);",
+			"\tPERFORM dblink_exec(ls_ConnectionName, 'BEGIN;');",
+			"\tPERFORM dblink_exec(ls_ConnectionName, ls_SQLPHUOCLOGry);",
+			"\tPERFORM dblink_exec(ls_ConnectionName, 'COMMIT;');",
+			"\tPERFORM dblink_disconnect(ls_ConnectionName);",
+			"",
+			"END;",
+			"$BODY$",
+			"LANGUAGE plpgsql VOLATILE",
+			"COST 100;",
+			"",
+			"ALTER FUNCTION VULOG(character varying) OWNER TO NTUSER;",
+			"",
+			"RESET CLIENT_ENCODING;"
+		],
+		"description": "create vu log server"
+	},
 	"create vu log": {
 		"prefix": "createvulog",
 		"body": [
 			"CREATE TABLE VU_LOG (TEST\tVARCHAR);"
 		],
 		"description": "create vu log"
+	},
+	"create index postgresql": {
+		"prefix": "create_index_postgresql",
+		"body": [
+			"CREATE INDEX ix1_utrdeliveryerror ON utr_deliveryerror USING btree (adddatetime);"
+		],
+		"description": "create index postgresql"
+	},
+	"create table vu log": {
+		"prefix": "create_table_vu_log",
+		"body": [
+			"-- ========================================================",
+			"-- Create Logging Table - Start",
+			"-- ======================================================== ",
+			"",
+			"DROP TABLE IF EXISTS VULOG;",
+			"",
+			"CREATE TABLE VULOG",
+			"(",
+			"\tID\t\t\tSERIAL NOT NULL,",
+			"\tMESSAGELOG\t\tTEXT,",
+			"\tCREATEDDATE\tTIMESTAMP DEFAULT CURRENT_TIMESTAMP,",
+			"\tCLOCK\t\tVARCHAR(100) DEFAULT TO_CHAR(clock_timestamp(), 'YYYY/MM/DD HH24:MI:SS.US'::text),",
+			"\tCONSTRAINT  VUMSG_PKEY PRIMARY KEY (ID)",
+			")",
+			"WITH (",
+			"\tOIDS=FALSE",
+			");",
+			"",
+			"ALTER TABLE VULOG OWNER TO NTUSER;"
+		],
+		"description": "create table vu log"
 	},
 	"vu log select": {
 		"prefix": "vulogselect",
