@@ -3793,6 +3793,13 @@
 		],
 		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
 	},
+	"regex clean tab": {
+		"prefix": "regex_clean_tab",
+		"body": [
+			".*\t[\r\n]"
+		],
+		"description": "rtrim forma: xﾃｳa kﾃｽ t盻ｱ bﾃｪn ph蘯｣i {RTRIM(string, [character]);}"
+	},
 	"btrim format": {
 		"prefix": "btrim",
 		"body": [

@@ -327,7 +327,7 @@
 		"prefix": "userinfo_SYSTEM_INFO_DEFINITION",
 		"body": [
 			"//==============================================",
-			"//IPADåˆ¤ï¿½?",
+			"//IPAD”»??",
 			"//==============================================",
 			"function isDeviceTablet() {",
 			"\tvar userAgent = window.navigator.userAgent.toLowerCase();",
@@ -357,7 +357,7 @@
 		"body": [
 			"\tvar queue = new ProcessQueue();",
 			"",
-			"\t// ãƒã‚§ï¿½?ã‚¯ã®ä»˜ã„ã¦ï¿½?ã‚‹ï½¼?ï¿½ï¿½?ï¿½??ï¿½ï¿½ï¾“ï½°?ï¿½??ï¿½ï¿½ï¿½??ã€ï¿½??é¡æ¨©é™å–ï¿½?",
+			"\t// ƒ`ƒF??ƒN‚Ì•t‚¢‚Ä??‚é¼?????????Ó°?????????A???—ŞŒ ŒÀæ??",
 			"\tqueue.push({",
 			"\t\tfunc_cd\t\t:\t'AA07',",
 			"\t\trevision_no\t:\t'1',",
@@ -409,7 +409,7 @@
 		"prefix": "DIALOG_ERROR",
 		"body": [
 			"\t\t\t\tvar settings = {",
-			"\t\t\t\t\tmessage\t\t: 'æ—¥ï¿½?(TO)ã¯æ—¥ï¿½?(FROM)ä»¥é™ã‚’ï¿½?å®šã—ã¦ä¸‹ã•ï¿½?ï¿½?',",
+			"\t\t\t\t\tmessage\t\t: '“ú??(TO)‚Í“ú??(FROM)ˆÈ~‚ğ??’è‚µ‚Ä‰º‚³????',",
 			"\t\t\t\t\ttype\t\t: 'ok',",
 			"\t\t\t\t\tfocus\t\t: 'ok',",
 			"\t\t\t\t\tbuttonTitle\t: {",
@@ -464,7 +464,7 @@
 	"Create Process Queue Pattern with wait action": {
 		"prefix": "search_with_param_and_wait_action",
 		"body": [
-			"\t// æ©Ÿï¿½?ï¿½ã‚³ãƒ¼ãƒ‰è¨­å®šãƒ†ãƒ¼ãƒ–ãƒ«ã‚’æ¤œç´¢",
+			"\t// ‹@???ƒR[ƒhİ’èƒe[ƒuƒ‹‚ğŒŸõ",
 			"\tvar queue = new ProcessQueue();",
 			"\tqueue.push(function() {",
 			"\t\tdialog.waitAction({",
@@ -556,6 +556,21 @@
 		],
 		"description": "Get grid data in jquery"
 	},
+	"Comment function action draw grid": {
+		"prefix": "group_element_grid_data_in_jquery",
+		"body": [
+			"// =============================================================================",
+			"// ŠÖ”–¼ : searchFormData",
+			"// à–¾   : ƒOƒ‹[ƒv‚R‚Ìƒf[ƒ^‚ğŒŸõ‚·‚é",
+			"// ŒÄoŒ³ : action_GROUP2_Click",
+			"// ˆø”   : IN  1.ƒOƒ‹[ƒvƒR[ƒh",
+			"//              2.s”Ô†",
+			"//              3.ƒOƒŠƒbƒh",
+			"//          OUT 1.void",
+			"// ============================================================================="
+		],
+		"description": "Comment function action draw grid"
+	},
 	"Create Async Executer Pattern": {
 		"prefix": "asyncExecuter",
 		"body": [
@@ -571,7 +586,7 @@
 			"\t\t}",
 			"\t]",
 			"",
-			"\t// å‡¦ï¿½?ã®å®Ÿï¿½?",
+			"\t// ˆ??‚ÌÀ??",
 			"\tnew asyncExecuter(processList, function() { executer.gotoNextProcess(); }).execute();"
 		],
 		"description": "Create Async Executer Pattern"
@@ -580,17 +595,17 @@
 		"prefix": "queue.constructor(property)",
 		"body": [
 			"function ProcessQueue(){",
-			"\t/** å€‹ï¿½?ã®å‡¦ï¿½?ã‚’ï¿½?ï¿½ã‚Œã‚‹ã‚­ãƒ¥ãƒ¼ */",
+			"\t/** ŒÂ??‚Ìˆ??‚ğ???‚ê‚éƒLƒ…[ */",
 			"\tthis._queue\t\t\t\t\t= [];",
-			"\t/** ç¾åœ¨å®Ÿè¡Œã—ã¦ï¿½?ã‚‹ï¿½?ï¿½ï¿½?ã® ID ?ï¿½?ProcessQueue ã®ï¿½?éƒ¨ã§è‡ªå‹•çš„ã«å‰²ã‚ŠæŒ¯ã‚‰ã‚Œã‚‹ï¿½? */",
+			"\t/** Œ»İÀs‚µ‚Ä??‚é?????‚Ì ID ???ProcessQueue ‚Ì??•”‚Å©“®“I‚ÉŠ„‚èU‚ç‚ê‚é?? */",
 			"\tthis._executeId\t\t\t\t= 0;",
-			"\t/** ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚ŒãŸï¿½?ï¿½ï¿½? ID ã®ãƒªã‚¹ï¿½? */",
+			"\t/** ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚½????? ID ‚ÌƒŠƒX?? */",
 			"\tthis._canceledExecuteIdList = [];",
-			"\t/** ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ */",
+			"\t/** ƒR[ƒ‹ƒoƒbƒN */",
 			"\tthis.callBackFunction\t\t= function(){};",
-			"\t/** å†å¸°ä¸€æ‹¬èµ·å‹•æœ€å¤§å›æ•° */",
+			"\t/** Ä‹AˆêŠ‡‹N“®Å‘å‰ñ” */",
 			"\tthis.maxReflexivePronoun\t= 1000;",
-			"\t/** å†å¸°ã‚¨ãƒ©ãƒ¼ãƒ•ãƒ©ã‚° */",
+			"\t/** Ä‹AƒGƒ‰[ƒtƒ‰ƒO */",
 			"\tthis.errorFlag\t\t\t\t= false;",
 			"}"
 		],
@@ -600,7 +615,7 @@
 		"prefix": "queue.clear_df",
 		"body": [
 			"//==========================================================================================",
-			"// ã‚­ãƒ¥ãƒ¼ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹",
+			"// ƒLƒ…[‚ğƒNƒŠƒA‚·‚é",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.clear = function() {",
 			"\tthis._queue = [];",
@@ -612,7 +627,7 @@
 		"prefix": "queue.push_df",
 		"body": [
 			"//==========================================================================================",
-			"// ã‚­ãƒ¥ãƒ¼ã«å‡¦ï¿½?ã‚’è¿½ï¿½?ã™ã‚‹",
+			"// ƒLƒ…[‚Éˆ??‚ğ’Ç??‚·‚é",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.push = function(func) {",
 			"\tthis._queue.push(func);",
@@ -624,7 +639,7 @@
 		"prefix": "queue.push",
 		"body": [
 			"\tqueue.push(function(){",
-			"\t\t// ã‚°ãƒªï¿½?ãƒ‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–ï¿½?",
+			"\t\t// ƒOƒŠ??ƒhƒIƒuƒWƒFƒNƒg‚ğæ??",
 			"\t\tvar assistObject = GROUP_ELEMENT['ASSIST_1'].gridAssist.object;",
 			"\t\tassistObject.entry();",
 			"\t\t$('#GROUP_6').find('#GRID_DETAIL tbody').each(function() {",
@@ -665,7 +680,7 @@
 		"prefix": "queue.cancel_df",
 		"body": [
 			"//==========================================================================================",
-			"// ï¿½?å®šã•ã‚ŒãŸ executeId ã®å‡¦ï¿½?ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹ã€‚executeId ã¯ execute() ã®æˆ»ã‚Šå€¤ã¨ã—ã¦å–å¾—ã§ãã‚‹ï¿½?",
+			"// ??’è‚³‚ê‚½ executeId ‚Ìˆ??‚ğƒLƒƒƒ“ƒZƒ‹‚·‚éBexecuteId ‚Í execute() ‚Ì–ß‚è’l‚Æ‚µ‚Äæ“¾‚Å‚«‚é??",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.cancel = function(executeId) {",
 			"\tthis._canceledExecuteIdList[executeId] = true;",
@@ -677,7 +692,7 @@
 		"prefix": "queue.cancelAll_df",
 		"body": [
 			"//==========================================================================================",
-			"// ã‚­ãƒ¥ãƒ¼ã§å…¨ã¦ãƒ—ãƒ­ã‚»ã‚¹ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹",
+			"// ƒLƒ…[‚Å‘S‚ÄƒvƒƒZƒX‚ğƒLƒƒƒ“ƒZƒ‹‚·‚é",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.cancelAll = function() {",
 			"\tfor(var i = this._queue.length - 1; i >= 0; i--) {",
@@ -691,8 +706,8 @@
 		"prefix": "queue.execute_df",
 		"body": [
 			"//==========================================================================================",
-			"// ã‚­ãƒ¥ãƒ¼ã«å…¥ã‚ŒãŸå‡¦ï¿½?ã‚’ï¿½??ç•ªã«å®Ÿè¡Œã™ã‚‹ï¿½?",
-			"// @returns ã“ï¿½?ï¿½ execute() ã«é–¢é€£ä»˜ã‘ã‚‰ã‚Œï¿½? executeId ã‚’è¿”ã™ã€‚executeId ã¯ cancel() ã™ã‚‹éš›ã«ä½¿ã‚ã‚Œã‚‹ï¿½?",
+			"// ƒLƒ…[‚É“ü‚ê‚½ˆ??‚ğ???”Ô‚ÉÀs‚·‚é??",
+			"// @returns ‚±??? execute() ‚ÉŠÖ˜A•t‚¯‚ç‚ê?? executeId ‚ğ•Ô‚·BexecuteId ‚Í cancel() ‚·‚éÛ‚Ég‚í‚ê‚é??",
 			"//==========================================================================================",
 			"ProcessQueue.prototype.execute = function(callback){",
 			"",
@@ -717,8 +732,8 @@
 		"prefix": "queue._isAjaxParameter_df",
 		"body": [
 			"//==========================================================================================",
-			"// push() ã•ã‚ŒãŸãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¿½? Ajax é€šä¿¡ã®ãŸã‚ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‹ã€å˜ãªã‚‹é–¢æ•°ã‹åˆ¤æ–­ã™ã‚‹ï¿½?",
-			"// @returns Ajax é€šä¿¡ç”¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§ã‚ã‚Œã° true ã‚’è¿”ã™ï¿½?",
+			"// push() ‚³‚ê‚½ƒpƒ‰ƒ[ƒ^?? Ajax ’ÊM‚Ì‚½‚ß‚Ìƒpƒ‰ƒ[ƒ^‚©A’P‚È‚éŠÖ”‚©”»’f‚·‚é??",
+			"// @returns Ajax ’ÊM—p‚Ìƒpƒ‰ƒ[ƒ^‚Å‚ ‚ê‚Î true ‚ğ•Ô‚·??",
 			"//==========================================================================================",
 			"ProcessQueue.prototype._isAjaxParameter = function (params) {",
 			"\tif (!params || params === true) {",
@@ -887,7 +902,7 @@
 	"shortcut javascript for generateTool": {
 		"prefix": "shortcut_javascript_for_generateTool",
 		"body": [
-			"Má»™t sá»‘ phÃ­m táº¯t trong Javascript editor trÃªn Gentool",
+			"M?t s? ph?m t?t trong Javascript editor tr?n Gentool",
 			"\tCtrl + Q / Toggle line comment",
 			"\tHold Alt /  Vertical selection",
 			" Search: highlight on scrollbar",
