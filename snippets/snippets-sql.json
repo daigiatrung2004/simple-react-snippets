@@ -2527,14 +2527,14 @@
 		],
 		"description": "Check Session Exists Array Store"
 	},
-	"postgresql dump data from this server to server other": {
+	"postgresql dump 1 data from this server to server other": {
 		"prefix": "pg_dump_1",
 		"body": [
 			"pg_dump --column-inserts --table=UTR_PURCHASEDENPHEADER parent > UTR_PURCHASEDENPHEADER.sql"
 		],
 		"description": "postgresql dump data from this server to server other"
 	},
-	"postgresql dump data from this server to server other": {
+	"postgresql dump 2 data from this server to server other": {
 		"prefix": "pg_dump_2",
 		"body": [
 			"pg_dump --no-tablespaces -Fp -v --table ntuser.umf_company -f umf_company.sql -d postgresql://ntuser:ntuser@nt-poc-parent-db1.cluster-cz55bk9crgju.ap-northeast-1.rds.amazonaws.com:5432/parent "
