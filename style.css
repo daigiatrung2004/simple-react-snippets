@@ -1,0 +1,31 @@
+.item {
+	height: 34px;
+	width: 34px;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#areaItem {
+	display: flex;
+	justify-content: space-around;
+	width: 200px;
+}
+
+.control {
+	display: flex;
+	justify-content: space-around;
+
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+}
+
+#historyEnemy {
+	min-height: 100px;
+}
+
+.history
