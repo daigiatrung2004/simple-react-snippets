@@ -1114,6 +1114,20 @@
 		],
 		"description": "Get Inspect Date"
 	},
+	"Search table name by regex": {
+		"prefix": "search_table_name_by_regex",
+		"body": [
+			"select * from information_schema.tables where table_name like '%6th%'"
+		],
+		"description": "Search table name by regex"
+	},
+	"Search table name by regex in linux": {
+		"prefix": "search_table_name_by_regex_linux",
+		"body": [
+			"\\dt *link6th*"
+		],
+		"description": "Search table name by regex in linux"
+	},
 	"Check Error Import Pattern": {
 		"prefix": "check_error_import_pattern",
 		"body": [
