@@ -221,6 +221,29 @@
 		],
 		"description": "ule Align Column"
 	},
+	"Rule check format": {
+		"prefix": "rule_check_format",
+		"body": [
+			"",
+			"STRING",
+			"\nNUMBERSTRING\n\n: 1234                    000a",
+			"\nSINGLEBYTESTRING\n: ab12±                    Ç†",
+			"\nMULTIBYTESTRING\n\n: ÇPÇ†ÉAäøéöÇÅ            1a±",
+			"\nOPERATOR\n\n\n: ab12±                    Ç†",
+			"\n''\n\n\n\n\n: ÇPÇ†ÉAäøéöÇÅ1a±        ''",
+			"",
+			"NUMBER",
+			"\nTELFAX            : 134-1                    12-a",
+			"\nUNSIGNEDNUMBER    : 123                    -5, aÇP",
+			"\nSIGNEDNUMBER    : -123                    ÇX",
+			"\n''=SIGNEDNUMBER",
+			"",
+			"DATE, DATETIME:",
+			"\nCHeck theo format : YYYYMMDD, a12",
+			""
+		],
+		"description": "ule Align Column"
+	},
 	"Comment Params Sp": {
 		"prefix": "get_comment_params",
 		"body": [
