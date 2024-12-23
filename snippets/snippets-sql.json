@@ -590,6 +590,111 @@
 		],
 		"description": "Server batch next 10"
 	},
+	"Url folder test review learn next tarus": {
+		"prefix": "url_path_review_learn_test_system_next_tarus",
+		"body": [
+			"D:\\reactjs\\test"
+		],
+		"description": "Url folder test review learn next tarus"
+	},
+	"Url folder tool reactjs type": {
+		"prefix": "url_path_tool_reactjs_type",
+		"body": [
+			"D:\\reactjs\\projects\\personals\\phjmdinh_v3\\simple-react-snippets"
+		],
+		"description": "Url folder tool reactjs type"
+	},
+	"Url folder epclipse": {
+		"prefix": "url_path_soft_epclipse",
+		"body": [
+			"D:\\reactjs\\test\\eclipse\\eclipse"
+		],
+		"description": "Url folder epclipse"
+	},
+	"Url folder project phjmdinh": {
+		"prefix": "url_path_project_phjmdinh",
+		"body": [
+			"D:\\reactjs\\projects\\personals\\phjmdinh_v3"
+		],
+		"description": "Url folder project phjmdinh"
+	},
+	"Url folder testcase next10": {
+		"prefix": "url_path_testcase_next10",
+		"body": [
+			"D:\\next tarus 10.0_v2\\10.0\\02.Testcase"
+		],
+		"description": "Url folder testcase next10"
+	},
+	"Url folder source function next10": {
+		"prefix": "url_path_source_function_next10",
+		"body": [
+			"D:\\next tarus 10.0_v2\\10.0\\01.Source\\StandardFunction\\uniccs-function\\src\\function"
+		],
+		"description": "Url folder source function next10"
+	},
+	"Url folder source framework coresystem next10": {
+		"prefix": "url_path_source_framework_coresystem",
+		"body": [
+			"D:\\next tarus 10.0_v2\\10.0\\01.Source\\CoreSystem"
+		],
+		"description": "Url folder source framework coresystem next10"
+	},
+	"Url folder source codecategory next10": {
+		"prefix": "url_path_source_codecategory_next10",
+		"body": [
+			"D:\\next tarus 10.0_v2\\10.0\\04.DefineManagement\\01.コード種別定義"
+		],
+		"description": "Url folder source codecategory next10"
+	},
+	"Url folder source codecategory next10 U117": {
+		"prefix": "url_path_source_codecategory_next10_U117",
+		"body": [
+			"D:\\next tarus 10.0_v2\\10.0\\01.Source\\Tool\\U117_本番環境の定義\\01.コード種別定義"
+		],
+		"description": "Url folder source codecategory next10 U117"
+	},
+	"Url folder source function sundrug": {
+		"prefix": "url_path_source_function_sundrug",
+		"body": [
+			"D:\\sundrug\\1.Source\\Framework\\StandardFunction\\function"
+		],
+		"description": "Url folder source function sundrug"
+	},
+	"Url folder source function testcase sundrug": {
+		"prefix": "url_path_source_testcase_sundrug",
+		"body": [
+			"D:\\sundrug\\2.Testcase"
+		],
+		"description": "Url folder source function testcase sundrug"
+	},
+	"Url folder source framework coresystem sundrug": {
+		"prefix": "url_path_source_framework_coresystem",
+		"body": [
+			"D:\\sundrug\\1.Source\\Framework\\CoreSystem"
+		],
+		"description": "Url folder source framework coresystem sundrug"
+	},
+	"Url folder source function u138": {
+		"prefix": "url_path_source_function_u138",
+		"body": [
+			"D:\\U138.Welcia\\01.Source"
+		],
+		"description": "Url folder source function u138"
+	},
+	"Url folder source function testcase u138": {
+		"prefix": "url_path_source_testcase_u138",
+		"body": [
+			"D:\\U138.Welcia\\02.Testcase"
+		],
+		"description": "Url folder source function testcase u138"
+	},
+	"Url folder source framework coresystem u138": {
+		"prefix": "url_path_source_framework_coresystem",
+		"body": [
+			"D:\\U138.Welcia\\01.Source\\CoreSystem"
+		],
+		"description": "Url folder source framework coresystem u138"
+	},
 	"current settings": {
 		"prefix": "current_settings",
 		"body": [
