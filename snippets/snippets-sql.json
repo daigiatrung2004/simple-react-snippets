@@ -570,6 +570,26 @@
 		],
 		"description": "Select data from json"
 	},
+	"Account wifi info": {
+		"prefix": "Account_wifi_info",
+		"body": [
+			"TK:.......jTW",
+			"PASSWORD: *JT)BrESU:e73;jmym/?Ns@:#&o[O'5Jn.HouQ_p=j\"TgKs*eV5iqGt':_[4Dm:",
+			"",
+			"TK: UNICCS VN",
+			"PASSWORD: P@$WOrd@99"
+		],
+		"description": "Account wifi info"
+	},
+	"Server batch next 10": {
+		"prefix": "server_batch_next10",
+		"body": [
+			"172.28.8.152",
+			"アクセスキー：nt-u117-dev-sework.pem",
+			"http://192.168.1.211/svn/PROJECT/Next10.0/10.0/01.Source/CoreSystem/uniccs-aws/uniccs-cloudformation/common/ec2/nt-u117-dev-sework.pem"
+		],
+		"description": "Server batch next 10"
+	},
 	"current settings": {
 		"prefix": "current_settings",
 		"body": [
