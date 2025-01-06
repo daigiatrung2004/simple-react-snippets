@@ -534,6 +534,13 @@
 		],
 		"description": "Exception Message"
 	},
+	"See port in window": {
+		"prefix": "see_port_on_window",
+		"body": [
+			"netstat -a -n -o"
+		],
+		"description": "See port in window"
+	},
 	"Get Resource Value": {
 		"prefix": "get_resource_value",
 		"body": [
