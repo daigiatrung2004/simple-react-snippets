@@ -2052,7 +2052,7 @@
 		"body": [
 			"\n",
 			"ALTER TABLE table_name ",
-			"DROP COLUMN column_name;""\n"
+			"DROP COLUMN column_name;"
 		],
 		"description": "Alter table add column"
 	},
@@ -3820,7 +3820,7 @@
 			"LA09_001.MESSAGETEXT.ERROR.MESSAGE\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t選択対象がありません。",
 			"AB13.MESSAGETEXT.ALL_STORE_CD\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t全店舗",
 			"AB13.MESSAGETEXT.ALL_CLASS_CD\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\t全分類",
-			"AB85_001.TEXT.NO\t\t\t\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\tいいえ",
+			"AB85_001.TEXT.NO\t\t\t\t\t\t\t\t\t   メッセージ\t\t\t\t\t\t\tいいえ"
 		],
 		"description": "Resourceval very popular use"
 	},
