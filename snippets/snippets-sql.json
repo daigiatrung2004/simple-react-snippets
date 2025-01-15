@@ -550,7 +550,8 @@
 			"netstat -ab: check port dang dung",
 			"ipconfig: xem dia chi ip",
 			"ipconfig/flushdns: dung xoa cache",
-			"taskkill /PID <process_id> /F: kill processid dang chay port."
+			"taskkill /PID <process_id> /F: kill processid dang chay port.",
+			"vd:taskkill /PID 19112 /F"
 		],
 		"description": "process port in window"
 	},
