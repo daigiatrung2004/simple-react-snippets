@@ -541,6 +541,19 @@
 		],
 		"description": "See port in window"
 	},
+	"process port in window": {
+		"prefix": "see_port_process_ip_process_on_window",
+		"body": [
+			"netstat -a –n: check port dang dung",
+			"netstat -ano | find “PortNumber” | find \"LISTENING\":tim ip dang su dung",
+			"netstat -ano | findStr \"445\": find process id de lang nghe tren 1 cong.",
+			"netstat -ab: check port dang dung",
+			"ipconfig: xem dia chi ip",
+			"ipconfig/flushdns: dung xoa cache",
+			"taskkill /PID <process_id> /F: kill processid dang chay port."
+		],
+		"description": "process port in window"
+	},
 	"Get Resource Value": {
 		"prefix": "get_resource_value",
 		"body": [
