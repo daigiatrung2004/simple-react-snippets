@@ -555,6 +555,20 @@
 		],
 		"description": "process port in window"
 	},
+	"Kill batch process id postgresql next10": {
+		"prefix": "kill_batch_process_id_postgresql_next10",
+		"body": [
+			"SELECT pg_terminate_backend(10965)"
+		],
+		"description": "Kill batch process id postgresql next10"
+	},
+	"see batch process id postgresql next10": {
+		"prefix": "see_batch_process_id_postgresql_next10",
+		"body": [
+			"select pid, state, query from pg_stat_activity where state = 'active'"
+		],
+		"description": "see batch process id postgresql next10"
+	},
 	"Get Resource Value": {
 		"prefix": "get_resource_value",
 		"body": [
