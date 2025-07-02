@@ -634,6 +634,16 @@
 		],
 		"description": "config connect DB postgresql ntscience"
 	},
+	"config connect DB redshift ntscience": {
+		"prefix": "config_connect_server_DB_redshift_ntscience",
+		"body": [
+			"Server name: ntscience-dev-analysis-db01-a.ce6codhnpxc3.ap-northeast-1.redshift.amazonaws.com",
+			"database NAME: dwh",
+			"USER ID: u140usr",
+			"PASSWORD: ScienceU140usr"
+		],
+		"description": "config connect DB redshift ntscience"
+	},
 	"Url folder test review learn next tarus": {
 		"prefix": "url_path_review_learn_test_system_next_tarus",
 		"body": [
