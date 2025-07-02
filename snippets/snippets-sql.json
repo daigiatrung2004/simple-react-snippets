@@ -625,6 +625,15 @@
 		],
 		"description": "Server batch next 10"
 	},
+	"config connect DB postgresql ntscience": {
+		"prefix": "config_connect_server_DB_postgresql_ntscience",
+		"body": [
+			"URL: jdbc:postgresql://nts-dev-parent-db01.cluster-ctc6qgaky8uu.ap-northeast-1.rds.amazonaws.com:5432/parent",
+			"username: uniusr",
+			"password: W1udMXsX8tsL"
+		],
+		"description": "config connect DB postgresql ntscience"
+	},
 	"Url folder test review learn next tarus": {
 		"prefix": "url_path_review_learn_test_system_next_tarus",
 		"body": [
