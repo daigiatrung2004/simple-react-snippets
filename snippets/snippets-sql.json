@@ -56,7 +56,7 @@
 			"\tlrec_UserInfo\t\t\tRECORD;",
 			"\tlrec_UserInfo\t:= PXS_USER.p_GetUserInfo();"
 		],
-		"description": "lrec_UserInfo"
+		"description": "Get User Info"
 	},
 	"Truncate Table": {
 		"prefix": "truncate",
@@ -10764,5 +10764,38 @@
 			""
 		],
 		"description": "Get purchase Gnk Bik"
-	}
+		},
+		"rule caculator width element code": {
+			"prefix": "rule_caculator_width_element_code",
+			"body": "so_ky_tu * 5.3  + 3",
+			"description": "rule caculator width element code"
+		},
+		"command cau lenh cho window update": {
+			"prefix": "command_cau_lenh_window_update",
+			"body": [
+				"irm christitus.com/win | iex"
+			],
+			"description": "rule caculator width element code"
+		},
+		"command cau lenh cho god mode window": {
+			"prefix": "command_cau_lenh_god_mode_window",
+			"body": [
+				"GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
+			],
+			"description": "command cau lenh cho god mode window"
+		},
+		"row count dem so dong insert update data": {
+			"prefix": "row_count_dem_so_dong_insert_update",
+			"body": [
+				"GET DIAGNOSTICS ln_rows = ROW_COUNT;"
+			],
+			"description": "row count dem so dong insert update data"
+		},
+		"rule size kich thuoc cot khi dinh nghia bang redshift": {
+			"prefix": "rule_redshift_size_kich_thuoc_cot_khi_dinh_nghia bang trong redshift",
+			"body": [
+				"CODE, TYPE THI KHONG X3 DOI VOI COT VARCHAR, CON LAI SNAME, NAME, NOTES,... THI X3 VARCHAR VI REDSHIFT TINH THEO BYTE"
+			],
+			"description": "rule size kich thuoc cot khi dinh nghia bang"
+		}
 }
