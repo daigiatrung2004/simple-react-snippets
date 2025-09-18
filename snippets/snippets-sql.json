@@ -10797,5 +10797,45 @@
 				"CODE, TYPE THI KHONG X3 DOI VOI COT VARCHAR, CON LAI SNAME, NAME, NOTES,... THI X3 VARCHAR VI REDSHIFT TINH THEO BYTE"
 			],
 			"description": "rule size kich thuoc cot khi dinh nghia bang"
-		}
+		},
+		"see batch is running redshift": {
+			"prefix": "see_batch_is_running_redshift",
+			"body": [
+				"SELECT",
+				"\tuserid,",
+				"\tpid,\t\t\t\t-- Process ID của kết nối",
+				"\tquery,\t\t\t-- Toàn bộ câu lệnh SQL",
+				"\tstarttime,",
+				"\tstatus,",
+				"\tDATEDIFF(seconds, starttime, GETDATE()) AS running_seconds -- Thời gian chạy (giây)",
+				"FROM",
+				"\tSTV_RECENTS",
+				"WHERE",
+				"\tstatus = 'Running'",
+				"\tAND query NOT LIKE '%STV_RECENTS%' -- Lọc bỏ chính câu lệnh truy vấn này",
+				"ORDER BY",
+				"\tstarttime DESC;"
+			],
+			"description": "see batch is running redshift"
+		},
+		"kill batch is running redshift": {
+			"prefix": "see_batch_is_running_redshift",
+			"body": [
+				"SELECT",
+				"\tuserid,",
+				"\tpid,\t\t\t\t-- Process ID của kết nối",
+				"\tquery,\t\t\t-- Toàn bộ câu lệnh SQL",
+				"\tstarttime,",
+				"\tstatus,",
+				"\tDATEDIFF(seconds, starttime, GETDATE()) AS running_seconds -- Thời gian chạy (giây)",
+				"FROM",
+				"\tSTV_RECENTS",
+				"WHERE",
+				"\tstatus = 'Running'",
+				"\tAND query NOT LIKE '%STV_RECENTS%' -- Lọc bỏ chính câu lệnh truy vấn này",
+				"ORDER BY",
+				"\tstarttime DESC;"
+			],
+			"description": "rule size kich thuoc cot khi dinh nghia bang"
+		},
 }
