@@ -10819,23 +10819,45 @@
 			"description": "see batch is running redshift"
 		},
 		"kill batch is running redshift": {
-			"prefix": "see_batch_is_running_redshift",
+			"prefix": "kill_batch_is_running_redshift",
 			"body": [
-				"SELECT",
-				"\tuserid,",
-				"\tpid,\t\t\t\t-- Process ID của kết nối",
-				"\tquery,\t\t\t-- Toàn bộ câu lệnh SQL",
-				"\tstarttime,",
-				"\tstatus,",
-				"\tDATEDIFF(seconds, starttime, GETDATE()) AS running_seconds -- Thời gian chạy (giây)",
-				"FROM",
-				"\tSTV_RECENTS",
-				"WHERE",
-				"\tstatus = 'Running'",
-				"\tAND query NOT LIKE '%STV_RECENTS%' -- Lọc bỏ chính câu lệnh truy vấn này",
-				"ORDER BY",
-				"\tstarttime DESC;"
+				"SELECT PG_TERMINATE_BACKEND(PID);"
 			],
-			"description": "rule size kich thuoc cot khi dinh nghia bang"
+			"description": "kill batch is running redshift"
 		},
+		"see definite table in redshift": {
+			"prefix": "see_definite_table_in_redshift",
+			"body": [
+				"SHOW TABLE u140usr.utr_salesbyclass;"
+			],
+			"description": "see definite table in redshift"
+		},
+		"see total time run batch in redshift": {
+			"prefix": "see_total_time_run_batch_in_redshift_by_pid",
+			"body": [
+				"SELECT SUM(duration_seconds) / 3600 AS   duration_hours",
+				"FROM (",
+				"SELECT",
+				"\tquery,",
+				"\tpid,",
+				"\tstarttime,",
+				"\tendtime,",
+				"\t-- Tính thời gian chạy bằng micro giây, sau đó đổi sang giây",
+				"\tDATEDIFF(microseconds, starttime, endtime) AS duration_microseconds,",
+				"\tROUND(DATEDIFF(microseconds, starttime, endtime) / 1000000.0, 2) AS duration_seconds",
+				"FROM",
+				"\tSTL_QUERY",
+				"WHERE",
+				"\tpid = '1073946930' -- << Thay PID của bạn vào đây",
+				")"
+			],
+			"description": "see total time run batch in redshift"
+		},
+		"open screen through menu location ref": {
+			"prefix": "open_screen_through_menu_location_ref",
+			"body": [
+				"location.href='http://internal-nts-dev-webapp-alb-int01-184675902.ap-northeast-1.elb.amazonaws.com/taurus/ScreenServlet?FUNC_CD=XA01&SCREEN_CD=XA01&REVISION_NO=1&LOGIN_CD=u140usr&CORPORATION_CD=u140sdg&USER_ID=u140usr&BIZTYPECOMPANY_CD=00000&BIZTYPECOMPANY_NAME=NTS-DS&CONFIGPATTERN_CD=001&STORE_CD=00001&STORE_NAME=%E5%91%89%E6%9C%8D%E7%94%BA%E5%BA%97&STORE_DISPLAYORDER=1&ITEMATTRIBUTETYPE=001&PARENT_PARTNER_CD=000000&MENUOPTION=&EXECUTE_SERVER_CODE=HEOS&SESSION_TIME=20251006124220&LOGIN_DATA_TYPE=RELOGIN&REFRESH_TOKEN="
+			],
+			"description": "open screen through menu location ref"
+		}
 }
