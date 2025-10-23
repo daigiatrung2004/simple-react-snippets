@@ -10859,5 +10859,15 @@
 				"location.href='http://internal-nts-dev-webapp-alb-int01-184675902.ap-northeast-1.elb.amazonaws.com/taurus/ScreenServlet?FUNC_CD=XA01&SCREEN_CD=XA01&REVISION_NO=1&LOGIN_CD=u140usr&CORPORATION_CD=u140sdg&USER_ID=u140usr&BIZTYPECOMPANY_CD=00000&BIZTYPECOMPANY_NAME=NTS-DS&CONFIGPATTERN_CD=001&STORE_CD=00001&STORE_NAME=%E5%91%89%E6%9C%8D%E7%94%BA%E5%BA%97&STORE_DISPLAYORDER=1&ITEMATTRIBUTETYPE=001&PARENT_PARTNER_CD=000000&MENUOPTION=&EXECUTE_SERVER_CODE=HEOS&SESSION_TIME=20251006124220&LOGIN_DATA_TYPE=RELOGIN&REFRESH_TOKEN="
 			],
 			"description": "open screen through menu location ref"
+		},
+		"rule join in redshift": {
+			"prefix": "rule_join_in_redshift",
+			"body": [
+				"trai, phai tren xuong duoi",
+				"trai : la nho",
+				"phai: la lon",
+				"tren xuong duoi : theo sort key"
+			],
+			"description": "rule join in redshift"
 		}
 }
