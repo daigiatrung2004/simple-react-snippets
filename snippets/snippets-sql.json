@@ -10876,5 +10876,16 @@
 				"copy umf_partnercompany from 's3://ntscience-dev-sampledata/data/共通マスタ/UMF_PARTNER.TXT.gz' iam_role 'arn:aws:iam::060795907848:role/service-role/AmazonRedshift-CommandsAccessRole-20241205T182616' csv gzip;"
 			],
 			"description": "command copy data from s3 to redshift"
+		},
+		"see refresh materialized views error message": {
+			"prefix": "see_refresh_materialized_views_error_message",
+			"body": [
+				"SELECT *",
+				"FROM SVL_MV_REFRESH_STATUS ",
+				"WHERE status = 'FAILED' ",
+				"ORDER BY starttime DESC ",
+				"LIMIT 10;"
+			],
+			"description": "see refresh materialized views error message"
 		}
 }
