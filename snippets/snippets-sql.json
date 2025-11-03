@@ -10887,5 +10887,18 @@
 				"LIMIT 10;"
 			],
 			"description": "see refresh materialized views error message"
+		},
+		"see view depend on definite table": {
+			"prefix": "see_view_depend_on_definite_table",
+			"body": [
+				"SELECT",
+				"\tschemaname,",
+				"\tviewname",
+				"FROM",
+				"\tpg_views",
+				"WHERE",
+				"\tdefinition ILIKE '%umf_partnerlabelitemchoice%'; "
+			],
+			"description": "see view depend on definite table"
 		}
 }
