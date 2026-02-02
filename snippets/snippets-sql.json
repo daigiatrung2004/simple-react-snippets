@@ -10888,6 +10888,51 @@
 			],
 			"description": "see refresh materialized views error message"
 		},
+		"account redshift": {
+			"prefix": "see_account_redshift",
+			"body": [
+				"u000demo/W1udMXsX8tsL",
+				"uniusr/W1udMXsX8tsL",
+				"u140usr/W1udMXsX8tsL"
+			],
+			"description": "account redshift"
+		},
+		"infomation login redshift/postgre on server": {
+			"prefix": "infomation_login_redshift_postgre_on_server",
+			"body": [
+				"param1: user schema (u000demo, u121usr, ..)",
+				"param2: server (heos, aeos, dwh, ...)",
+				"param3: write or reader (1: write, 2: reader1, 3: reader2, ...)",
+				"",
+				"is",
+				"\tuser uniusr heos write",
+				"",
+				"is u121usr",
+				"\tuser u121usr heos write",
+				"",
+				"is u121usr heos 2",
+				"\tuser u121usr heos reader",
+				"",
+				"is u000demo heos 2",
+				"\tuser u000demo heos reader",
+				"",
+				"is u121usr aeos",
+				"\tuser u121usr aeos write",
+				"",
+				"is u000demo aeos",
+				"\tuser u121usr aeos write",
+				"",
+				"is u121usr aeos 2",
+				"\tuser u121usr aeos reader",
+				"",
+				"is u121usr dwh",
+				"\tuser u121usr redshift",
+				"",
+				"is u000demo dwh",
+				"\tuser u000demo redshift"
+			],
+			"description": "infomation login redshift/postgre on server"
+		},
 		"see view depend on definite table": {
 			"prefix": "see_view_depend_on_definite_table",
 			"body": [
