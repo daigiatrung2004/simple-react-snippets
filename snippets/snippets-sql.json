@@ -10933,6 +10933,33 @@
 			],
 			"description": "infomation login redshift/postgre on server"
 		},
+		"cach vao container de chay batch ntscience": {
+			"prefix": "cach_vao container_de_chay_batch_ntscience",
+			"body": [
+				"-- vao container de chay batch ntscience",
+				"sp_container batchparent",
+				"",
+				"-- vao container bang cach lay taskId",
+				"aws ecs execute-command --cluster nts-dev-batch-cluster01 --task 71582a295de44db0a7734b235a9bbb28 --container BatchOnlineParentContainer --interactive --command '/bin/sh'",
+				"",
+				"code example: ",
+				"/bin/sh /home/ntuser/taurus/bin/shell/framework/batch/tshbatchexec.sh true SDA05:1:CreateAnalysisByDayStoreItem:u000demo ACCOUNTDATE_FROM=2021/12/01,ACCOUNTDATE_TO=2026/03/05"
+			],
+			"description": "cach vao container de chay batch ntscience"
+		},
+		"cach deploy source when create": {
+			"prefix": "cach_deploy_source_when_create",
+			"body": [
+				"-- Deploy source bang uniusr",
+				"",
+				"-- them cau nay vao file schema",
+				"GRANT USAGE ON SCHEMA PXC_PLA01_001 TO u000all;",
+				"",
+				"-- them cau nay vao file sp",
+				"GRANT EXECUTE ON FUNCTION PXC_PLA01_001.p_GridSearch(varchar, varchar) TO u000all;"
+			],
+			"description": "cach deploy source when create"
+		},
 		"see view depend on definite table": {
 			"prefix": "see_view_depend_on_definite_table",
 			"body": [
