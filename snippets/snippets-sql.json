@@ -10947,8 +10947,8 @@
 			],
 			"description": "cach vao container de chay batch ntscience"
 		},
-		"cach deploy source when create": {
-			"prefix": "cach_deploy_source_when_create",
+		"cach deploy source when create ntscience": {
+			"prefix": "cach_deploy_source_when_create_ntscience",
 			"body": [
 				"-- Deploy source bang uniusr",
 				"",
@@ -10958,7 +10958,7 @@
 				"-- them cau nay vao file sp",
 				"GRANT EXECUTE ON FUNCTION PXC_PLA01_001.p_GridSearch(varchar, varchar) TO u000all;"
 			],
-			"description": "cach deploy source when create"
+			"description": "cach deploy source when create ntscience"
 		},
 		"see view depend on definite table": {
 			"prefix": "see_view_depend_on_definite_table",
